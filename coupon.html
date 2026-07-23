@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>特別割引券 5,000円（税込）｜株式会社 丸翔</title>
+<meta name="description" content="株式会社 丸翔（丸翔リフォーム）のリフォーム・塗装工事でご利用いただける5,000円（税込）の特別割引券です。店頭でこの画面をご提示ください。">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<header class="site-header">
+  <div class="header-inner">
+    <a href="index.html" class="brand">
+      <img src="lp_ui_assets_png/brand/logo_marusho.png" alt="株式会社 丸翔" class="brand-logo">
+    </a>
+    <div class="header-right">
+      <div class="header-phone">
+        <img src="lp_ui_assets_png/icons/icon_phone.png" alt="">
+        <div class="header-phone-text">
+          <span class="num"><small class="ph-label">（代表）</small>0246-84-5557</span>
+          <span class="num"><small class="ph-label">（携帯）</small>090-2025-3104</span>
+          <span class="hours">受付 10:00～18:00（火曜定休）</span>
+        </div>
+      </div>
+      <a href="index.html" class="btn btn-orange header-cta">トップページへ戻る</a>
+    </div>
+  </div>
+</header>
+
+<!-- ===== COUPON ===== -->
+<section class="coupon-page">
+  <div class="container coupon-wrap">
+
+    <div class="coupon-head">
+      <h1>特別割引券</h1>
+      <span class="en">SPECIAL COUPON</span>
+      <p class="coupon-lead">ご来店・お打ち合わせの際に、<b>この画面をスタッフにご提示ください。</b></p>
+    </div>
+
+    <!-- 券本体 -->
+    <figure class="coupon-ticket" id="ticket">
+      <img src="lp_image_assets_png/news/coupon5000.jpg" alt="リフォーム・塗装工事のお客様 特別割引券 5,000円（税込）／5万円以上の工事から／有効期限 2026年10月迄">
+      <figcaption class="coupon-stamp" id="stamp" hidden>
+        <span class="coupon-stamp-mark">使用済み</span>
+        <span class="coupon-stamp-time" id="stampTime"></span>
+      </figcaption>
+    </figure>
+
+    <!-- 状態と操作 -->
+    <div class="coupon-action" id="action">
+      <p class="coupon-state coupon-state--ready" id="stateReady">
+        この割引券は<b>まだ使用されていません</b>。
+      </p>
+      <p class="coupon-state coupon-state--used" id="stateUsed" hidden>
+        この割引券は<b>使用済み</b>です。<span id="usedTimeText"></span>
+      </p>
+      <button type="button" class="btn btn-orange coupon-btn" id="useBtn">この割引券を使用する</button>
+      <p class="coupon-note" id="useNote">※ボタンを押すと使用済みになります。<b>スタッフが確認できる場所で押してください。</b></p>
+    </div>
+
+    <!-- 利用条件 -->
+    <div class="coupon-terms">
+      <h2>ご利用条件</h2>
+      <ul>
+        <li><b>5万円以上の工事</b>からご利用いただけます。</li>
+        <li>割引額は<b>5,000円（税込）</b>です。</li>
+        <li>有効期限は<b>2026年10月迄</b>です。</li>
+        <li><b>お一人さま1回限り</b>のご利用となります。他の割引との併用はできません。</li>
+        <li>ご利用の際は、この画面をスタッフにご提示のうえ、<b>スタッフの目の前で「使用する」ボタンを押してください</b>（その場で使用済みになります）。</li>
+        <li>一度「使用する」を押すと元に戻せません。ご来店前やご相談前に押さないようご注意ください。</li>
+        <li>この割引券の<b>転売・譲渡はできません</b>。</li>
+        <li>使用済みの記録はお使いのスマートフォン（ブラウザ）に保存されます。閲覧履歴の削除や別の端末・別のブラウザからのご利用時は、スタッフが状況を確認のうえ対応いたします。</li>
+      </ul>
+    </div>
+
+    <div class="legal-back">
+      <a href="index.html" class="back-home">← トップページへ戻る</a>
+    </div>
+  </div>
+</section>
+
+<!-- 使用確認ダイアログ -->
+<div class="coupon-modal" id="modal" hidden>
+  <div class="coupon-modal-box" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <p class="coupon-modal-title" id="modalTitle">この割引券を使用しますか？</p>
+    <p class="coupon-modal-body">一度使用すると<b>元に戻せません</b>。<br>スタッフが確認できる状態で「使用する」を押してください。</p>
+    <div class="coupon-modal-btns">
+      <button type="button" class="btn coupon-modal-cancel" id="cancelBtn">キャンセル</button>
+      <button type="button" class="btn btn-orange" id="confirmBtn">使用する</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== FOOTER ===== -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="footer-brand-head">
+        <img src="lp_ui_assets_png/brand/logo_marusho.png" alt="株式会社 丸翔" class="footer-logo">
+      </div>
+      <p class="footer-lead">創業15年、地域密着の工務店として、高品質なリフォーム工事を提供しています。小さな工事から全面リノベーションまで、住まいのことなら何でもご相談ください。</p>
+    </div>
+    <div class="footer-col">
+      <h4>会社情報</h4>
+      <dl class="footer-dl">
+        <div><dt>会社名</dt><dd>株式会社 丸翔</dd></div>
+        <div><dt>代表者</dt><dd>代表取締役 山内 寿徳</dd></div>
+      </dl>
+    </div>
+    <div class="footer-col">
+      <h4>対応エリア</h4>
+      <p class="footer-area-note">福島県いわき市全域に対応しています。</p>
+      <div class="area-tags">
+        <span>いわき市全域</span>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>本社所在地</h4>
+      <dl class="footer-dl footer-dl--contact">
+        <div><dt>〒</dt><dd>970-1152<br>福島県いわき市好間町中好間鍛冶内8-1</dd></div>
+        <div><dt>TEL</dt><dd>（代表）0246-84-5557<br>（携帯）090-2025-3104</dd></div>
+        <div><dt>FAX</dt><dd>0246-84-5571</dd></div>
+        <div><dt>営業時間</dt><dd>10:00～18:00</dd></div>
+        <div><dt>定休日</dt><dd>火曜日</dd></div>
+      </dl>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2024 丸翔リフォーム All Rights Reserved.</p>
+    <p class="footer-links"><a href="privacy.html">プライバシーポリシー</a><span>｜</span><a href="index.html">サイトマップ</a></p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  'use strict';
+
+  /* 使用済み情報の保存先（このスマホ／このブラウザの中だけに保存されます）。
+     割引券の内容を変えて「全員もう一度使えるように」したいときは、
+     下の 'v1' を 'v2' などに書き換えてください。 */
+  var KEY = 'marusho_coupon5000_used_v1';
+
+  var ticket    = document.getElementById('ticket');
+  var stamp     = document.getElementById('stamp');
+  var stampTime = document.getElementById('stampTime');
+  var stateReady= document.getElementById('stateReady');
+  var stateUsed = document.getElementById('stateUsed');
+  var usedText  = document.getElementById('usedTimeText');
+  var useBtn    = document.getElementById('useBtn');
+  var useNote   = document.getElementById('useNote');
+  var modal     = document.getElementById('modal');
+  var cancelBtn = document.getElementById('cancelBtn');
+  var confirmBtn= document.getElementById('confirmBtn');
+
+  // localStorage が使えない環境（プライベートモード等）でもページが壊れないように
+  function load(){ try { return window.localStorage.getItem(KEY); } catch(e){ return null; } }
+  function save(v){ try { window.localStorage.setItem(KEY, v); return true; } catch(e){ return false; } }
+  function clear(){ try { window.localStorage.removeItem(KEY); } catch(e){} }
+
+  var WD = ['日','月','火','水','木','金','土'];
+  function fmt(iso){
+    var d = new Date(iso);
+    if (isNaN(d.getTime())) return '';
+    var p = function(n){ return (n < 10 ? '0' : '') + n; };
+    return d.getFullYear() + '年' + (d.getMonth()+1) + '月' + d.getDate() + '日（' + WD[d.getDay()] + '）'
+         + p(d.getHours()) + ':' + p(d.getMinutes());
+  }
+
+  function showUsed(iso){
+    var t = fmt(iso);
+    ticket.classList.add('is-used');
+    stamp.hidden = false;
+    stampTime.textContent = t ? t + ' 使用' : '';
+    stateReady.hidden = true;
+    stateUsed.hidden = false;
+    usedText.textContent = t ? '（' + t + ' に使用）' : '';
+    useBtn.hidden = true;
+    useNote.hidden = true;
+  }
+
+  function showReady(){
+    ticket.classList.remove('is-used');
+    stamp.hidden = true;
+    stateReady.hidden = false;
+    stateUsed.hidden = true;
+    useBtn.hidden = false;
+    useNote.hidden = false;
+  }
+
+  // ?reset=1 を付けて開くと未使用に戻せます（店頭でのテスト・確認用）
+  if (/[?&]reset=1(&|$)/.test(location.search)) {
+    clear();
+    if (history.replaceState) history.replaceState(null, '', location.pathname);
+  }
+
+  var used = load();
+  if (used) { showUsed(used); } else { showReady(); }
+
+  // スマホのタップは「タッチ＋マウス」の二重イベントになることがあり、
+  // 開いた直後の背景クリック判定が誤作動するため、開いてすぐは背景タップを無視する。
+  var openedAt = 0;
+  function openModal(){
+    modal.hidden = false;
+    openedAt = Date.now();
+    document.body.style.overflow = 'hidden';
+    confirmBtn.focus();
+  }
+  function closeModal(){ modal.hidden = true; document.body.style.overflow = ''; }
+
+  useBtn.addEventListener('click', openModal);
+  cancelBtn.addEventListener('click', closeModal);
+  modal.addEventListener('click', function(e){
+    if (e.target === modal && Date.now() - openedAt > 400) closeModal();
+  });
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && !modal.hidden) closeModal(); });
+
+  confirmBtn.addEventListener('click', function(){
+    var iso = new Date().toISOString();
+    var ok = save(iso);
+    closeModal();
+    showUsed(iso);
+    if (!ok) {
+      useNote.hidden = false;
+      useNote.innerHTML = '※お使いのブラウザの設定により、使用済みの記録が保存できませんでした。<b>スタッフにお伝えください。</b>';
+    }
+  });
+})();
+</script>
+
+</body>
+</html>

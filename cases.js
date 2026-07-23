@@ -29,15 +29,54 @@
 
 const CASE_ITEMS = [
   {
-    category: "外壁・屋根塗装",
-    before: "lp_image_assets_png/cases/web/exterior_wallroof_before.jpg",
-    after:  "lp_image_assets_png/cases/web/exterior_wallroof_after.jpg",
-    spec:   { location: "外壁・屋根", period: "18日間", cost: "約120万円〜（目安）", building: "戸建て" },
+    category: "外壁塗装（ツートン）",
+    before: "lp_image_assets_png/cases/web/exterior_navy_before.jpg",
+    after:  "lp_image_assets_png/cases/web/exterior_navy_after.jpg",
+    spec:   { location: "外壁", period: "14日間", cost: "約155万円〜（目安）", building: "戸建て" },
     detail: {
-      problem: "外壁の色あせと屋根の傷みを、まとめてきれいにしたい",
-      work:    "足場を一度で設置し、外壁塗装と屋根塗装を同時に施工",
-      change:  "白い外壁と引き締まった屋根色で、新築のような外観に。",
-      comment: "足場を有効活用し、別々に行うより費用を抑えられました。"
+      problem: "外壁全体の色あせが進み、家の印象が古く見えてしまう",
+      work:    "高圧洗浄・下地補修のうえ、濃紺と白のツートンで全面塗装",
+      change:  "2色の塗り分けで外観の印象が大きく変わり、汚れも目立ちにくくなりました。",
+      comment: "既存の瓦屋根に合う濃紺をお選びいただき、引き締まった外観に仕上げました。"
+    },
+    link: ""
+  },
+  {
+    category: "外壁塗装（付帯部含む）",
+    before: "lp_image_assets_png/cases/web/exterior_twotone_before.jpg",
+    after:  "lp_image_assets_png/cases/web/exterior_twotone_after.jpg",
+    spec:   { location: "外壁・付帯部", period: "15日間", cost: "約145万円〜（目安）", building: "戸建て" },
+    detail: {
+      problem: "外壁のひび・クラックが気になり、雨樋や破風の傷みも心配",
+      work:    "ストーンカラーで外壁を丁寧に塗装し、雨樋・破風などの付帯部もあわせて施工",
+      change:  "全体が明るく引き締まり、細部まで新しくなりました。",
+      comment: "施主様のお好みをヒヤリングし、色をご提案しました。"
+    },
+    link: ""
+  },
+  {
+    category: "玄関ドア交換",
+    before: "lp_image_assets_png/cases/web/entrance_door_before.jpg",
+    after:  "lp_image_assets_png/cases/web/entrance_door_after.jpg",
+    spec:   { location: "玄関", period: "1日間", cost: "約55万円〜（目安）", building: "戸建て" },
+    detail: {
+      problem: "カギがかかりにくく、防犯面が心配",
+      work:    "3重ロックのカギ付きで、断熱性のある玄関ドアへ交換",
+      change:  "開け閉めが軽くなり、玄関まわりの印象も明るくなりました。",
+      comment: "玄関は家の顔とのご主人のご要望におこたえしました。"
+    },
+    link: ""
+  },
+  {
+    category: "内窓・間仕切り（インプラス）",
+    before: "lp_image_assets_png/cases/web/innerwindow_before.jpg",
+    after:  "lp_image_assets_png/cases/web/innerwindow_after.jpg",
+    spec:   { location: "居室", period: "1日間", cost: "約25万円〜（目安）", building: "戸建て" },
+    detail: {
+      problem: "建具の老朽化で、開け閉めのたびにガタガタ音がする",
+      work:    "4カ所にインプラス（内窓）を取付",
+      change:  "採光を保ちながら断熱性が上がり、冷暖房も効きやすくなりました。",
+      comment: "断熱効果もあります。"
     },
     link: ""
   },
@@ -58,7 +97,7 @@ const CASE_ITEMS = [
     category: "ユニットバス交換",
     before: "lp_image_assets_png/cases/web/bath_unit_before.jpg",
     after:  "lp_image_assets_png/cases/web/bath_unit_after.jpg",
-    spec:   { location: "浴室", period: "4日間", cost: "約95万円〜（目安）", building: "戸建て" },
+    spec:   { location: "浴室", period: "4日間", cost: "約125万円〜（目安）", building: "戸建て" },
     detail: {
       problem: "冬場の浴室が寒く、掃除もしづらい",
       work:    "断熱性の高い最新ユニットバスへ交換し、床・壁も一新",
@@ -71,9 +110,9 @@ const CASE_ITEMS = [
     category: "外壁塗装",
     before: "lp_image_assets_png/cases/web/exterior_paint_before.jpg",
     after:  "lp_image_assets_png/cases/web/exterior_paint_after.jpg",
-    spec:   { location: "外壁", period: "12日間", cost: "約90万円〜（目安）", building: "戸建て" },
+    spec:   { location: "外壁", period: "12日間", cost: "約185万円〜（目安）", building: "戸建て" },
     detail: {
-      problem: "外壁の色あせやチョーキング（白い粉）が気になる",
+      problem: "外壁の色あせやヨゴレが気になる",
       work:    "高圧洗浄と下地補修のうえ、下塗り〜上塗りまで丁寧に塗装",
       change:  "見違えるほど美しくなり、防水性もしっかり回復しました。",
       comment: "傷みやすい部分を補修し、長持ちする塗膜に仕上げました。"
@@ -84,7 +123,7 @@ const CASE_ITEMS = [
     category: "内装リフォーム（畳→フローリング）",
     before: "lp_image_assets_png/cases/web/floor_before.jpg",
     after:  "lp_image_assets_png/cases/web/floor_after.jpg",
-    spec:   { location: "居室", period: "3日間", cost: "約22万円〜（目安）", building: "戸建て" },
+    spec:   { location: "居室", period: "2日間", cost: "約22万円〜（目安）", building: "戸建て" },
     detail: {
       problem: "畳が傷み、掃除や家具の配置がしづらい",
       work:    "畳を撤去し、お手入れしやすいフローリングへ張り替え",
@@ -94,23 +133,10 @@ const CASE_ITEMS = [
     link: ""
   },
   {
-    category: "屋根塗装",
-    before: "lp_image_assets_png/cases/web/roof_before.jpg",
-    after:  "lp_image_assets_png/cases/web/roof_after.jpg",
-    spec:   { location: "屋根", period: "7日間", cost: "約45万円〜（目安）", building: "戸建て" },
-    detail: {
-      problem: "屋根の色あせやサビ、防水性の低下が心配",
-      work:    "高圧洗浄・下塗りのうえ、耐久性の高い塗料で塗装",
-      change:  "屋根がよみがえり、雨風から住まいを守る機能も回復しました。",
-      comment: "傷みやすい屋根を長持ちさせる仕様でご提案しました。"
-    },
-    link: ""
-  },
-  {
     category: "浴室改修（在来→ユニットバス）",
     before: "lp_image_assets_png/cases/web/bath_before.jpg",
     after:  "lp_image_assets_png/cases/web/bath_after.jpg",
-    spec:   { location: "浴室", period: "6日間", cost: "約110万円〜（目安）", building: "戸建て" },
+    spec:   { location: "浴室", period: "7日間", cost: "約148万円〜（目安）", building: "戸建て" },
     detail: {
       problem: "タイル張りの在来浴室が寒く、ひび割れも心配",
       work:    "在来浴室を解体し、暖かく掃除しやすいユニットバスを新設",
@@ -120,62 +146,10 @@ const CASE_ITEMS = [
     link: ""
   },
   {
-    category: "店舗改修",
-    before: "lp_image_assets_png/cases/web/store_before.jpg",
-    after:  "lp_image_assets_png/cases/web/store_after.jpg",
-    spec:   { location: "店舗", period: "10日間", cost: "約80万円〜（目安）", building: "店舗・事務所" },
-    detail: {
-      problem: "店舗の外観が古く、印象を新しくしたい",
-      work:    "傷んだ箇所を補修し、外観を一新するリフォームを実施",
-      change:  "清潔感のある新しい印象になり、集客面でも好評です。",
-      comment: "営業への影響を抑えながら、工程を組んで施工しました。"
-    },
-    link: ""
-  },
-  {
-    category: "外壁塗装（和風住宅）",
-    before: "lp_image_assets_png/cases/web/paint_before.jpg",
-    after:  "lp_image_assets_png/cases/web/paint_after.jpg",
-    spec:   { location: "外壁", period: "13日間", cost: "約100万円〜（目安）", building: "戸建て" },
-    detail: {
-      problem: "和風住宅の外壁の傷みを、雰囲気を残して直したい",
-      work:    "既存の風合いに合う色で、外壁を丁寧に塗装",
-      change:  "落ち着いた仕上がりで、建物の趣を保ちながら美しくなりました。",
-      comment: "瓦屋根との調和を考え、色をご提案しました。"
-    },
-    link: ""
-  },
-  {
-    category: "洗面化粧台リフォーム",
-    before: "lp_image_assets_png/cases/web/washstand_before.jpg",
-    after:  "lp_image_assets_png/cases/web/washstand_after.jpg",
-    spec:   { location: "洗面所", period: "2日間", cost: "約28万円〜（目安）", building: "戸建て" },
-    detail: {
-      problem: "洗面台が古く、収納も足りない",
-      work:    "収納力のある使いやすい洗面化粧台へ交換",
-      change:  "清潔感が増し、朝の身支度もしやすくなりました。",
-      comment: "限られたスペースに合わせて無駄なく交換しました。"
-    },
-    link: ""
-  },
-  {
-    category: "外壁塗装",
-    before: "lp_image_assets_png/cases/web/exterior_wall_before.jpg",
-    after:  "lp_image_assets_png/cases/web/exterior_wall_after.jpg",
-    spec:   { location: "外壁", period: "12日間", cost: "約95万円〜（目安）", building: "戸建て" },
-    detail: {
-      problem: "築年数が経ち、外壁の色あせが目立ってきた",
-      work:    "高圧洗浄・下地補修のうえ、外壁を全面塗装",
-      change:  "落ち着いた色合いで、住まい全体の印象が引き締まりました。",
-      comment: "周囲の環境になじむ色をご提案しました。"
-    },
-    link: ""
-  },
-  {
     category: "外構・庭工事",
     before: "lp_image_assets_png/cases/web/garden_before.jpg",
     after:  "lp_image_assets_png/cases/web/garden_after.jpg",
-    spec:   { location: "庭・外構", period: "8日間", cost: "約60万円〜（目安）", building: "戸建て" },
+    spec:   { location: "庭・外構", period: "8日間", cost: "約120万円〜（目安）", building: "戸建て" },
     detail: {
       problem: "庭の手入れが大変で、使いにくい",
       work:    "整地・土間などを行い、手入れしやすい外構へ整備",
