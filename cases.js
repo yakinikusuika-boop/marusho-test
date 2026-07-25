@@ -146,19 +146,6 @@ const CASE_ITEMS = [
     link: ""
   },
   {
-    category: "浴室改修（在来→ユニットバス）",
-    before: "lp_image_assets_png/cases/web/bath_before.jpg",
-    after:  "lp_image_assets_png/cases/web/bath_after.jpg",
-    spec:   { location: "浴室", period: "7日間", cost: "約148万円〜（目安）", building: "戸建て" },
-    detail: {
-      problem: "タイル張りの在来浴室が寒く、ひび割れも心配",
-      work:    "在来浴室を解体し、暖かく掃除しやすいユニットバスを新設",
-      change:  "保温性が上がり、日々のお掃除もぐっと楽になりました。",
-      comment: "見えない下地の防水までしっかり施工しました。"
-    },
-    link: ""
-  },
-  {
     category: "外構・庭工事",
     before: "lp_image_assets_png/cases/web/garden_before.jpg",
     after:  "lp_image_assets_png/cases/web/garden_after.jpg",
