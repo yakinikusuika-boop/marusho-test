@@ -107,6 +107,19 @@ const CASE_ITEMS = [
     link: ""
   },
   {
+    category: "浴室改修（バランス釜→ポリバス）",
+    before: "lp_image_assets_png/cases/web/bath_polybath_before.jpg",
+    after:  "lp_image_assets_png/cases/web/bath_polybath_after.jpg",
+    spec:   { location: "浴室", period: "3日間", cost: "約42万円〜（目安）", building: "戸建て" },
+    detail: {
+      problem: "バランス釜で浴槽が狭く、浴室全体の傷みや汚れも気になる",
+      work:    "バランス釜を撤去してポリバスへ入れ替え、浴室窓のガラスサッシもあわせて交換",
+      change:  "ゆったり入れる浴槽になり、窓まわりも一新して明るく清潔な浴室になりました。",
+      comment: "ユニットバスより費用を抑えられるポリバス施工で、工期も3日間で仕上げました。"
+    },
+    link: ""
+  },
+  {
     category: "外壁塗装",
     before: "lp_image_assets_png/cases/web/exterior_paint_before.jpg",
     after:  "lp_image_assets_png/cases/web/exterior_paint_after.jpg",
