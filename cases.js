@@ -29,6 +29,32 @@
 
 const CASE_ITEMS = [
   {
+    category: "橋の拡張・補修工事",
+    before: "lp_image_assets_png/cases/web/bridge_before.jpg",
+    after:  "lp_image_assets_png/cases/web/bridge_after.jpg",
+    spec:   { location: "農道の橋（水路横断部）", period: "お問い合わせください", cost: "お問い合わせください", building: "屋外・土木工事" },
+    detail: {
+      problem: "橋の幅が狭く、路肩に寄ると水路側に落ちそうで通行が不安",
+      work:    "橋の路盤を拡張し、水路側にコンクリート縁石を新設。取合いの土間も打ち直し",
+      change:  "有効幅が広がり、軽トラックでも安心して渡れるようになりました。",
+      comment: "水路をまたぐ部分のため、通行止めの期間を最小限にして施工しました。"
+    },
+    link: ""
+  },
+  {
+    category: "外壁塗装（クリーム色）",
+    before: "lp_image_assets_png/cases/web/exterior_cream_before.jpg",
+    after:  "lp_image_assets_png/cases/web/exterior_cream_after.jpg",
+    spec:   { location: "外壁・付帯部", period: "お問い合わせください", cost: "お問い合わせください", building: "戸建て" },
+    detail: {
+      problem: "外壁の白さがくすみ、破風や軒まわりの傷みも気になる",
+      work:    "足場を組み、高圧洗浄・下地補修のうえ外壁をクリーム色に塗装。破風・軒天などの付帯部もあわせて塗り替え",
+      change:  "既存の瓦屋根に合う落ち着いた色合いになり、家全体が明るくなりました。",
+      comment: "付帯部を濃い色で締めることで、クリーム色の外壁が引き立つよう仕上げました。"
+    },
+    link: ""
+  },
+  {
     category: "外壁塗装（ツートン）",
     before: "lp_image_assets_png/cases/web/exterior_navy_before.jpg",
     after:  "lp_image_assets_png/cases/web/exterior_navy_after.jpg",
