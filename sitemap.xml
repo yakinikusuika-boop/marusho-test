@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  検索エンジンに知らせるページの一覧です。
+  ・検索に載せたいページだけを書きます。
+  ・noindex にしているページ（coupon.html／before/／review/）は載せません。
+  ・ページを追加・削除したときは、この一覧と lastmod の日付も更新してください。
+-->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://marusho-iwaki.co.jp/</loc>
+    <lastmod>2026-07-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://marusho-iwaki.co.jp/privacy.html</loc>
+    <lastmod>2026-07-29</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+</urlset>

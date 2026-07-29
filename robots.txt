@@ -1,0 +1,13 @@
+# 株式会社丸翔 公式サイト
+# 検索エンジンのクロール設定
+#
+# 【重要】coupon.html・before/・review/ を Disallow にしてはいけません。
+#   これらは各ページの noindex で検索結果から外しています。
+#   Disallow にするとページを読みに来られなくなり、noindex に気づいてもらえず、
+#   かえってURLだけが検索結果に残ることがあります。
+#   「検索に載せたくない」ときは Disallow ではなく noindex を使ってください。
+
+User-agent: *
+Allow: /
+
+Sitemap: https://marusho-iwaki.co.jp/sitemap.xml
