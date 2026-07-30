@@ -8,8 +8,12 @@
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-WCEB8Y4N4F');
+  // 手元での表示確認（localhost や file:// で開いた場合）がレポートに混ざらないよう、
+  // 本番ドメインからのアクセスだけを計測する。ドメイン変更時はここも直すこと。
+  if (location.hostname === 'marusho-iwaki.co.jp') {
+    gtag('js', new Date());
+    gtag('config', 'G-WCEB8Y4N4F');
+  }
 </script>
 <script src="analytics.js" defer></script>
 <title>プライバシーポリシー｜株式会社 丸翔</title>
