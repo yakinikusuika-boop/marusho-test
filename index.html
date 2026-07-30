@@ -3,6 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- ===== アクセス解析：Googleタグ（GA4 / G-WCEB8Y4N4F）===== -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-WCEB8Y4N4F"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-WCEB8Y4N4F');
+</script>
+<script src="analytics.js" defer></script>
 <title>いわき市の外壁塗装・屋根・水回りリフォーム｜株式会社丸翔（丸翔リフォーム）</title>
 <meta name="description" content="いわき市の外壁塗装・屋根工事・水回り・内装リフォームは株式会社丸翔へ。現地調査・お見積もり無料。小さな修繕から全面改修まで、地域密着でまごころ施工をお届けします。">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1038,6 +1047,12 @@
             }
           });
           if (!res.ok) throw new Error('send failed');
+          // アクセス解析：送信が成功したときだけ記録する（個人情報は送りません）
+          if (window.msTrack) window.msTrack('contact_submit', {
+            soudan_naiyou: type,
+            kouji_naiyou: works.join('、') || '（未選択）',
+            kikkake: g('source') || '（未選択）'
+          });
           form.reset();
           formError.hidden = true;
           formSuccess.hidden = false;
@@ -1055,6 +1070,7 @@
       }
 
       // mailto方式（フォールバック）
+      if (window.msTrack) window.msTrack('contact_mailto', { soudan_naiyou: type });
       const mailto = 'mailto:' + RECIPIENT
         + '?subject=' + encodeURIComponent(subject)
         + '&body=' + encodeURIComponent(lines.join('\n'));
