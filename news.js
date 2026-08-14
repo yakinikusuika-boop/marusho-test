@@ -78,7 +78,7 @@ const NEWS_ITEMS = [
     category: "お知らせ",
     title: "【いわき市】木造住宅の耐震診断が無料で受けられます（8/31まで）",
     body: "令和8年度 いわき市木造住宅耐震診断派遣事業。昭和56年5月31日以前に着工した3階建て以下の木造住宅が対象で、図面があり延床面積200㎡以下なら診断は無料です（図面がない場合は約17,900円程度）。申込は令和8年8月31日（月）まで。診断後の耐震改修工事には、工事費の80％・上限115万円などの補助制度もあります。工事のご相談は当社へお気軽にどうぞ。",
-    image: "lp_image_assets_png/slideshow/slide1_exterior.jpg",
+    image: "lp_image_assets_png/news/seismic-iwaki_thumb.jpg?v=20260814",
     links: [
       { url: "https://www.city.iwaki.lg.jp/www/contents/1778629552308/index.html",
         label: "耐震診断派遣事業（いわき市）の詳細を見る" },
