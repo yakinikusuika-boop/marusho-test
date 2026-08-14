@@ -123,8 +123,8 @@ const NEWS_ITEMS = [
     category: "イベント",
     title: "リフォーム無料相談会を開催します（8/22・23）",
     body: "2026年8月22日（土）・23日（日）の両日10:00〜18:00、当社本社（いわき市好間町中好間字鍛冶内8番地）にて開催します。会期中はトイレ改修 85,800円〜（税込）、洗面台 85,800円〜（税込）、網戸張替え 1枚1,650円〜（税込）、耐震金具取付 5,500円〜（税込）、手すり工事 10,780円〜（税込）などの特別価格をご用意しました。外壁塗装や水廻り・内装のお見積りもその場で承ります。ご予約不要・入場無料です。詳しくは下のチラシをご覧ください。",
-    image: "lp_image_assets_png/news/consult-flyer_thumb.jpg",
-    link: "lp_image_assets_png/news/consult-flyer.pdf",
+    image: "lp_image_assets_png/news/consult-flyer_thumb.jpg?v=20260814",
+    link: "lp_image_assets_png/news/consult-flyer.pdf?v=20260814",
     linkText: "チラシを開く（A4・印刷／保存できます）"
   }
 ];
