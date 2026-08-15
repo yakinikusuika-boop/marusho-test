@@ -3,116 +3,1095 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ただいまデータ更新中｜株式会社丸翔（いわき市のリフォーム）</title>
-<meta name="description" content="株式会社丸翔のホームページは、ただいまデータ更新作業のため一時的に公開を停止しております。お問い合わせはお電話にて承っております。">
+<!-- ===== アクセス解析：Googleタグ（GA4 / G-WCEB8Y4N4F）===== -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-WCEB8Y4N4F"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  // 手元での表示確認（localhost や file:// で開いた場合）がレポートに混ざらないよう、
+  // 本番ドメインからのアクセスだけを計測する。ドメイン変更時はここも直すこと。
+  if (location.hostname === 'marusho-iwaki.co.jp') {
+    gtag('js', new Date());
+    gtag('config', 'G-WCEB8Y4N4F');
+  }
+</script>
+<!-- ===== ヒートマップ・セッション録画：Microsoft Clarity（xvefvdpdvg）===== -->
+<script type="text/javascript">
+  // GA4と同じく、手元での表示確認が記録に混ざらないよう本番ドメインだけで動かす
+  if (location.hostname === 'marusho-iwaki.co.jp') {
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "xvefvdpdvg");
+  }
+</script>
+<script src="analytics.js" defer></script>
+<title>いわき市の外壁塗装・屋根・水回りリフォーム｜株式会社丸翔（丸翔リフォーム）</title>
+<meta name="description" content="いわき市の外壁塗装・屋根工事・水回り・内装リフォームは株式会社丸翔へ。現地調査・お見積もり無料。小さな修繕から全面改修まで、地域密着でまごころ施工をお届けします。">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
-<style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  :root{
-    --orange:#e8821e;
-    --orange-dark:#d9741a;
-    --teal:#0e3d34;
-    --cream:#f5efe4;
-    --line:#e3ddd2;
-    --text:#333;
-    --muted:#6b6b6b;
-  }
-  body{
-    font-family:"Noto Sans JP",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-    color:var(--text); line-height:1.9; background:var(--cream);
-    min-height:100vh; display:flex; align-items:center; justify-content:center;
-    padding:32px 20px; -webkit-font-smoothing:antialiased;
-  }
-  .card{
-    width:100%; max-width:680px; background:#fff; border-radius:14px;
-    box-shadow:0 10px 40px rgba(0,0,0,.09); overflow:hidden;
-  }
-  .card-head{ background:var(--teal); padding:28px 24px; text-align:center; }
-  .card-head img{ height:64px; width:auto; margin:0 auto; display:block; }
-  .card-head .company{
-    color:#fff; font-size:15px; font-weight:700; letter-spacing:.08em; margin-top:12px;
-  }
-  .card-body{ padding:40px 32px 36px; }
-  .badge{
-    display:inline-block; background:var(--orange); color:#fff;
-    font-size:13px; font-weight:700; letter-spacing:.06em;
-    padding:6px 16px; border-radius:999px; margin-bottom:18px;
-  }
-  h1{
-    font-size:26px; font-weight:900; color:var(--teal);
-    line-height:1.6; margin-bottom:20px;
-  }
-  .lead{ font-size:15.5px; margin-bottom:14px; }
-  .note{ font-size:14px; color:var(--muted); }
-  .divider{ height:1px; background:var(--line); margin:30px 0 26px; }
-  h2{
-    font-size:16px; font-weight:700; color:var(--teal); margin-bottom:14px;
-    display:flex; align-items:center; gap:9px;
-  }
-  h2::before{ content:""; width:4px; height:18px; background:var(--orange); border-radius:2px; }
-  .tel-list{ display:flex; flex-direction:column; gap:10px; margin-bottom:12px; }
-  .tel{
-    display:flex; align-items:center; justify-content:center; gap:10px;
-    background:var(--orange); color:#fff; font-weight:700; font-size:23px;
-    letter-spacing:.03em; padding:14px 18px; border-radius:8px;
-    text-decoration:none; transition:.2s;
-    box-shadow:0 4px 12px rgba(232,130,30,.32);
-  }
-  .tel:hover{ background:var(--orange-dark); transform:translateY(-2px); }
-  .tel small{ font-size:13px; font-weight:500; }
-  .hours{ font-size:14px; color:var(--muted); text-align:center; }
-  .info{ font-size:14px; color:var(--muted); margin-top:6px; }
-  .info a{ color:var(--teal); }
-  .card-foot{
-    background:#fafafa; border-top:1px solid var(--line);
-    padding:18px 24px; text-align:center; font-size:12.5px; color:var(--muted);
-  }
-  @media (max-width:520px){
-    .card-body{ padding:32px 22px 30px; }
-    h1{ font-size:21px; }
-    .tel{ font-size:20px; }
-  }
-</style>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Yuji+Mai&family=Yuji+Syuku&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HomeAndConstructionBusiness",
+  "name": "株式会社丸翔",
+  "description": "いわき市の外壁塗装・屋根・水回り・内装リフォーム専門店",
+  "address": {
+    "@type": "PostalAddress",
+    "postalCode": "970-1152",
+    "addressRegion": "福島県",
+    "addressLocality": "いわき市",
+    "streetAddress": "好間町中好間鍛冶内8番地"
+  },
+  "telephone": "+81-246-84-5557",
+  "openingHours": "Mo,We,Th,Fr,Sa,Su 10:00-18:00",
+  "areaServed": "福島県いわき市",
+  "image": "lp_ui_assets_png/brand/logo_marusho.png"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "現地調査やお見積もりは本当に無料ですか？",
+      "acceptedAnswer": { "@type": "Answer", "text": "はい、現地調査・お見積もりは無料です。お見積もり後のしつこい営業もいたしませんので、比較検討の段階でも安心してご相談ください。" }
+    },
+    {
+      "@type": "Question",
+      "name": "工事の途中で追加費用が発生することはありませんか？",
+      "acceptedAnswer": { "@type": "Answer", "text": "お見積もりの段階で、費用が変わる可能性のある条件（下地の傷みの程度など）を事前にご説明します。工事中に追加の補修が必要と分かった場合も、必ず事前にご相談し、ご了承いただいてから進めます。" }
+    },
+    {
+      "@type": "Question",
+      "name": "施工後の保証はありますか？",
+      "acceptedAnswer": { "@type": "Answer", "text": "対象工事には最長10年の施工保証をご用意しています。保証期間は工事内容・施工範囲・使用材料および保証プランにより異なります。対象となる主な工事は、屋根の全面葺き替え・カバー工法、外壁の張り替え・外装下地防水工事、屋上・バルコニーの全面防水工事、外壁・屋根塗装です。経年による色あせ、チョーキング、汚れ・カビ・藻、シーリング材の通常劣化、既存下地のひび割れ、建物の揺れや構造変形、台風・地震・雹・落雷などの自然災害、他社工事による損傷、お客様ご自身による加工や破損、保証対象外部分を原因とする雨漏りは保証の対象外です。対象部位・保証期間・保証内容・免責事項は、工事前に保証書または契約書で明確にご説明します。" }
+    },
+    {
+      "@type": "Question",
+      "name": "対応エリアはどこまでですか？",
+      "acceptedAnswer": { "@type": "Answer", "text": "福島県いわき市全域に対応しています。市外の場合もまずはお気軽にご相談ください。" }
+    },
+    {
+      "@type": "Question",
+      "name": "小さな修繕だけでもお願いできますか？",
+      "acceptedAnswer": { "@type": "Answer", "text": "もちろん可能です。手すりの取り付け、網戸・蛇口の交換、雨どいの補修など、小さな困りごともお気軽にご相談ください。" }
+    },
+    {
+      "@type": "Question",
+      "name": "住みながらの工事は可能ですか？",
+      "acceptedAnswer": { "@type": "Answer", "text": "外壁塗装や水回りの改修など、多くの工事はお住まいのまま施工できます。生活への影響が大きい工事の場合は、事前に工程をご説明のうえ進めます。" }
+    }
+  ]
+}
+</script>
 </head>
 <body>
-  <main class="card">
-    <div class="card-head">
-      <img src="lp_ui_assets_png/brand/logo_marusho.png?v=20260811a" alt="株式会社 丸翔">
-      <p class="company">株式会社 丸翔</p>
-    </div>
 
-    <div class="card-body">
-      <span class="badge">ただいまデータ更新中</span>
-      <h1>ホームページは現在、<br>更新作業のため一時休止しております</h1>
-      <p class="lead">
-        サイト内容の点検と、お客様からいただいたご要望を反映するため、
-        ホームページの公開を一時的に停止しております。
-      </p>
-      <p class="note">
-        準備が整い次第、あらためて公開いたします。
-        ご不便をおかけいたしますが、何卒ご理解のほどお願い申し上げます。
-      </p>
+<!-- ===== HEADER ===== -->
+<header class="site-header" id="top">
+  <div class="header-inner">
+    <a href="#top" class="brand">
+      <img src="lp_ui_assets_png/brand/logo_marusho.png?v=20260811a" alt="株式会社 丸翔" class="brand-logo">
+    </a>
 
-      <div class="divider"></div>
+    <nav class="global-nav" id="gnav">
+      <a href="#cases">施工事例</a>
+      <!-- 「お客様の声」は掲載許可の確認が取れるまで非表示（2026-07-28 丸翔さまご判断）
+           許可が取れたら、このリンクと下の voice セクションのコメントアウトを解除してください -->
+      <a href="#news">お知らせ</a>
+      <a href="#service">選ばれる理由</a>
+      <a href="#pricing">費用・見積り</a>
+      <a href="#about">会社案内</a>
+      <a href="#contact">お問い合わせ</a>
+    </nav>
 
-      <h2>お問い合わせ・ご相談はお電話で承ります</h2>
-      <div class="tel-list">
-        <a class="tel" href="tel:0246845557"><small>（代表）</small>0246-84-5557</a>
-        <a class="tel" href="tel:09020253104"><small>（携帯）</small>090-2025-3104</a>
+    <button class="hamburger" id="hamburger" aria-label="メニューを開く">
+      <img src="lp_ui_assets_png/icons/icon_hamburger_menu.png" alt="">
+    </button>
+  </div>
+</header>
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <div class="hero-photo" id="heroSlides">
+    <img src="lp_image_assets_png/slideshow/slide1_exterior.jpg" alt="いわき市の外壁・屋根塗装の施工例" class="hero-slide is-active" fetchpriority="high">
+    <img src="lp_image_assets_png/slideshow/slide2_kitchen.jpg" alt="システムキッチン改修の施工例" class="hero-slide" loading="lazy">
+    <img src="lp_image_assets_png/slideshow/slide3_living.jpg" alt="リビング内装リフォームの施工例" class="hero-slide" loading="lazy">
+    <img src="lp_image_assets_png/slideshow/slide4_bath.jpg" alt="ユニットバス改修の施工例" class="hero-slide" loading="lazy">
+    <img src="lp_image_assets_png/slideshow/slide5_paint.jpg" alt="外壁塗装の施工例" class="hero-slide" loading="lazy">
+    <img src="lp_image_assets_png/slideshow/slide6_store.jpg" alt="店舗リフォームの施工例" class="hero-slide" loading="lazy">
+  </div>
+
+  <div class="hero-badges" aria-hidden="true">
+    <div class="hero-badge"><span class="hb-label">年間施工実績</span><span class="hb-value">120<small>件</small></span><span class="hb-foot">※</span></div>
+    <div class="hero-badge"><span class="hb-label">最長</span><span class="hb-value">10<small>年</small></span><span class="hb-foot">保証で安心※</span></div>
+  </div>
+
+  <div class="hero-inner">
+    <div class="hero-card">
+      <p class="hero-eyebrow">地域密着のリフォーム専門店</p>
+      <h1 class="hero-title">住まいの悩みを、<br><em>丸っと解決します！</em></h1>
+      <p class="hero-area">いわき市の外壁・屋根・水回りリフォーム</p>
+      <div class="hero-tags">
+        <span>相談無料</span><span>見積無料</span><span>現地調査無料</span>
       </div>
-      <p class="hours">受付時間 10:00～18:00（火曜定休）</p>
-      <p class="info">
-        メール：<a href="mailto:yamauchi310lyd@gmail.com">yamauchi310lyd@gmail.com</a><br>
-        現地調査・お見積もりは無料です。工事のご依頼・ご相談は通常どおり承っております。
+      <p class="hero-lead">
+        小さな工事から大規模リフォームまで、<br>
+        まごころ施工で快適な暮らしをお届けします。
       </p>
+      <div class="hero-phone">
+        <img src="lp_ui_assets_png/icons/icon_phone.png" alt="">
+        <span class="hp-nums">
+          <a href="tel:0246845557" class="hp-num">0246-84-5557</a>
+          <a href="tel:09020253104" class="hp-num hp-num--sub"><small class="ph-label">（携帯）</small>090-2025-3104</a>
+        </span>
+        <span class="hp-hours">受付 10:00～18:00（火曜定休）</span>
+      </div>
+      <div class="hero-btns">
+        <a href="#contact" class="btn btn-orange">無料相談・見積もりを依頼する <span class="arw">→</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== STATS ===== -->
+<section class="stats">
+  <div class="stats-inner">
+    <div class="stat">
+      <img src="lp_ui_assets_png/icons/icon_house_stats.png" alt="">
+      <div class="stat-text"><span class="stat-label">年間施工実績</span><span class="stat-value">120<small>件※</small></span></div>
+    </div>
+    <div class="stat">
+      <img src="lp_ui_assets_png/icons/icon_calendar_check.png" alt="">
+      <div class="stat-text"><span class="stat-label">設立</span><span class="stat-value">2007<small>年</small></span></div>
+    </div>
+    <div class="stat">
+      <img src="lp_ui_assets_png/icons/icon_shield_check.png" alt="">
+      <div class="stat-text"><span class="stat-label">対象工事は最長</span><span class="stat-value">10<small>年保証※</small></span></div>
+    </div>
+    <div class="stat">
+      <img src="lp_ui_assets_png/icons/icon_pin.png" alt="">
+      <div class="stat-text stat-text--single"><span class="stat-value stat-value--sm">地域密着対応</span></div>
+    </div>
+  </div>
+  <p class="stats-note">※施工実績は2025年1月〜12月の完工件数です（蛇口交換・網戸張替えなどの小規模な修繕を含みます）。※保証は対象工事に限り、工事内容・施工範囲・使用材料・保証プランにより期間が異なります。対象部位・期間・免責事項は工事前に保証書または契約書でご説明します。</p>
+</section>
+
+<!-- ===== 施工事例 ===== -->
+<section class="cases" id="cases">
+  <div class="container">
+    <h2 class="sec-title">いわき市の<em>施工事例</em></h2>
+    <div class="case-grid" id="caseGrid"></div>
+  </div>
+</section>
+
+<!-- ===== お客様の声 =====
+     【非表示中】掲載許可の確認が取れるまで非表示にしています（2026-07-28 丸翔さまご判断）。
+     許可が取れたら、この行の下の「<section」から「</section>」までのコメントを外してください。
+     あわせて、掲載地域が対応エリア（いわき市）と合っているかもご確認ください
+     （現在は郡山市・福島市のお客様が含まれています）。
+<section class="voice" id="voice">
+  <div class="container">
+    <h2 class="sec-title">お客様の<em>声</em></h2>
+    <div class="voice-grid">
+      <div class="voice-card">
+        <div class="voice-head">
+          <img src="lp_ui_assets_png/icons/icon_customer_avatar_woman.png" alt="">
+          <span class="voice-meta">いわき市・50代・キッチン改修</span>
+        </div>
+        <p class="voice-title">「予算内で理想のキッチンになりました」</p>
+        <p class="voice-body">他社の見積もりよりも明確で、内容も納得できました。職人さんの対応も丁寧で、工事中も安心してお任せできました。</p>
+      </div>
+      <div class="voice-card">
+        <div class="voice-head">
+          <img src="lp_ui_assets_png/icons/icon_customer_avatar_man.png" alt="">
+          <span class="voice-meta">郡山市・60代・外壁塗装</span>
+        </div>
+        <p class="voice-title">「近隣への配慮が丁寧で安心でした」</p>
+        <p class="voice-body">ご近所への挨拶や工事中の配慮が行き届いていて、トラブルなく完了。仕上がりにも満足しています。</p>
+      </div>
+      <div class="voice-card">
+        <div class="voice-head">
+          <img src="lp_ui_assets_png/icons/icon_customer_avatar_worker.png" alt="">
+          <span class="voice-meta">福島市・30代・全面リノベーション</span>
+        </div>
+        <p class="voice-title">「暮らしやすさが格段に向上しました」</p>
+        <p class="voice-body">寒さや使いにくさが改善され、毎日の生活が快適に。担当の方が親身に相談に乗ってくれて心強かったです。</p>
+      </div>
+    </div>
+    <p class="voice-note">※お客様の感想であり、効果を保証するものではありません。※掲載にあたってはお客様の許可をいただいています。</p>
+  </div>
+</section>
+===== お客様の声 ここまで非表示 ===== -->
+
+<!-- ===== お知らせ・イベント情報 ===== -->
+<section class="news" id="news">
+  <div class="container">
+    <div class="news-head">
+      <h2 class="sec-title">お知らせ・<em>イベント情報</em></h2>
+    </div>
+    <div class="news-grid" id="newsList"></div>
+    <p class="news-empty" id="newsEmpty" hidden>現在、お知らせはありません。</p>
+  </div>
+</section>
+
+<!-- ===== 悩み ===== -->
+<section class="worries">
+  <div class="container">
+    <h2 class="sec-title">こんなお悩みは<em>ありませんか？</em></h2>
+    <div class="worry-grid">
+      <div class="worry-card worry-card--photo" style="background-image:url('lp_image_assets_png/cases/web/kitchen_after.jpg')">
+        <img src="lp_ui_assets_png/icons/icon_checklist.png" alt="" class="worry-icon">
+        <p>他社の見積りが<br>高い！</p>
+      </div>
+      <div class="worry-card worry-card--photo" style="background-image:url('lp_image_assets_png/cases/web/exterior_paint_after.jpg')">
+        <img src="lp_ui_assets_png/icons/icon_person.png" alt="" class="worry-icon">
+        <p>どの業者に頼めば<br>いいかわからない</p>
+      </div>
+      <div class="worry-card worry-card--photo" style="background-image:url('lp_image_assets_png/cases/web/paint_after.jpg')">
+        <img src="lp_ui_assets_png/icons/icon_house_family.png" alt="" class="worry-icon">
+        <p>工事中の対応や<br>近隣配慮が心配</p>
+      </div>
+      <div class="worry-card worry-card--photo" style="background-image:url('lp_image_assets_png/cases/web/bath_after.jpg')">
+        <img src="lp_ui_assets_png/icons/icon_calculator.png" alt="" class="worry-icon">
+        <p>追加費用が<br>発生しないか心配</p>
+      </div>
+      <div class="worry-card worry-card--photo" style="background-image:url('lp_image_assets_png/cases/web/roof_after.jpg')">
+        <img src="lp_ui_assets_png/icons/icon_shield_check.png" alt="" class="worry-icon">
+        <p>施工後の保証まで<br>任せたい</p>
+      </div>
+    </div>
+    <p class="worries-lead">そのお悩み、丸翔リフォームが<em>丁寧に解決</em>します。</p>
+  </div>
+</section>
+
+<!-- ===== 選ばれる理由 ===== -->
+<section class="reasons" id="service">
+  <div class="container">
+    <h2 class="sec-title">丸翔リフォームが<em>選ばれる理由</em></h2>
+    <div class="reason-grid">
+      <div class="reason-card">
+        <img src="lp_ui_assets_png/icons/icon_helmet.png" alt="">
+        <h3>自社職人による<br>丁寧な施工</h3>
+        <p>経験豊富な自社職人が責任を持って施工。品質に妥協せず、細部まで丁寧に仕上げます。</p>
+      </div>
+      <div class="reason-card">
+        <img src="lp_ui_assets_png/icons/icon_clipboard.png" alt="">
+        <h3>現場管理の徹底</h3>
+        <p>工程・品質・安全を徹底管理。近隣への配慮も欠かさず、安心の現場づくりを実現します。プロの技術者がそろっています。</p>
+      </div>
+      <div class="reason-card">
+        <img src="lp_ui_assets_png/icons/icon_calculator.png" alt="">
+        <h3>わかりやすい<br>見積もり</h3>
+        <p>専門用語を使わず、明確な内容でご提示。追加費用の不安がない見積もりをお約束します。</p>
+      </div>
+      <div class="reason-card">
+        <img src="lp_ui_assets_png/icons/icon_heart_hand.png" alt="">
+        <h3>アフターサポート<br>充実</h3>
+        <p>対象工事には最長10年の施工保証をご用意しています。施工後も長く安心して暮らせる住まいをサポートします。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CTA ===== -->
+<section class="cta" id="cta">
+  <div class="cta-inner">
+    <img src="lp_ui_assets_png/decorations/deco_badge_free_survey_estimate.png" alt="現地調査・お見積もり無料" class="cta-badge">
+    <div class="cta-main">
+      <p class="cta-heading">まずはお気軽にご相談ください</p>
+      <div class="cta-phone">
+        <img src="lp_ui_assets_png/icons/icon_phone.png" alt="">
+        <span class="cta-nums">
+          <a href="tel:0246845557" class="cta-num"><small class="ph-label">（代表）</small>0246-84-5557</a>
+          <a href="tel:09020253104" class="cta-num"><small class="ph-label">（携帯）</small>090-2025-3104</a>
+        </span>
+      </div>
+      <p class="cta-hours">受付時間 10:00～18:00（火曜定休）</p>
+      <p class="cta-sub">しつこい営業はいたしません。安心してご相談ください。</p>
+    </div>
+    <a href="#contact" class="btn btn-white cta-btn">無料相談・見積もりを依頼する</a>
+  </div>
+</section>
+
+<!-- ===== 代表あいさつ ===== -->
+<section class="greeting" id="about">
+  <div class="container">
+    <h2 class="sec-title">代表<em>あいさつ</em></h2>
+    <div class="greeting-inner">
+      <div class="greeting-visual">
+        <img src="lp_ui_assets_png/brand/shacho.png?v=20260811a" alt="株式会社丸翔 代表取締役 山内 寿徳" class="greeting-photo">
+        <p class="greeting-name">
+          <span class="greeting-role">株式会社丸翔　代表取締役</span>
+          <span class="greeting-person">山内 寿徳</span>
+        </p>
+      </div>
+      <div class="greeting-body">
+        <h3 class="greeting-catch">仕事（志事）を通じて、お客様の生きる喜びと楽しさの<br>実現に誠意をもって貢献して参ります！</h3>
+        <p>このたびは、株式会社丸翔のホームページをご覧いただき、誠にありがとうございます。</p>
+        <p>私たち株式会社丸翔は、地元の皆さまの住まいに関するお悩みを、ひとつひとつ丁寧に受け止め、安心して任せていただけるリフォーム・塗装工事を目指してまいりました。</p>
+        <p>住まいは、ご家族の暮らしを支える大切な場所です。だからこそ、私たちはただ工事を行うだけではなく、お客様のお困りごとやご不安にしっかり寄り添い、分かりやすい説明、誠実な対応、確かな施工を大切にしています。</p>
+        <p>社名の「丸翔」には、お客様の悩みを丸ごと解決し、より良い暮らしへ向かって共に成長していきたいという想いを込めています。小さな修繕から外壁塗装、内装リフォームまで、どのようなご相談にも真摯に向き合い、地元に必要とされる会社であり続けることが私たちの使命です。</p>
+        <p>これからも、地元に根ざしたリフォーム・塗装専門店として、技術力の向上はもちろん、人と人とのつながりを大切にしながら、皆さまに信頼される会社づくりに努めてまいります。</p>
+        <p>住まいのことでお困りの際は、どうぞお気軽に株式会社丸翔へご相談ください。</p>
+        <p>今後とも、変わらぬご支援とご愛顧を賜りますよう、心よりお願い申し上げます。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 企業理念 ===== -->
+<section class="philosophy" id="philosophy">
+  <div class="container">
+    <h2 class="sec-title">企業<em>理念</em></h2>
+
+    <div class="phil-lead">
+      <p class="phil-catch">住まいの困りごとを丸ごと受け止め、<br>地域の暮らしに安心と快適を届ける。</p>
+      <p class="phil-desc">株式会社丸翔 建築事業部は、いわき市に根ざしたリフォーム専門店として、住まいの修理・改修・リノベーションを通じ、お客様一人ひとりの暮らしに寄り添います。地元職人による確かな施工と、経験豊富な技術者による丁寧な対応を大切にし、施工後も安心して相談できる“地元のプロリフォーム店”を目指します。</p>
     </div>
 
-    <div class="card-foot">
-      株式会社丸翔　福島県いわき市好間町中好間鍛冶内8番地<br>
-      &copy; 株式会社丸翔
+    <div class="phil-mission">
+      <h3 class="phil-subtitle"><span class="en">MISSION</span>使命</h3>
+      <p>私たちの使命は、地域の皆さまが長く安心して暮らせる住まいを守り、これからの生活に合った快適な住空間づくりを支えることです。</p>
+      <p>住まいは、家族の暮らしを支える大切な場所です。老朽化による不安、雨漏りや外壁の傷み、間取りや設備への不便さなど、住まいに関するお困りごとは一つひとつ異なります。</p>
+      <p>株式会社丸翔 建築事業部は、そうしたお客様のお悩みに真摯に向き合い、修理・改修・リノベーションを通じて、安心して暮らせる住環境を提供してまいります。</p>
     </div>
-  </main>
+
+    <div class="phil-group">
+      <h3 class="phil-subtitle center"><span class="en">ACTION</span>行動指針</h3>
+      <div class="phil-grid">
+        <div class="phil-card"><span class="phil-num">1</span><div><h4>地域に根ざした対応を大切にします</h4><p>いわき市のリフォーム専門店として、地域の住まいと暮らしに寄り添い、身近で相談しやすい存在であり続けます。</p></div></div>
+        <div class="phil-card"><span class="phil-num">2</span><div><h4>お客様の声を丁寧に聞きます</h4><p>工事を進める前に、お客様の不安やご要望をしっかり伺い、分かりやすい説明と納得いただけるご提案を心がけます。</p></div></div>
+        <div class="phil-card"><span class="phil-num">3</span><div><h4>確かな施工品質を追求します</h4><p>地元職人による丁寧な施工と、経験豊富な技術者による管理を徹底し、見えない部分まで誠実な仕事を行います。</p></div></div>
+        <div class="phil-card"><span class="phil-num">4</span><div><h4>施工後の信頼関係を大切にします</h4><p>工事が終わってからも、安心してご相談いただける関係を築き、OB様からの信頼を守り続けます。</p></div></div>
+        <div class="phil-card"><span class="phil-num">5</span><div><h4>暮らしの将来まで考えます</h4><p>現在の不便を解消するだけでなく、定年後の暮らしや将来の住みやすさまで見据えた住空間づくりを提案します。</p></div></div>
+      </div>
+    </div>
+
+    <div class="phil-group">
+      <h3 class="phil-subtitle center"><span class="en">PROMISE</span>お客様への約束</h3>
+      <div class="phil-grid">
+        <div class="phil-card"><span class="phil-num">1</span><div><h4>誠実な対応をお約束します</h4><p>小さな修繕から大きなリフォームまで、どのようなご相談にも誠実に向き合います。</p></div></div>
+        <div class="phil-card"><span class="phil-num">2</span><div><h4>分かりやすい説明をお約束します</h4><p>工事内容、費用、工期について、専門用語だけに頼らず、お客様に分かりやすく丁寧にご説明します。</p></div></div>
+        <div class="phil-card"><span class="phil-num">3</span><div><h4>丁寧な施工をお約束します</h4><p>住まいを大切に扱い、近隣への配慮や現場の整理整頓にも気を配りながら、責任ある施工を行います。</p></div></div>
+        <div class="phil-card"><span class="phil-num">4</span><div><h4>無理な提案はいたしません</h4><p>お客様の暮らしやご予算に合わせ、本当に必要な工事を見極め、納得いただけるご提案を行います。</p></div></div>
+        <div class="phil-card"><span class="phil-num">5</span><div><h4>施工後も安心をお届けします</h4><p>工事が完了した後も、住まいのことで困ったときに気軽に相談できる、地域の頼れるパートナーであり続けます。</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 施工の流れ ===== -->
+<section class="flow">
+  <div class="container">
+    <h2 class="sec-title">施工の<em>流れ</em></h2>
+    <div class="flow-grid">
+      <div class="flow-step">
+        <img src="lp_ui_assets_png/decorations/deco_step_number_01.png" alt="STEP01" class="flow-num">
+        <img src="lp_ui_assets_png/icons/icon_mail.png" alt="" class="flow-icon">
+        <h3>お問い合わせ</h3>
+        <p>お電話・メール・フォームよりお気軽にご相談ください。</p>
+      </div>
+      <div class="flow-step">
+        <img src="lp_ui_assets_png/decorations/deco_step_number_02.png" alt="STEP02" class="flow-num">
+        <img src="lp_ui_assets_png/icons/icon_home_search.png" alt="" class="flow-icon">
+        <h3>現地調査</h3>
+        <p>専門スタッフが現地を確認し、ご要望を詳しくお伺いします。</p>
+      </div>
+      <div class="flow-step">
+        <img src="lp_ui_assets_png/decorations/deco_step_number_03.png" alt="STEP03" class="flow-num">
+        <img src="lp_ui_assets_png/icons/icon_calculator.png" alt="" class="flow-icon">
+        <h3>お見積もり</h3>
+        <p>調査内容をもとに、わかりやすい見積もりをご提出します。</p>
+      </div>
+      <div class="flow-step">
+        <img src="lp_ui_assets_png/decorations/deco_step_number_04.png" alt="STEP04" class="flow-num">
+        <img src="lp_ui_assets_png/icons/icon_contract_handshake.png" alt="" class="flow-icon">
+        <h3>ご契約</h3>
+        <p>内容にご納得いただけましたら、ご契約となります。</p>
+      </div>
+      <div class="flow-step">
+        <img src="lp_ui_assets_png/decorations/deco_step_number_05.png" alt="STEP05" class="flow-num">
+        <img src="lp_ui_assets_png/icons/icon_hammer.png" alt="" class="flow-icon">
+        <h3>施工</h3>
+        <p>経験豊富な職人が丁寧に施工。進捗も随時ご報告します。</p>
+      </div>
+      <div class="flow-step">
+        <img src="lp_ui_assets_png/decorations/deco_step_number_06.png" alt="STEP06" class="flow-num">
+        <img src="lp_ui_assets_png/icons/icon_house_finish.png" alt="" class="flow-icon">
+        <h3>お引き渡し</h3>
+        <p>完了後の確認を経て、お引き渡しとなります。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 費用・見積りの考え方 ===== -->
+<section class="pricing" id="pricing">
+  <div class="container">
+    <h2 class="sec-title">費用・<em>見積りの考え方</em></h2>
+    <p class="pricing-intro">
+      「安いか高いか」だけで比較すると、必要な工事が抜けたり、数年後に再工事が必要になることがあります。<br>
+      丸翔では、含まれる工事内容と材料を明確にした<strong>3つの考え方</strong>でご提案し、納得して選んでいただけるようにしています。
+    </p>
+    <div class="pricing-grid">
+      <div class="pricing-card">
+        <span class="pricing-rank">PLAN 1</span>
+        <h3>必要最低限プラン</h3>
+        <p>今ある不具合の解消を最優先に、費用を抑えて必要な工事だけを行うご提案です。</p>
+        <ul>
+          <li>不具合箇所の補修が中心</li>
+          <li>費用を最小限に抑えたい方向け</li>
+          <li>将来の再工事時期も併せてご説明</li>
+        </ul>
+      </div>
+      <div class="pricing-card pricing-card--main">
+        <span class="pricing-rank">PLAN 2</span>
+        <h3>標準プラン</h3>
+        <p>耐久性と費用のバランスを重視した、最も多く選ばれている標準的なご提案です。</p>
+        <ul>
+          <li>下地補修＋標準グレードの材料</li>
+          <li>コストと持ちのバランス重視</li>
+          <li>保証対象の工事範囲を明記</li>
+        </ul>
+      </div>
+      <div class="pricing-card">
+        <span class="pricing-rank">PLAN 3</span>
+        <h3>長期安心プラン</h3>
+        <p>高耐久の材料と予防的な補修まで含め、長く安心して暮らしたい方へのご提案です。</p>
+        <ul>
+          <li>高耐久グレードの材料を使用</li>
+          <li>傷みやすい箇所の予防補修も実施</li>
+          <li>メンテナンス周期を長くしたい方向け</li>
+        </ul>
+      </div>
+    </div>
+    <div class="pricing-factors">
+      <h3>お見積もり金額が変わる主な要因</h3>
+      <p>同じ工事でも、次の条件によって費用は変わります。お見積もりの際は、内訳と併せて一つひとつご説明します。</p>
+      <div class="factor-tags">
+        <span>施工面積</span><span>足場の要否</span><span>下地の傷み具合</span><span>材料のグレード</span><span>既存設備の撤去・処分</span><span>搬入経路</span><span>追加補修の有無</span>
+      </div>
+      <p class="pricing-note">※具体的な金額は現地調査のうえ、書面のお見積もりでご提示します。追加費用が発生する可能性がある場合は、事前に条件をご説明します。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== よくある質問 ===== -->
+<section class="faq" id="faq">
+  <div class="container">
+    <h2 class="sec-title">よくある<em>ご質問</em></h2>
+    <div class="faq-list">
+      <details class="faq-item" open>
+        <summary>現地調査やお見積もりは本当に無料ですか？</summary>
+        <p>はい、現地調査・お見積もりは無料です。お見積もり後のしつこい営業もいたしませんので、比較検討の段階でも安心してご相談ください。</p>
+      </details>
+      <details class="faq-item">
+        <summary>工事の途中で追加費用が発生することはありませんか？</summary>
+        <p>お見積もりの段階で、費用が変わる可能性のある条件（下地の傷みの程度など）を事前にご説明します。工事中に追加の補修が必要と分かった場合も、必ず事前にご相談し、ご了承いただいてから進めます。</p>
+      </details>
+      <details class="faq-item">
+        <summary>施工後の保証はありますか？</summary>
+        <p>対象工事には最長10年の施工保証をご用意しています。保証期間は工事内容・施工範囲・使用材料および保証プランにより異なります。</p>
+        <p><strong>対象となる主な工事</strong><br>
+        ①屋根の全面葺き替え・カバー工法／②外壁の張り替え・外装下地防水工事／③屋上・バルコニーの全面防水工事／④外壁・屋根塗装</p>
+        <p><strong>保証の対象外となるもの</strong><br>
+        経年による色あせ、チョーキング、汚れ・カビ・藻、シーリング材の通常劣化、既存下地のひび割れ、建物の揺れや構造変形、台風・地震・雹・落雷などの自然災害、他社工事による損傷、お客様ご自身による加工や破損、保証対象外部分を原因とする雨漏り</p>
+        <p>対象部位・保証期間・保証内容・免責事項は、工事前に保証書または契約書で明確にご説明します。</p>
+      </details>
+      <details class="faq-item">
+        <summary>対応エリアはどこまでですか？</summary>
+        <p>福島県いわき市全域に対応しています。市外の場合もまずはお気軽にご相談ください。</p>
+      </details>
+      <details class="faq-item">
+        <summary>小さな修繕だけでもお願いできますか？</summary>
+        <p>もちろん可能です。手すりの取り付け、網戸・蛇口の交換、雨どいの補修など、小さな困りごともお気軽にご相談ください。</p>
+      </details>
+      <details class="faq-item">
+        <summary>住みながらの工事は可能ですか？</summary>
+        <p>外壁塗装や水回りの改修など、多くの工事はお住まいのまま施工できます。生活への影響が大きい工事の場合は、事前に工程をご説明のうえ進めます。</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ===== サポート・募集のご案内 ===== -->
+<section class="support" id="support">
+  <div class="container">
+    <h2 class="sec-title">サポート・<em>各種ご案内</em></h2>
+    <div class="support-grid">
+      <div class="support-card" id="ob">
+        <img src="lp_ui_assets_png/icons/icon_heart_hand.png" alt="" class="support-icon">
+        <h3>OB顧客さま専用窓口</h3>
+        <p>丸翔で工事をされたお客様の定期点検のご予約、不具合のご連絡、保証内容のご確認、季節のメンテナンス相談を承ります。お知り合いのご紹介もこちらへどうぞ。</p>
+        <a href="#contact" class="support-link">点検・修理を相談する →</a>
+      </div>
+      <div class="support-card" id="subsidy">
+        <img src="lp_ui_assets_png/icons/icon_checklist.png" alt="" class="support-icon">
+        <h3>補助金・支援制度のご案内</h3>
+        <p>いわき市では住宅リフォームに関する補助制度が実施される場合があります。対象工事・申請時期・条件は必ず市の公式情報をご確認ください。多くの制度は<strong>着工前の申請</strong>が必要です。</p>
+        <a href="https://www.city.iwaki.lg.jp/www/contents/1618912363187/index.html" target="_blank" rel="noopener" class="support-link">いわき市の公式ページを見る →</a>
+        <p class="support-note">※制度の利用可否・金額を当社が保証するものではありません。申請のご相談は無料で承ります。（情報確認日：2026年7月17日）</p>
+      </div>
+      <div class="support-card" id="recruit">
+        <img src="lp_ui_assets_png/icons/icon_helmet.png" alt="" class="support-icon">
+        <h3>採用情報</h3>
+        <p>地域の住まいを支える仲間（正社員）を募集しています。仕事内容や条件の詳細は、お気軽にお問い合わせください。</p>
+        <a href="#contact" class="support-link">採用について問い合わせる →</a>
+      </div>
+      <div class="support-card" id="partner">
+        <img src="lp_ui_assets_png/icons/icon_contract_handshake.png" alt="" class="support-icon">
+        <h3>協力業者さま募集</h3>
+        <p>いわき市および近隣エリアで、共に品質の高い施工を担っていただける協力業者さまを募集しています。対応工種・エリアを添えてご連絡ください。</p>
+        <a href="#contact" class="support-link">協力業者として問い合わせる →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CONTACT FORM ===== -->
+<section class="form-sec" id="contact">
+  <div class="container">
+    <h2 class="sec-title">お問い合わせ・<em>無料診断／見積り依頼</em></h2>
+    <p class="form-intro">
+      現地調査・お見積もりは<strong>無料</strong>です。下記フォームまたはお電話（代表 <a href="tel:0246845557">0246-84-5557</a>／携帯 <a href="tel:09020253104">090-2025-3104</a>）よりお気軽にご相談ください。<br>
+      通常<strong>1～2営業日以内</strong>にご連絡いたします。しつこい営業はいたしません。
+    </p>
+
+    <form class="contact-form" id="contactForm" novalidate>
+      <div class="form-row">
+        <label class="form-label">ご相談内容 <span class="req">必須</span></label>
+        <div class="form-field radio-group">
+          <label><input type="radio" name="type" value="無料診断・現地調査" checked> 無料診断・現地調査</label>
+          <label><input type="radio" name="type" value="お見積り依頼"> お見積り依頼</label>
+          <label><input type="radio" name="type" value="OB点検・修理のご相談"> OB点検・修理のご相談</label>
+          <label><input type="radio" name="type" value="採用・協力業者について"> 採用・協力業者について</label>
+          <label><input type="radio" name="type" value="ご相談・お問い合わせ"> ご相談・お問い合わせ</label>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <label class="form-label" for="f-name">お名前 <span class="req">必須</span></label>
+        <div class="form-field">
+          <input type="text" id="f-name" name="name" placeholder="例）丸翔 太郎" required>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <label class="form-label" for="f-kana">ふりがな</label>
+        <div class="form-field">
+          <input type="text" id="f-kana" name="kana" placeholder="例）まるしょう たろう">
+        </div>
+      </div>
+
+      <div class="form-row">
+        <label class="form-label" for="f-tel">電話番号 <span class="req">必須</span></label>
+        <div class="form-field">
+          <input type="tel" id="f-tel" name="tel" placeholder="例）090-2025-3104" required>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <label class="form-label" for="f-email">メールアドレス <span class="req">必須</span></label>
+        <div class="form-field">
+          <input type="email" id="f-email" name="email" placeholder="例）example@mail.com" required>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <label class="form-label">ご希望の連絡方法</label>
+        <div class="form-field radio-group">
+          <label><input type="radio" name="contactMethod" value="電話" checked> 電話</label>
+          <label><input type="radio" name="contactMethod" value="メール"> メール</label>
+          <label><input type="radio" name="contactMethod" value="どちらでも"> どちらでも</label>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <label class="form-label" for="f-calltime">電話がつながりやすい時間帯</label>
+        <div class="form-field">
+          <select id="f-calltime" name="calltime">
+            <option value="">選択してください</option>
+            <option value="午前（10:00～12:00）">午前（10:00～12:00）</option>
+            <option value="午後（12:00～16:00）">午後（12:00～16:00）</option>
+            <option value="夕方（16:00～18:00）">夕方（16:00～18:00）</option>
+            <option value="いつでも可">いつでも可</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <label class="form-label" for="f-addr">ご住所（施工場所）</label>
+        <div class="form-field">
+          <input type="text" id="f-addr" name="address" placeholder="例）福島県いわき市好間町〇〇">
+        </div>
+      </div>
+
+      <div class="form-row">
+        <label class="form-label">ご希望の工事内容</label>
+        <div class="form-field check-group">
+          <label><input type="checkbox" name="work" value="外壁塗装"> 外壁塗装</label>
+          <label><input type="checkbox" name="work" value="屋根工事"> 屋根工事</label>
+          <label><input type="checkbox" name="work" value="内装リフォーム"> 内装リフォーム</label>
+          <label><input type="checkbox" name="work" value="水まわり"> 水まわり</label>
+          <label><input type="checkbox" name="work" value="小修繕・バリアフリー"> 小修繕・バリアフリー</label>
+          <label><input type="checkbox" name="work" value="全面リノベーション"> 全面リノベーション</label>
+          <label><input type="checkbox" name="work" value="その他"> その他</label>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <label class="form-label" for="f-building">建物種別</label>
+        <div class="form-field">
+          <select id="f-building" name="building">
+            <option value="">選択してください</option>
+            <option value="戸建て">戸建て</option>
+            <option value="マンション・集合住宅">マンション・集合住宅</option>
+            <option value="店舗・事務所">店舗・事務所</option>
+            <option value="その他">その他</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <label class="form-label" for="f-budget">ご予算の目安</label>
+        <div class="form-field">
+          <select id="f-budget" name="budget">
+            <option value="">選択してください（未定でも大丈夫です）</option>
+            <option value="～30万円">～30万円</option>
+            <option value="30～100万円">30～100万円</option>
+            <option value="100～300万円">100～300万円</option>
+            <option value="300万円以上">300万円以上</option>
+            <option value="未定・相談したい">未定・相談したい</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <label class="form-label" for="f-timing">ご希望の時期</label>
+        <div class="form-field">
+          <select id="f-timing" name="timing">
+            <option value="">選択してください</option>
+            <option value="なるべく早く">なるべく早く</option>
+            <option value="3か月以内">3か月以内</option>
+            <option value="半年以内">半年以内</option>
+            <option value="1年以内">1年以内</option>
+            <option value="時期は未定">時期は未定</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <label class="form-label" for="f-photos">気になる箇所の写真</label>
+        <div class="form-field">
+          <input type="file" id="f-photos" name="photos" accept="image/*" multiple>
+          <p class="field-note">※現在のフォームでは写真を直接送信できません。ご返信の際に、写真の送付方法（メール等）をご案内します。</p>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <label class="form-label" for="f-source">当サイトを知ったきっかけ</label>
+        <div class="form-field">
+          <select id="f-source" name="source">
+            <option value="">選択してください</option>
+            <option value="検索（Google・Yahoo!など）">検索（Google・Yahoo!など）</option>
+            <option value="Googleマップ">Googleマップ</option>
+            <option value="知人・OB客の紹介">知人・OB客の紹介</option>
+            <option value="チラシ・看板">チラシ・看板</option>
+            <option value="SNS">SNS</option>
+            <option value="その他">その他</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <label class="form-label" for="f-message">ご相談・ご要望</label>
+        <div class="form-field">
+          <textarea id="f-message" name="message" rows="5" placeholder="気になっている箇所、築年数、ご希望などをご記入ください。"></textarea>
+        </div>
+      </div>
+
+      <div class="form-row form-row--consent">
+        <label class="consent">
+          <input type="checkbox" id="f-consent" name="consent" required>
+          <span><a href="privacy.html" target="_blank" rel="noopener">プライバシーポリシー</a>に同意する <span class="req">必須</span></span>
+        </label>
+      </div>
+
+      <p class="form-error" id="formError" hidden>未入力の必須項目があります。ご確認ください。</p>
+      <p class="form-success" id="formSuccess" hidden>お問い合わせを受け付けました。担当者より1～2営業日以内にご連絡いたします。</p>
+
+      <!-- 迷惑メール対策（人間には見えない罠の入力欄。ボットが入力すると送信サービス側で弾かれます） -->
+      <div style="position:absolute;left:-9999px;" aria-hidden="true">
+        <label>この欄は入力しないでください <input type="text" name="_gotcha" tabindex="-1" autocomplete="off"></label>
+      </div>
+
+      <div class="form-submit">
+        <button type="submit" class="btn btn-orange btn-lg">この内容で送信する <span class="arw">→</span></button>
+        <p class="form-note" id="formNote">※送信ボタンを押すとメールソフトが起動し、入力内容が本文に入ります。<br>うまく起動しない場合は、お電話（代表 0246-84-5557／携帯 090-2025-3104）またはメール（yamauchi310lyd@gmail.com）へ直接ご連絡ください。</p>
+      </div>
+    </form>
+  </div>
+</section>
+
+<!-- ===== アクセス（案内地図） ===== -->
+<section class="access" id="access">
+  <div class="container">
+    <h2 class="sec-title">アクセス・<em>案内地図</em></h2>
+    <div class="access-inner">
+      <div class="access-map">
+        <!-- 【住所表記について】表示用の住所は登記どおりの「8番地」。
+             地図のURL（下の q= と、経路案内リンクの destination=）だけは「8-1」のままにしています。
+             「8番地」ではGoogleマップが正しい位置を示さないためです。修正しないでください。 -->
+        <iframe
+          src="https://maps.google.com/maps?q=%E7%A6%8F%E5%B3%B6%E7%9C%8C%E3%81%84%E3%82%8F%E3%81%8D%E5%B8%82%E5%A5%BD%E9%96%93%E7%94%BA%E4%B8%AD%E5%A5%BD%E9%96%93%E9%8D%9B%E5%86%B6%E5%86%858-1&z=16&hl=ja&output=embed"
+          loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+          title="株式会社 丸翔 所在地の地図" allowfullscreen></iframe>
+      </div>
+      <div class="access-info">
+        <h3 class="access-name">株式会社 丸翔</h3>
+        <dl class="access-dl">
+          <div><dt>所在地</dt><dd>〒970-1152<br>福島県いわき市好間町中好間鍛冶内8番地</dd></div>
+          <div><dt>TEL</dt><dd>代表 <a href="tel:0246845557">0246-84-5557</a>／携帯 <a href="tel:09020253104">090-2025-3104</a></dd></div>
+          <div><dt>FAX</dt><dd>0246-84-5571</dd></div>
+          <div><dt>営業時間</dt><dd>10:00～18:00</dd></div>
+          <div><dt>定休日</dt><dd>火曜日</dd></div>
+        </dl>
+        <a class="btn btn-orange access-btn"
+           href="https://www.google.com/maps/dir/?api=1&destination=%E7%A6%8F%E5%B3%B6%E7%9C%8C%E3%81%84%E3%82%8F%E3%81%8D%E5%B8%82%E5%A5%BD%E9%96%93%E7%94%BA%E4%B8%AD%E5%A5%BD%E9%96%93%E9%8D%9B%E5%86%B6%E5%86%858-1"
+           target="_blank" rel="noopener">
+          Googleマップで経路を見る <span class="arw">→</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="site-footer" id="company">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="footer-brand-head">
+        <img src="lp_ui_assets_png/brand/logo_marusho.png?v=20260811a" alt="株式会社 丸翔" class="footer-logo">
+      </div>
+      <p class="footer-lead">いわき市の地域密着リフォーム専門店として、外壁塗装・屋根・水回り・内装まで高品質な工事を提供しています。小さな修繕から全面リノベーションまで、住まいのことなら何でもご相談ください。</p>
+    </div>
+
+    <div class="footer-col">
+      <h4>会社情報</h4>
+      <dl class="footer-dl">
+        <div><dt>会社名</dt><dd>株式会社 丸翔</dd></div>
+        <div><dt>代表者</dt><dd>代表取締役 山内 寿徳</dd></div>
+        <!-- 資格・許認可／工事保険は「掲載しない」とのご判断のため削除（2026-07-28）。
+             掲載される場合は、上と同じ形式で <div><dt>…</dt><dd>…</dd></div> を追加してください。 -->
+      </dl>
+    </div>
+
+    <div class="footer-col">
+      <h4>対応エリア</h4>
+      <p class="footer-area-note">福島県いわき市全域に対応しています。</p>
+      <div class="area-tags">
+        <span>いわき市全域</span>
+      </div>
+    </div>
+
+    <div class="footer-col">
+      <h4>本社所在地</h4>
+      <dl class="footer-dl footer-dl--contact">
+        <div><dt>〒</dt><dd>970-1152<br>福島県いわき市好間町中好間鍛冶内8番地</dd></div>
+        <div><dt>TEL</dt><dd>（代表）0246-84-5557<br>（携帯）090-2025-3104</dd></div>
+        <div><dt>FAX</dt><dd>0246-84-5571</dd></div>
+        <div><dt>E-mail</dt><dd>yamauchi310lyd@gmail.com</dd></div>
+        <div><dt>営業時間</dt><dd>10:00～18:00</dd></div>
+        <div><dt>定休日</dt><dd>火曜日</dd></div>
+      </dl>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2024 丸翔リフォーム All Rights Reserved.</p>
+    <p class="footer-links"><a href="privacy.html">プライバシーポリシー</a><span>｜</span><a href="#top">サイトマップ</a></p>
+  </div>
+</footer>
+
+<!-- ===== MOBILE STICKY BAR ===== -->
+<div class="sticky-bar">
+  <a href="tel:0246845557" class="sticky-phone">
+    <img src="lp_ui_assets_png/icons/icon_phone.png" alt="">電話する
+  </a>
+  <a href="#contact" class="sticky-quote">
+    <img src="lp_ui_assets_png/icons/icon_clipboard.png" alt="">無料相談・見積もり
+  </a>
+</div>
+
+<script src="news.js"></script>
+<script src="cases.js"></script>
+<script>
+  const hb = document.getElementById('hamburger');
+  const gnav = document.getElementById('gnav');
+  hb.addEventListener('click', () => {
+    gnav.classList.toggle('open');
+    document.body.classList.toggle('nav-open');
+  });
+  gnav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    gnav.classList.remove('open');
+    document.body.classList.remove('nav-open');
+  }));
+
+  // ヘッダーロゴ：クリックでページ先頭（TOP）へスムーズに戻る
+  const brandLink = document.querySelector('.brand[href="#top"]');
+  if (brandLink) {
+    brandLink.addEventListener('click', (e) => {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      if (history.replaceState) history.replaceState(null, '', location.pathname + location.search);
+    });
+  }
+
+  // ===== ヒーロー：施工例スライドショー =====
+  (function heroSlideshow(){
+    const wrap = document.getElementById('heroSlides');
+    if (!wrap) return;
+    const slides = wrap.querySelectorAll('.hero-slide');
+    if (slides.length < 2) return;
+    const INTERVAL = 5000; // 1枚の表示時間（ミリ秒）
+    let i = 0;
+    setInterval(() => {
+      slides[i].classList.remove('is-active');
+      i = (i + 1) % slides.length;
+      slides[i].classList.add('is-active');
+    }, INTERVAL);
+  })();
+
+  // ===== お知らせ・イベント情報（画像付きカード表示） =====
+  const NEWS_MAX = 8; // トップに表示する最大件数（1行4枚。多いときは日付が新しい順に表示）
+  (function renderNews(){
+    const list = document.getElementById('newsList');
+    if (!list || typeof NEWS_ITEMS === 'undefined') return;
+    const esc = (s) => String(s == null ? '' : s)
+      .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    const fmt = (d) => {
+      const p = String(d).split('-');
+      return (p.length === 3) ? `${p[0]}.${p[1].padStart(2,'0')}.${p[2].padStart(2,'0')}` : esc(d);
+    };
+    const FALLBACK_IMG = 'lp_image_assets_png/slideshow/slide1_exterior.jpg';
+    // 表示順は news.js に書いた順（上から）。並べ替えたいときは news.js の順番を入れ替えてください。
+    const items = [...NEWS_ITEMS]
+      .filter(it => it && it.title)
+      .slice(0, NEWS_MAX);
+    if (items.length === 0) { document.getElementById('newsEmpty').hidden = false; return; }
+    list.innerHTML = items.map(it => {
+      const cat = esc(it.category || 'お知らせ');
+      const img = esc(it.image || FALLBACK_IMG);
+      const body = it.body ? `<p class="news-card-body">${esc(it.body)}</p>` : '';
+      // links（複数リンク）があれば、それぞれをリンクとして並べる。
+      // ない場合は従来どおり link + linkText（カード全体が1つのリンク）。
+      const linkList = Array.isArray(it.links) ? it.links.filter(l => l && l.url && l.label) : [];
+      const badge = (url) => /\.pdf($|\?)/i.test(url) ? '<span class="news-pdf-badge">PDF</span>' : '';
+      const extMark = (url) => /^https?:/i.test(url) ? '<span class="news-ext-mark" aria-hidden="true">↗</span>' : '';
+      // サイト内のページは同じタブ、PDF・画像・外部サイトは別タブで開く
+      const inSite = (url) => /\.html($|[?#])/i.test(url) && !/^https?:/i.test(url);
+      const tgt = (url) => inSite(url) ? '' : ' target="_blank" rel="noopener"';
+      let note = '';
+      if (linkList.length) {
+        note = `<div class="news-card-links">` + linkList.map(l =>
+          `<a class="news-card-link" href="${esc(l.url)}"${tgt(l.url)}>${badge(l.url)}${esc(l.label)}${extMark(l.url)}</a>`
+        ).join('') + `</div>`;
+      } else if (it.linkText) {
+        note = `<span class="news-card-link">${badge(it.link || '')}${esc(it.linkText)}</span>`;
+      }
+      const inner = `
+        <figure class="news-card-photo"><img src="${img}" alt="" loading="lazy"><span class="news-cat" data-cat="${cat}">${cat}</span></figure>
+        <div class="news-card-main">
+          <p class="news-card-title">${esc(it.title)}</p>
+          ${body}
+          ${note}
+          <time class="news-date">${fmt(it.date)}</time>
+        </div>`;
+      return (it.link && !linkList.length)
+        ? `<a class="news-card" href="${esc(it.link)}"${tgt(it.link)}>${inner}</a>`
+        : `<article class="news-card">${inner}</article>`;
+    }).join('');
+  })();
+
+  // ===== 施工事例 =====
+  (function renderCases(){
+    const grid = document.getElementById('caseGrid');
+    if (!grid || typeof CASE_ITEMS === 'undefined') return;
+    const esc = (s) => String(s == null ? '' : s)
+      .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    const L_BEFORE = 'lp_ui_assets_png/decorations/label_before_green.png';
+    const L_AFTER  = 'lp_ui_assets_png/decorations/label_after_green.png';
+    const items = CASE_ITEMS.filter(c => c && c.category);
+    grid.innerHTML = items.map(c => {
+      const sp = c.spec || {}, dt = c.detail || {};
+      return `<article class="case-card">
+        <div class="case-ba">
+          <figure><img src="${esc(c.before)}" alt="${esc(c.category)} 施工前" loading="lazy"><img src="${L_BEFORE}" alt="Before" class="ba-label ba-label--l"></figure>
+          <figure><img src="${esc(c.after)}" alt="${esc(c.category)} 施工後" loading="lazy"><img src="${L_AFTER}" alt="After" class="ba-label ba-label--r"></figure>
+        </div>
+        <div class="case-body">
+          <span class="case-tag">${esc(c.category)}</span>
+          <dl class="case-spec">
+            <div><dt>施工箇所</dt><dd>${esc(sp.location)}</dd></div>
+            <div><dt>工期</dt><dd>${esc(sp.period)}</dd></div>
+            <div><dt>費用目安</dt><dd>${esc(sp.cost)}</dd></div>
+            <div><dt>建物種別</dt><dd>${esc(sp.building)}</dd></div>
+          </dl>
+          <dl class="case-detail">
+            <div><dt>工事前の悩み</dt><dd>${esc(dt.problem)}</dd></div>
+            <div><dt>施工内容</dt><dd>${esc(dt.work)}</dd></div>
+            <div><dt>施工後の変化</dt><dd>${esc(dt.change)}</dd></div>
+            <div><dt>担当者コメント</dt><dd>${esc(dt.comment)}</dd></div>
+          </dl>
+        </div>
+      </article>`;
+    }).join('');
+  })();
+
+  // ===== お問い合わせフォーム =====
+  // ▼ 送信サービスのエンドポイントを設定すると、サーバー送信方式に切り替わります。
+  //    例）const FORM_ENDPOINT = 'https://formspree.io/f/xxxxxxxx';
+  //    設定すると、メールソフトを起動せずに送信され、完了メッセージと注意書きも自動で切り替わります。
+  //    未設定（''のまま）の間は、メールソフト起動（mailto）方式で動作します。
+  const FORM_ENDPOINT = 'https://ssgform.com/s/2qEq3hthPZK0';
+  const RECIPIENT = 'yamauchi310lyd@gmail.com';
+  const form = document.getElementById('contactForm');
+  const formError = document.getElementById('formError');
+  const formSuccess = document.getElementById('formSuccess');
+  const formNote = document.getElementById('formNote');
+
+  // 送信方式に合わせて、ボタン下の注意書きを切り替える
+  if (formNote && FORM_ENDPOINT) {
+    formNote.innerHTML = '※送信後、担当者より折り返しご連絡いたします。<br>お急ぎの場合は、お電話（代表 0246-84-5557／携帯 090-2025-3104）へご連絡ください。';
+  }
+
+  if (form) {
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      formSuccess.hidden = true;
+      // 必須チェック
+      const required = form.querySelectorAll('[required]');
+      let ok = true;
+      required.forEach(el => {
+        const invalid = (el.type === 'checkbox') ? !el.checked : !el.value.trim();
+        el.closest('.form-row').classList.toggle('has-error', invalid);
+        if (invalid) ok = false;
+      });
+      // メール形式
+      const email = form.elements['email'].value.trim();
+      if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        ok = false;
+        form.querySelector('#f-email').closest('.form-row').classList.add('has-error');
+      }
+      formError.hidden = ok;
+      if (!ok) {
+        form.querySelector('.has-error')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        return;
+      }
+      // 送信内容を組み立て
+      const g = (n) => (form.elements[n]?.value || '').trim();
+      const works = [...form.querySelectorAll('input[name="work"]:checked')].map(c => c.value);
+      const type = form.querySelector('input[name="type"]:checked')?.value || '';
+      const contactMethod = form.querySelector('input[name="contactMethod"]:checked')?.value || '';
+      const lines = [
+        '【ご相談内容】' + type,
+        '【お名前】' + g('name'),
+        '【ふりがな】' + g('kana'),
+        '【電話番号】' + g('tel'),
+        '【メールアドレス】' + g('email'),
+        '【ご希望の連絡方法】' + (contactMethod || '（未選択）'),
+        '【電話がつながりやすい時間帯】' + (g('calltime') || '（未選択）'),
+        '【ご住所（施工場所）】' + g('address'),
+        '【ご希望の工事内容】' + (works.join('、') || '（未選択）'),
+        '【建物種別】' + (g('building') || '（未選択）'),
+        '【ご予算の目安】' + (g('budget') || '（未選択）'),
+        '【ご希望の時期】' + (g('timing') || '（未選択）'),
+        '【当サイトを知ったきっかけ】' + (g('source') || '（未選択）'),
+        '【ご相談・ご要望】',
+        g('message'),
+        '',
+        '---',
+        '※このメールは丸翔リフォームのお問い合わせフォームから送信されました。'
+      ];
+      const subject = '【お問い合わせ】' + type + '／' + g('name') + '様';
+
+      // 迷惑メール対策：隠し欄に入力があるのはボットなので、静かに中断する
+      if ((form.elements['_gotcha']?.value || '').trim()) return;
+
+      if (FORM_ENDPOINT) {
+        // サーバー送信方式（SSGform）
+        const btn = form.querySelector('button[type="submit"]');
+        if (btn.dataset.sending === '1') return; // 二重送信の防止
+        const btnHtml = btn.innerHTML;
+        btn.dataset.sending = '1';
+        btn.disabled = true;
+        btn.textContent = '送信中…';
+        try {
+          // 通知メールが日本語の項目名で読めるように組み立てる
+          const fd = new FormData();
+          fd.append('ご相談内容', type);
+          fd.append('お名前', g('name'));
+          fd.append('ふりがな', g('kana'));
+          fd.append('電話番号', g('tel'));
+          fd.append('メールアドレス', email);
+          fd.append('ご希望の連絡方法', contactMethod || '（未選択）');
+          fd.append('電話がつながりやすい時間帯', g('calltime') || '（未選択）');
+          fd.append('ご住所（施工場所）', g('address'));
+          fd.append('ご希望の工事内容', works.join('、') || '（未選択）');
+          fd.append('建物種別', g('building') || '（未選択）');
+          fd.append('ご予算の目安', g('budget') || '（未選択）');
+          fd.append('ご希望の時期', g('timing') || '（未選択）');
+          fd.append('当サイトを知ったきっかけ', g('source') || '（未選択）');
+          fd.append('ご相談・ご要望', g('message'));
+          // ※SSGformでは件名・返信先は管理画面で設定するため、_subject や _replyto は送りません。
+          //   自動応答メールの宛先は、上の「メールアドレス」欄から自動的に判定されます。
+          const res = await fetch(FORM_ENDPOINT, {
+            method: 'POST',
+            body: fd,
+            headers: {
+              'Accept': 'application/json',
+              // SSGformはこのヘッダでAjax送信を判定します。無いと転送用のHTMLが返り、
+              // 送信できたのに失敗扱いになることがあります。削除しないでください。
+              'X-Requested-With': 'XMLHttpRequest'
+            }
+          });
+          if (!res.ok) throw new Error('send failed');
+          // アクセス解析：送信が成功したときだけ記録する（個人情報は送りません）
+          if (window.msTrack) window.msTrack('contact_submit', {
+            soudan_naiyou: type,
+            kouji_naiyou: works.join('、') || '（未選択）',
+            kikkake: g('source') || '（未選択）'
+          });
+          form.reset();
+          formError.hidden = true;
+          formSuccess.hidden = false;
+          formSuccess.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        } catch (err) {
+          formError.textContent = '送信に失敗しました。お手数ですが、お電話（代表 0246-84-5557／携帯 090-2025-3104）へご連絡ください。';
+          formError.hidden = false;
+          formError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        } finally {
+          btn.disabled = false;
+          btn.innerHTML = btnHtml;
+          delete btn.dataset.sending;
+        }
+        return;
+      }
+
+      // mailto方式（フォールバック）
+      if (window.msTrack) window.msTrack('contact_mailto', { soudan_naiyou: type });
+      const mailto = 'mailto:' + RECIPIENT
+        + '?subject=' + encodeURIComponent(subject)
+        + '&body=' + encodeURIComponent(lines.join('\n'));
+      window.location.href = mailto;
+    });
+  }
+</script>
 </body>
 </html>

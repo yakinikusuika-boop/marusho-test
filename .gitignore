@@ -15,6 +15,9 @@
 *.orig
 *~
 
+# 表示確認用のローカル設定（公開対象ではありません）
+.claude/
+
 # OS が自動生成するファイル
 Thumbs.db
 ehthumbs.db
