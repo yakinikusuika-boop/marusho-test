@@ -32,7 +32,7 @@ const CASE_ITEMS = [
     category: "橋の拡張・補修工事",
     before: "lp_image_assets_png/cases/web/bridge_before.jpg",
     after:  "lp_image_assets_png/cases/web/bridge_after.jpg",
-    spec:   { location: "農道の橋（水路横断部）", period: "お問い合わせください", cost: "お問い合わせください", building: "屋外・土木工事" },
+    spec:   { location: "農道の橋（水路横断部）", period: "約7日間", cost: "65万円〜（目安）", building: "屋外・土木工事" },
     detail: {
       problem: "橋の幅が狭く、路肩に寄ると水路側に落ちそうで通行が不安",
       work:    "橋の路盤を拡張し、水路側にコンクリート縁石を新設。取合いの土間も打ち直し",
@@ -45,7 +45,7 @@ const CASE_ITEMS = [
     category: "外壁塗装（クリーム色）",
     before: "lp_image_assets_png/cases/web/exterior_cream_before.jpg",
     after:  "lp_image_assets_png/cases/web/exterior_cream_after.jpg",
-    spec:   { location: "外壁・付帯部", period: "お問い合わせください", cost: "お問い合わせください", building: "戸建て" },
+    spec:   { location: "外壁・付帯部", period: "約14日間", cost: "155万円〜（目安）", building: "戸建て" },
     detail: {
       problem: "外壁の白さがくすみ、破風や軒まわりの傷みも気になる",
       work:    "足場を組み、高圧洗浄・下地補修のうえ外壁をクリーム色に塗装。破風・軒天などの付帯部もあわせて塗り替え",
