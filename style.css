@@ -84,14 +84,6 @@ a{ text-decoration:none; color:inherit; }
 /* ===== Hero ===== */
 .hero{ position:relative; background:var(--cream); overflow:hidden; }
 .hero-photo{ position:absolute; inset:0; z-index:0; }
-.hero-photo .hero-slide{
-  position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
-  opacity:0; transition:opacity 1.4s ease-in-out;
-}
-.hero-photo .hero-slide.is-active{ opacity:1; }
-@media (prefers-reduced-motion: reduce){
-  .hero-photo .hero-slide{ transition:none; }
-}
 .hero-photo::after{
   content:""; position:absolute; inset:0;
   background:linear-gradient(90deg, rgba(245,239,228,.98) 30%, rgba(245,239,228,.4) 55%, rgba(245,239,228,0) 75%);
@@ -514,24 +506,6 @@ a.cta-num:hover{ opacity:.85; }
 }
 .hero-btns .btn-orange .arw{ font-size:24px; }
 
-/* ヒーロー写真上の円形バッジ */
-.hero-badges{
-  position:absolute; top:36px; right:44px; z-index:1;
-  display:flex; gap:16px;
-}
-.hero-badge{
-  width:118px; height:118px; border-radius:50%;
-  background:rgba(255,255,255,.94); border:3px solid var(--orange);
-  display:flex; flex-direction:column; align-items:center; justify-content:center;
-  text-align:center; line-height:1.2; box-shadow:0 4px 14px rgba(0,0,0,.15);
-}
-.hero-badge .hb-label{ font-size:11px; font-weight:700; color:var(--teal); }
-.hero-badge .hb-value{ font-size:32px; font-weight:900; color:var(--orange); }
-.hero-badge .hb-value small{ font-size:14px; font-weight:700; }
-.hero-badge .hb-foot{ font-size:11px; font-weight:700; color:var(--teal); }
-@media (max-width:1024px){
-  .hero-badges{ display:none; }
-}
 
 /* ===== Stats（濃緑帯・白文字） ===== */
 .stats{ background:var(--teal); }
@@ -797,4 +771,131 @@ a.news-card-link:hover{ color:var(--orange); }
   .hero-phone .hp-num--sub{ font-size:21px; }
   .hero-btns .btn-orange{ font-size:18px; padding:20px 18px; }
   .hero-btns .btn-orange .arw{ font-size:20px; }
+}
+
+/* ============================================================
+   ヒーロー：写真の壁（現場写真24枚）＋中央パネル
+   上段＝写真の壁。24枚は常に明るいまま（章による明暗の切り替えはしない）。
+   壁の中央は写真を置かずに空けてあり、そこへ見出しパネルがぴったり収まる
+   ＝パネルの裏に写真が隠れない。
+   メイン写真 wall02 は左上に2列×2段で大きく置き、オレンジのふちを付ける。
+   下段＝クリーム地にエリア一文・電話番号・申し込みボタン。
+   ============================================================ */
+.hero{ background:var(--cream); }
+.hero-stage{ position:relative; overflow:hidden; }
+
+/* 壁：6列×6段＝36マスの割り当て
+     ・パネル      … 2〜5列／3〜4段＝8マス（中央）
+     ・メイン写真   … 1〜2列／1〜2段＝4マス（左上・wall02）
+     ・縦長タイル   … 6列／5〜6段＝2マス（右下・wall04）
+     ・残り22枚が空いた22マスを自動で埋める（dense で隙間なく詰まる）
+   3〜4段はパネルの高さに合わせて伸びる。それ以外の段は固定の高さ。 */
+.hero-wall{
+  display:grid;
+  grid-template-columns:repeat(6,1fr);
+  grid-template-rows:repeat(2,124px) repeat(2,minmax(124px,auto)) repeat(2,124px);
+  grid-auto-flow:row dense;
+  gap:2px;
+  background:var(--teal);
+}
+.hw-tile{ position:relative; overflow:hidden; margin:0; min-height:0; min-width:0; }
+/* 写真はタイルいっぱいに敷く（段の高さは上の grid-template-rows だけで決める） */
+.hw-tile picture{ position:absolute; inset:0; display:block; }
+.hw-tile img{
+  position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
+  transition:transform 1.2s ease;
+}
+.hw-tile:hover img{ transform:scale(1.05); }
+@media (prefers-reduced-motion: reduce){
+  .hw-tile img{ transition:none; transform:none; }
+}
+/* メイン写真（wall02）：4倍の大きさ＋オレンジのふちで主役にする */
+.hw-tile--main{
+  grid-column:1 / span 2; grid-row:1 / span 2;
+  z-index:1;
+}
+/* ふちは内側に描く（壁の端で切れないように） */
+.hw-tile--main::after{
+  content:""; position:absolute; inset:0; pointer-events:none;
+  border:4px solid var(--orange);
+}
+/* 右下の縦長タイル（wall04）。マスの数をきっちり合わせる役目も兼ねる */
+.hw-tile--tall{ grid-column:6; grid-row:5 / span 2; }
+
+/* 中央パネル：壁の中央区画にぴったり収める（写真の上には重ねない） */
+.hero-inner{
+  grid-column:2 / span 4; grid-row:3 / span 2;
+  z-index:2; width:auto; max-width:none; margin:0; padding:0;
+  display:flex;
+}
+.hero-card{
+  width:100%; max-width:none; text-align:center;
+  display:flex; flex-direction:column; justify-content:center;
+  background:rgba(250,246,238,.92);
+  -webkit-backdrop-filter:blur(6px); backdrop-filter:blur(6px);
+  border-radius:18px; padding:40px 48px;
+  box-shadow:0 18px 50px rgba(0,0,0,.22);
+}
+.hero-card .hero-eyebrow{ align-self:center; margin-bottom:16px; font-size:14px; }
+/* 見出しは壁の横幅を使い切る（改行はスマホだけ） */
+.hero-card .hero-title{ font-size:clamp(30px,3.2vw,46px); line-height:1.28; }
+.hero-card .ttl-br{ display:none; }
+
+/* 三つの信条のチップ：いま光っている1つだけ teal 地×白文字。他は沈める */
+.hero-creed{
+  display:flex; justify-content:center; flex-wrap:wrap; gap:10px;
+  margin-top:22px;
+}
+.hero-creed .creed{
+  font-size:17px; font-weight:800; letter-spacing:.04em;
+  padding:9px 20px; border-radius:6px;
+  background:rgba(14,61,52,.12); color:rgba(14,61,52,.45);
+  transition:background .5s ease, color .5s ease, transform .5s ease;
+}
+.hero-creed .creed.is-on{
+  background:var(--teal); color:#fff; transform:translateY(-2px);
+  box-shadow:0 4px 12px rgba(14,61,52,.30);
+}
+@media (prefers-reduced-motion: reduce){
+  .hero-creed .creed{ transition:none; transform:none; }
+}
+
+/* 壁の下：エリア一文・連絡先・申し込みボタン */
+.hero-action{ background:var(--cream); padding:30px 24px 42px; text-align:center; }
+.hero-action-inner{ max-width:1120px; margin:0 auto; }
+.hero-action .hero-area{ margin-top:0; }
+.hero-action .hero-tags{ justify-content:center; margin-top:14px; }
+.hero-action .hero-lead{ margin-top:16px; }
+.hero-action .hero-phone{ margin-top:20px; }
+.hero-action .hero-btns{ margin-top:22px; justify-content:center; }
+
+@media (max-width:1024px){
+  .hero-wall{ grid-template-rows:repeat(2,108px) repeat(2,minmax(108px,auto)) repeat(2,108px); }
+  .hero-card{ padding:30px 32px; }
+  .hero-card .hero-title{ font-size:31px; }
+}
+
+@media (max-width:768px){
+  /* スマホは4列×9段＝36マス。
+       ・メイン写真 … 1〜3列／1〜3段＝9マス（wall02）
+       ・パネル     … 4段目の全幅＝4マス
+       ・残り23枚が空いた23マス（1〜3段の4列＋5〜9段）を埋める */
+  .hero-wall{
+    grid-template-columns:repeat(4,1fr);
+    grid-template-rows:repeat(3,64px) auto repeat(5,64px);
+  }
+  .hw-tile--main{ grid-column:1 / span 3; grid-row:1 / span 3; }
+  .hw-tile--main::after{ border-width:3px; }
+  .hw-tile--tall{ grid-column:auto; grid-row:auto; }
+  .hero-inner{ grid-column:1 / -1; grid-row:4; }
+  .hero-card{ padding:22px 14px 20px; border-radius:0; }
+  .hero-card .hero-title{ font-size:26px; }
+  .hero-card .ttl-br{ display:inline; }
+  .hero-card .hero-eyebrow{ margin-bottom:12px; }
+  .hero-area{ font-size:15px; }
+  /* 3つのチップは1行に収める */
+  .hero-creed{ gap:6px; margin-top:16px; flex-wrap:nowrap; }
+  .hero-creed .creed{ font-size:12px; letter-spacing:0; padding:7px 10px; white-space:nowrap; }
+  .hero-action{ padding:24px 16px 36px; }
+  .hero-btns .btn-orange{ font-size:17px; padding:20px 12px; gap:10px; }
 }

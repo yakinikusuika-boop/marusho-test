@@ -119,24 +119,55 @@
 
 <!-- ===== HERO ===== -->
 <section class="hero">
-  <div class="hero-photo" id="heroSlides">
-    <img src="lp_image_assets_png/slideshow/slide1_exterior.jpg" alt="いわき市の外壁・屋根塗装の施工例" class="hero-slide is-active" fetchpriority="high">
-    <img src="lp_image_assets_png/slideshow/slide2_kitchen.jpg" alt="システムキッチン改修の施工例" class="hero-slide" loading="lazy">
-    <img src="lp_image_assets_png/slideshow/slide3_living.jpg" alt="リビング内装リフォームの施工例" class="hero-slide" loading="lazy">
-    <img src="lp_image_assets_png/slideshow/slide4_bath.jpg" alt="ユニットバス改修の施工例" class="hero-slide" loading="lazy">
-    <img src="lp_image_assets_png/slideshow/slide5_paint.jpg" alt="外壁塗装の施工例" class="hero-slide" loading="lazy">
-    <img src="lp_image_assets_png/slideshow/slide6_store.jpg" alt="店舗リフォームの施工例" class="hero-slide" loading="lazy">
+  <!-- 写真の壁ゾーン：24枚を敷き詰め、その中央に見出しパネルを重ねる -->
+  <div class="hero-stage">
+  <!-- 写真の壁：24枚は常に明るいまま。中央の区画はパネル用に空けてあるので写真は隠れない -->
+  <div class="hero-wall" id="heroWall">
+    <figure class="hw-tile" data-ch="2"><picture><source srcset="lp_image_assets_png/hero_wall/wall01.webp" type="image/webp"><img src="lp_image_assets_png/hero_wall/wall01.jpg" alt="更地での着工前の現場立会い" decoding="async"></picture></figure>
+    <figure class="hw-tile hw-tile--main" data-ch="1"><picture><source srcset="lp_image_assets_png/hero_wall/wall02.webp" type="image/webp"><img src="lp_image_assets_png/hero_wall/wall02.jpg" alt="建方前の資材搬入と現場確認" decoding="async"></picture></figure>
+    <figure class="hw-tile" data-ch="2"><picture><source srcset="lp_image_assets_png/hero_wall/wall03.webp" type="image/webp"><img src="lp_image_assets_png/hero_wall/wall03.jpg" alt="現場に整然と並べられた履物" decoding="async"></picture></figure>
+    <figure class="hw-tile hw-tile--tall" data-ch="3"><picture><source srcset="lp_image_assets_png/hero_wall/wall04.webp" type="image/webp"><img src="lp_image_assets_png/hero_wall/wall04.jpg" alt="建方中の階段に立つスタッフ" decoding="async"></picture></figure>
+    <figure class="hw-tile" data-ch="1"><picture><source srcset="lp_image_assets_png/hero_wall/wall05.webp" type="image/webp"><img src="lp_image_assets_png/hero_wall/wall05.jpg" alt="足場の上での軒天施工" decoding="async"></picture></figure>
+    <figure class="hw-tile" data-ch="3"><picture><source srcset="lp_image_assets_png/hero_wall/wall06.webp" type="image/webp"><img src="lp_image_assets_png/hero_wall/wall06.jpg" alt="現場前で笑顔を見せるスタッフ" decoding="async"></picture></figure>
+    <figure class="hw-tile" data-ch="1"><picture><source srcset="lp_image_assets_png/hero_wall/wall07.webp" type="image/webp"><img src="lp_image_assets_png/hero_wall/wall07.jpg" alt="断熱材の施工中" decoding="async"></picture></figure>
+    <figure class="hw-tile" data-ch="1"><picture><source srcset="lp_image_assets_png/hero_wall/wall08.webp" type="image/webp"><img src="lp_image_assets_png/hero_wall/wall08.jpg" alt="造作棚の加工作業" decoding="async"></picture></figure>
+    <figure class="hw-tile" data-ch="1"><picture><source srcset="lp_image_assets_png/hero_wall/wall09.webp" type="image/webp"><img src="lp_image_assets_png/hero_wall/wall09.jpg" alt="造作材のカット加工" decoding="async"></picture></figure>
+    <figure class="hw-tile" data-ch="2"><picture><source srcset="lp_image_assets_png/hero_wall/wall10.webp" type="image/webp"><img src="lp_image_assets_png/hero_wall/wall10.jpg" alt="現場でのお施主様との打ち合わせ" decoding="async"></picture></figure>
+    <figure class="hw-tile" data-ch="2"><picture><source srcset="lp_image_assets_png/hero_wall/wall11.webp" type="image/webp"><img src="lp_image_assets_png/hero_wall/wall11.jpg" alt="お施主様への現場でのご説明" decoding="async"></picture></figure>
+    <figure class="hw-tile" data-ch="1"><picture><source srcset="lp_image_assets_png/hero_wall/wall12.webp" type="image/webp"><img src="lp_image_assets_png/hero_wall/wall12.jpg" alt="窓周りの外壁コーキング" decoding="async"></picture></figure>
+    <figure class="hw-tile" data-ch="1"><picture><source srcset="lp_image_assets_png/hero_wall/wall13.webp" type="image/webp"><img src="lp_image_assets_png/hero_wall/wall13.jpg" alt="足場の上での外壁施工" decoding="async"></picture></figure>
+    <figure class="hw-tile" data-ch="3"><picture><source srcset="lp_image_assets_png/hero_wall/wall14.webp" type="image/webp"><img src="lp_image_assets_png/hero_wall/wall14.jpg" alt="現場での昼休憩" decoding="async"></picture></figure>
+    <figure class="hw-tile" data-ch="2"><picture><source srcset="lp_image_assets_png/hero_wall/wall15.webp" type="image/webp"><img src="lp_image_assets_png/hero_wall/wall15.jpg" alt="完成した室内をお施主様にご案内" decoding="async"></picture></figure>
+    <figure class="hw-tile" data-ch="3"><picture><source srcset="lp_image_assets_png/hero_wall/wall16.webp" type="image/webp"><img src="lp_image_assets_png/hero_wall/wall16.jpg" alt="内装下地の確認作業" decoding="async"></picture></figure>
+    <figure class="hw-tile" data-ch="1"><picture><source srcset="lp_image_assets_png/hero_wall/wall17.webp" type="image/webp"><img src="lp_image_assets_png/hero_wall/wall17.jpg" alt="内装下地のパテ処理" decoding="async"></picture></figure>
+    <figure class="hw-tile" data-ch="3"><picture><source srcset="lp_image_assets_png/hero_wall/wall18.webp" type="image/webp"><img src="lp_image_assets_png/hero_wall/wall18.jpg" alt="外部での庇の取り付け作業" decoding="async"></picture></figure>
+    <figure class="hw-tile" data-ch="3"><picture><source srcset="lp_image_assets_png/hero_wall/wall19.webp" type="image/webp"><img src="lp_image_assets_png/hero_wall/wall19.jpg" alt="完成した室内での仕上げ確認" decoding="async"></picture></figure>
+    <figure class="hw-tile" data-ch="1"><picture><source srcset="lp_image_assets_png/hero_wall/wall20.webp" type="image/webp"><img src="lp_image_assets_png/hero_wall/wall20.jpg" alt="そうじ用具の管理を示す手書きの掲示" decoding="async"></picture></figure>
+    <figure class="hw-tile" data-ch="3"><picture><source srcset="lp_image_assets_png/hero_wall/wall21.webp" type="image/webp"><img src="lp_image_assets_png/hero_wall/wall21.jpg" alt="室内での造作材の加工" decoding="async"></picture></figure>
+    <figure class="hw-tile" data-ch="1"><picture><source srcset="lp_image_assets_png/hero_wall/wall22.webp" type="image/webp"><img src="lp_image_assets_png/hero_wall/wall22.jpg" alt="天井の軽天下地施工" decoding="async"></picture></figure>
+    <figure class="hw-tile" data-ch="1"><picture><source srcset="lp_image_assets_png/hero_wall/wall23.webp" type="image/webp"><img src="lp_image_assets_png/hero_wall/wall23.jpg" alt="玄関ポーチの配筋工事" decoding="async"></picture></figure>
+    <figure class="hw-tile" data-ch="1"><picture><source srcset="lp_image_assets_png/hero_wall/wall24.webp" type="image/webp"><img src="lp_image_assets_png/hero_wall/wall24.jpg" alt="外構コンクリートの打設" decoding="async"></picture></figure>
+
+    <!-- 中央パネル：壁の中央区画（写真を置かない場所）に収まる -->
+    <div class="hero-inner">
+      <div class="hero-card">
+        <p class="hero-eyebrow">地域密着のリフォーム専門店</p>
+        <h1 class="hero-title">住まいの悩みを、<br class="ttl-br"><em>丸っと解決します！</em></h1>
+        <!-- 三つの信条：常に3つ並べ、順ぐりに1つだけを teal 地×白文字で光らせる -->
+        <div class="hero-creed" id="heroCreed" aria-label="丸翔の三つの信条">
+          <span class="creed" data-ch="1">現場主義！</span>
+          <span class="creed" data-ch="2">仕事への感謝！</span>
+          <span class="creed" data-ch="3">仲間への信頼！</span>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <div class="hero-badges" aria-hidden="true">
-    <div class="hero-badge"><span class="hb-label">年間施工実績</span><span class="hb-value">120<small>件</small></span><span class="hb-foot">※</span></div>
-    <div class="hero-badge"><span class="hb-label">最長</span><span class="hb-value">10<small>年</small></span><span class="hb-foot">保証で安心※</span></div>
-  </div>
+  </div><!-- /.hero-stage -->
 
-  <div class="hero-inner">
-    <div class="hero-card">
-      <p class="hero-eyebrow">地域密着のリフォーム専門店</p>
-      <h1 class="hero-title">住まいの悩みを、<br><em>丸っと解決します！</em></h1>
+  <!-- 壁のすぐ下：連絡先と申し込みボタン -->
+  <div class="hero-action">
+    <div class="hero-action-inner">
       <p class="hero-area">いわき市の外壁・屋根・水回りリフォーム</p>
       <div class="hero-tags">
         <span>相談無料</span><span>見積無料</span><span>現地調査無料</span>
@@ -853,19 +884,25 @@
     });
   }
 
-  // ===== ヒーロー：施工例スライドショー =====
-  (function heroSlideshow(){
-    const wrap = document.getElementById('heroSlides');
-    if (!wrap) return;
-    const slides = wrap.querySelectorAll('.hero-slide');
-    if (slides.length < 2) return;
-    const INTERVAL = 5000; // 1枚の表示時間（ミリ秒）
-    let i = 0;
-    setInterval(() => {
-      slides[i].classList.remove('is-active');
-      i = (i + 1) % slides.length;
-      slides[i].classList.add('is-active');
-    }, INTERVAL);
+  // ===== ヒーロー：三つの信条のチップ =====
+  // 写真24枚は常に明るいまま（章との連動なし）。チップだけを5.2秒ごとに順ぐりで光らせる。
+  // 動きを減らす設定の端末では3つとも光らせたまま止める。
+  // ※タイルの data-ch は写真の分類として残してあるが、明暗の切り替えには使っていない。
+  (function heroCreed(){
+    const creed = document.getElementById('heroCreed');
+    if (!creed) return;
+    const creeds = Array.from(creed.querySelectorAll('.creed'));
+    if (creeds.length === 0) return;
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      creeds.forEach(c => c.classList.add('is-on'));
+      return;
+    }
+    const INTERVAL = 5200; // 1つの信条を光らせる時間（ミリ秒）
+    let ch = 0;
+    const apply = () => creeds.forEach((c, i) => c.classList.toggle('is-on', i === ch));
+    apply();
+    setInterval(() => { ch = (ch + 1) % creeds.length; apply(); }, INTERVAL);
   })();
 
   // ===== お知らせ・イベント情報（画像付きカード表示） =====
