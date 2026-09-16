@@ -51,8 +51,8 @@
 <meta name="twitter:card"        content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Yuji+Mai&family=Yuji+Syuku&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=20260916b">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&family=Yuji+Mai&family=Yuji+Syuku&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css?v=20260916c">
 <!-- ===== 構造化データ：事業所情報 =====
      検索エンジンに会社の基本情報を伝える。
      ここに書いてよいのは「画面に表示されている事実」だけ。
@@ -1067,13 +1067,25 @@
       .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
     const L_BEFORE = 'lp_ui_assets_png/decorations/label_before_green.png';
     const L_AFTER  = 'lp_ui_assets_png/decorations/label_after_green.png';
+
+    // 写真は WebP があればそれを使い、無ければ JPEG のまま出す。
+    // cases.js に書くのは今までどおり .jpg のパスだけでよい。
+    // 同じ場所に同じ名前の .webp を置けば、自動でそちらが使われる。
+    // .webp が無い場合は、下の「読み込みに失敗したら JPEG に戻す」仕組みが働く。
+    const photo = (src, alt) => {
+      const jpg = esc(src);
+      const webp = esc(String(src || '').replace(/\.(jpe?g|png)$/i, '.webp'));
+      return `<picture><source srcset="${webp}" type="image/webp">`
+           + `<img src="${jpg}" alt="${alt}" loading="lazy"></picture>`;
+    };
+
     const items = CASE_ITEMS.filter(c => c && c.category);
     grid.innerHTML = items.map(c => {
       const sp = c.spec || {}, dt = c.detail || {};
       return `<article class="case-card">
         <div class="case-ba">
-          <figure><img src="${esc(c.before)}" alt="${esc(c.category)} 施工前" loading="lazy"><img src="${L_BEFORE}" alt="Before" class="ba-label ba-label--l" loading="lazy"></figure>
-          <figure><img src="${esc(c.after)}" alt="${esc(c.category)} 施工後" loading="lazy"><img src="${L_AFTER}" alt="After" class="ba-label ba-label--r" loading="lazy"></figure>
+          <figure>${photo(c.before, esc(c.category) + ' 施工前')}<img src="${L_BEFORE}" alt="Before" class="ba-label ba-label--l" loading="lazy"></figure>
+          <figure>${photo(c.after, esc(c.category) + ' 施工後')}<img src="${L_AFTER}" alt="After" class="ba-label ba-label--r" loading="lazy"></figure>
         </div>
         <div class="case-body">
           <span class="case-tag">${esc(c.category)}</span>
@@ -1093,6 +1105,22 @@
       </article>`;
     }).join('');
   })();
+
+  // ===== WebPが読めなかったときは、JPEGで出し直す =====
+  // <picture> は、選んだ <source> の読み込みに失敗しても
+  // 自動では <img> に戻ってくれず、写真が欠けたままになる。
+  // 新しい事例写真を .webp を作らずに追加した場合でも写真が消えないよう、
+  // 失敗したら <source> を外して読み直す。
+  document.addEventListener('error', (e) => {
+    const img = e.target;
+    if (!img || img.tagName !== 'IMG') return;
+    const pic = img.parentElement;
+    if (!pic || pic.tagName !== 'PICTURE') return;
+    if (img.dataset.fellBack) return;      // 二度は試さない
+    img.dataset.fellBack = '1';
+    pic.querySelectorAll('source').forEach(src => src.remove());
+    img.src = img.getAttribute('src');
+  }, true);                                 // 画像のerrorは伝播しないので捕捉フェーズで拾う
 
   // ===== お問い合わせフォーム =====
   // ▼ 送信サービスのエンドポイントを設定すると、サーバー送信方式に切り替わります。

@@ -67,7 +67,7 @@ a{ text-decoration:none; color:inherit; }
 /* 濃緑ヘッダー上でもロゴが読めるよう白いプレートを敷く */
 .brand-logo{ height:76px; width:auto; background:#fff; border-radius:8px; padding:4px 10px; }
 .global-nav{ display:flex; gap:22px; margin-left:auto; }
-.global-nav a{ font-size:14px; font-weight:500; color:#fff; white-space:nowrap; }
+.global-nav a{ font-size:14px; font-weight:400; color:#fff; white-space:nowrap; }
 /* 濃緑背景ではオレンジ原色だとコントラスト不足のため明るめのオレンジ */
 .global-nav a:hover{ color:#f5b25c; }
 .header-right{ display:flex; align-items:center; gap:16px; margin-left:auto; }
@@ -222,8 +222,11 @@ a.news-title:hover{ color:var(--orange); }
   font-size:40px; font-weight:400; color:#1f1a17; letter-spacing:.12em;
   margin-top:8px; transform:rotate(-3deg); line-height:1;
 }
-.greeting-body{ padding-top:4px; font-family:"Yuji Syuku", "Noto Sans JP", serif; }
+/* 社長挨拶の本文は本文書体で読む。装飾書体（Yuji Syuku）はキャッチコピーだけに使う。
+   1300文字を装飾書体で出すと、その文字ぶんの書体データを余分に読み込むことになるため。 */
+.greeting-body{ padding-top:4px; }
 .greeting-catch{
+  font-family:"Yuji Syuku", "Noto Sans JP", serif;
   font-size:27px; font-weight:400; color:var(--teal); line-height:1.75;
   margin-bottom:24px; padding-bottom:18px; border-bottom:2px solid var(--line);
 }
@@ -883,7 +886,7 @@ a.news-card-link:hover{ color:var(--orange); }
   margin-top:22px;
 }
 .hero-creed .creed{
-  font-size:17px; font-weight:800; letter-spacing:.04em;
+  font-size:17px; font-weight:900; letter-spacing:.04em;
   padding:9px 20px; border-radius:6px;
   background:rgba(14,61,52,.12); color:rgba(14,61,52,.45);
   transition:background .5s ease, color .5s ease, transform .5s ease;
