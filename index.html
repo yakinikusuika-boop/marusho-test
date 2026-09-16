@@ -32,7 +32,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Yuji+Mai&family=Yuji+Syuku&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=20260916">
+<link rel="stylesheet" href="style.css?v=20260916b">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -261,7 +261,12 @@
       <h2 class="sec-title">お知らせ・<em>イベント情報</em></h2>
     </div>
     <div class="news-grid" id="newsList"></div>
-    <p class="news-empty" id="newsEmpty" hidden>現在、お知らせはありません。</p>
+    <p class="news-empty" id="newsEmpty" hidden>現在、掲載中のお知らせはありません。</p>
+    <!-- 過去のお知らせ。該当が無いときは自動で非表示になります（news.js の until / archive で振り分け） -->
+    <details class="news-archive" id="newsArchive" hidden>
+      <summary class="news-archive-toggle">過去のお知らせを見る<span class="news-archive-count" id="newsArchiveCount"></span></summary>
+      <div class="news-grid news-grid--archive" id="newsArchiveList"></div>
+    </details>
   </div>
 </section>
 
@@ -899,7 +904,10 @@
   })();
 
   // ===== お知らせ・イベント情報（画像付きカード表示） =====
-  const NEWS_MAX = 8; // トップに表示する最大件数（1行4枚。多いときは日付が新しい順に表示）
+  // 「最新」と「過去」に自動で振り分けます。振り分けの基準は news.js 側に書いた
+  // until（掲載終了日）と archive（true で強制的に過去へ）です。
+  const NEWS_MAX = 8;          // 「最新のお知らせ」に並べる最大件数（1行4枚）
+  const NEWS_ARCHIVE_MAX = 12; // 「過去のお知らせ」に並べる最大件数
   (function renderNews(){
     const list = document.getElementById('newsList');
     if (!list || typeof NEWS_ITEMS === 'undefined') return;
@@ -910,12 +918,21 @@
       return (p.length === 3) ? `${p[0]}.${p[1].padStart(2,'0')}.${p[2].padStart(2,'0')}` : esc(d);
     };
     const FALLBACK_IMG = 'lp_image_assets_png/slideshow/slide1_exterior.jpg';
-    // 表示順は news.js に書いた順（上から）。並べ替えたいときは news.js の順番を入れ替えてください。
-    const items = [...NEWS_ITEMS]
-      .filter(it => it && it.title)
-      .slice(0, NEWS_MAX);
-    if (items.length === 0) { document.getElementById('newsEmpty').hidden = false; return; }
-    list.innerHTML = items.map(it => {
+
+    // 「過去のお知らせ」かどうかの判定。
+    // until に書いた日は"まだ掲載中"で、その翌日から過去に移ります。
+    const today = new Date(); today.setHours(0, 0, 0, 0);
+    const isPast = (it) => {
+      if (it.archive === true) return true;
+      const p = String(it.until || '').split('-');
+      if (p.length !== 3) return false;
+      const end = new Date(Number(p[0]), Number(p[1]) - 1, Number(p[2]));
+      if (isNaN(end.getTime())) return false;
+      end.setHours(0, 0, 0, 0);
+      return today > end;
+    };
+
+    const cardHtml = (it) => {
       const cat = esc(it.category || 'お知らせ');
       const img = esc(it.image || FALLBACK_IMG);
       const body = it.body ? `<p class="news-card-body">${esc(it.body)}</p>` : '';
@@ -946,7 +963,25 @@
       return (it.link && !linkList.length)
         ? `<a class="news-card" href="${esc(it.link)}"${tgt(it.link)}>${inner}</a>`
         : `<article class="news-card">${inner}</article>`;
-    }).join('');
+    };
+
+    // 表示順は news.js に書いた順（上から）。並べ替えたいときは news.js の順番を入れ替えてください。
+    const valid   = NEWS_ITEMS.filter(it => it && it.title);
+    const current = valid.filter(it => !isPast(it)).slice(0, NEWS_MAX);
+    const past    = valid.filter(isPast).slice(0, NEWS_ARCHIVE_MAX);
+
+    list.innerHTML = current.map(cardHtml).join('');
+    list.dataset.count = current.length;
+    const emptyEl = document.getElementById('newsEmpty');
+    if (emptyEl) emptyEl.hidden = current.length > 0;
+
+    const archive = document.getElementById('newsArchive');
+    if (archive && past.length) {
+      document.getElementById('newsArchiveList').innerHTML = past.map(cardHtml).join('');
+      document.getElementById('newsArchiveList').dataset.count = past.length;
+      document.getElementById('newsArchiveCount').textContent = `（${past.length}件）`;
+      archive.hidden = false;
+    }
   })();
 
   // ===== 施工事例 =====

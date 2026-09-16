@@ -561,6 +561,34 @@ a.news-card-link:hover{ color:var(--orange); }
   background:#c0392b; color:#fff; font-size:10.5px; font-weight:700;
   letter-spacing:.04em; text-decoration:none;
 }
+
+/* カードが4枚に満たないときは、右端が空いて不揃いに見えないよう中央に寄せる */
+@media (min-width:1025px){
+  .news-grid{ justify-content:center; }
+  .news-grid[data-count="1"]{ grid-template-columns:minmax(0,340px); }
+  .news-grid[data-count="2"]{ grid-template-columns:repeat(2,minmax(0,310px)); }
+  .news-grid[data-count="3"]{ grid-template-columns:repeat(3,minmax(0,290px)); }
+}
+
+/* ----- 過去のお知らせ（折りたたみ） ----- */
+.news-archive{ margin-top:36px; text-align:center; }
+.news-archive[hidden]{ display:none; }
+.news-archive-toggle{
+  list-style:none; cursor:pointer; display:inline-flex; align-items:center; gap:10px;
+  padding:13px 30px; background:#fff; border:1px solid var(--line); border-radius:999px;
+  font-size:14.5px; font-weight:700; color:var(--teal); transition:.2s;
+}
+.news-archive-toggle::-webkit-details-marker{ display:none; }
+.news-archive-toggle::after{ content:"＋"; color:var(--orange); font-weight:900; }
+.news-archive[open] .news-archive-toggle::after{ content:"－"; }
+.news-archive-toggle:hover{ border-color:var(--orange); color:var(--orange); box-shadow:var(--shadow); }
+.news-archive-count{ font-size:13px; font-weight:700; color:var(--muted); }
+/* 掲載中のお知らせと見分けがつくよう、過去のカードは少し落ち着いた見た目にする */
+.news-grid--archive{ margin-top:26px; text-align:left; }
+.news-grid--archive .news-card{ background:#fbfaf7; box-shadow:none; }
+.news-grid--archive .news-card-photo img{ filter:saturate(.72); opacity:.88; }
+.news-grid--archive a.news-card:hover .news-card-photo img{ filter:none; opacity:1; }
+
 @media (max-width:1024px){
   .news-grid{ grid-template-columns:repeat(2,1fr); }
 }
