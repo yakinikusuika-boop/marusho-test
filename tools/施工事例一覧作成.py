@@ -81,11 +81,27 @@ def esc(v):
             .replace(">", "&gt;").replace('"', "&quot;"))
 
 
-def photo(src, alt, w, h):
+def img_size(src, default=(800, 600)):
+    """写真の実物の大きさを読む（読めなければ 800×600 とみなす）。
+       width / height を正しく書いておくと、読み込み前から場所が確保され、
+       写真が出た瞬間に文字がずれるのを防げる。"""
+    try:
+        from PIL import Image
+    except ImportError:
+        return default
+    try:
+        with Image.open(os.path.join(SITE, str(src).lstrip("/"))) as im:
+            return im.size
+    except Exception:
+        return default
+
+
+def photo(src, alt):
     """WebPがあればWebPで、無ければJPEGで出す。
        cases.js に書くのは今までどおり .jpg のパスだけでよい。"""
     jpg = "/" + esc(src).lstrip("/")
     webp = re.sub(r"\.(jpe?g|png)$", ".webp", jpg, flags=re.I)
+    w, h = img_size(src)
     return ('<picture><source srcset="%s" type="image/webp">'
             '<img src="%s" alt="%s" loading="lazy" decoding="async" width="%d" height="%d"></picture>'
             % (webp, jpg, esc(alt), w, h))
@@ -127,8 +143,8 @@ def card_html(c):
         </div>
       </article>""" % (
         esc(t),
-        photo(c.get("before"), cat + " 施工前", 800, 600), L,
-        photo(c.get("after"), cat + " 施工後", 800, 600), R,
+        photo(c.get("before"), cat + " 施工前"), L,
+        photo(c.get("after"), cat + " 施工後"), R,
         cat, spec, detail, btn)
 
 
