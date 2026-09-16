@@ -87,7 +87,11 @@ BASE = (
 )
 
 TEXT_FILES = ["index.html", "privacy.html", "coupon.html", "404.html",
+              "works/index.html",
               "cases.js", "news.js", "analytics.js"]
+# ※CSS（style.css）は読んでいません。
+#   CSSの content:"…" で画面に文字を出すときは、ここで拾えないため、
+#   BASE に入っている記号（英数字・ひらがな・カタカナ・全角記号など）を使ってください。
 
 
 def site_chars():

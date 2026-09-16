@@ -20,6 +20,11 @@
 
    ■ 各項目の意味
      category … 事例の種別（見出しの緑バッジに表示）
+     type     … 施工事例一覧ページ（/works/）の絞り込みの分類。
+                 「外壁塗装」「屋根・雨漏り」「水回り」「内装・建具」「外構・その他」
+                 の5つから選んで書いてください。書き忘れると「外構・その他」に入ります。
+                 ※この欄を書き換えたら tools/施工事例一覧作成.py を実行してください
+                   （/works/ のカードは、このファイルから作り直す仕組みです）
      spec     … 施工箇所 / 工期 / 費用目安 / 建物種別
      detail   … 工事前の悩み / 施工内容 / 施工後の変化 / 担当者コメント
      link     … 「この事例を詳しく見る」のリンク先（空 "" ならお問い合わせへ）
@@ -33,6 +38,7 @@
 const CASE_ITEMS = [
   {
     category: "橋の拡張・補修工事",
+    type:     "外構・その他",
     before: "lp_image_assets_png/cases/web/bridge_before.jpg",
     after:  "lp_image_assets_png/cases/web/bridge_after.jpg",
     spec:   { location: "農道の橋（水路横断部）", period: "約7日間", cost: "65万円〜（目安）", building: "屋外・土木工事" },
@@ -46,6 +52,7 @@ const CASE_ITEMS = [
   },
   {
     category: "外壁塗装（クリーム色）",
+    type:     "外壁塗装",
     before: "lp_image_assets_png/cases/web/exterior_cream_before.jpg",
     after:  "lp_image_assets_png/cases/web/exterior_cream_after.jpg",
     spec:   { location: "外壁・付帯部", period: "約14日間", cost: "155万円〜（目安）", building: "戸建て" },
@@ -59,6 +66,7 @@ const CASE_ITEMS = [
   },
   {
     category: "外壁塗装（ツートン）",
+    type:     "外壁塗装",
     before: "lp_image_assets_png/cases/web/exterior_navy_before.jpg",
     after:  "lp_image_assets_png/cases/web/exterior_navy_after.jpg",
     spec:   { location: "外壁", period: "14日間", cost: "約155万円〜（目安）", building: "戸建て" },
@@ -72,6 +80,7 @@ const CASE_ITEMS = [
   },
   {
     category: "外壁塗装（付帯部含む）",
+    type:     "外壁塗装",
     before: "lp_image_assets_png/cases/web/exterior_twotone_before.jpg",
     after:  "lp_image_assets_png/cases/web/exterior_twotone_after.jpg",
     spec:   { location: "外壁・付帯部", period: "15日間", cost: "約145万円〜（目安）", building: "戸建て" },
@@ -85,6 +94,7 @@ const CASE_ITEMS = [
   },
   {
     category: "玄関ドア交換",
+    type:     "内装・建具",
     before: "lp_image_assets_png/cases/web/entrance_door_before.jpg",
     after:  "lp_image_assets_png/cases/web/entrance_door_after.jpg",
     spec:   { location: "玄関", period: "1日間", cost: "約55万円〜（目安）", building: "戸建て" },
@@ -98,6 +108,7 @@ const CASE_ITEMS = [
   },
   {
     category: "内窓・間仕切り（インプラス）",
+    type:     "内装・建具",
     before: "lp_image_assets_png/cases/web/innerwindow_before.jpg",
     after:  "lp_image_assets_png/cases/web/innerwindow_after.jpg",
     spec:   { location: "居室", period: "1日間", cost: "約25万円〜（目安）", building: "戸建て" },
@@ -111,6 +122,7 @@ const CASE_ITEMS = [
   },
   {
     category: "キッチン改修",
+    type:     "水回り",
     before: "lp_image_assets_png/cases/web/kitchen_before.jpg",
     after:  "lp_image_assets_png/cases/web/kitchen_after.jpg",
     spec:   { location: "キッチン", period: "5日間", cost: "約120万円〜（目安）", building: "戸建て" },
@@ -124,6 +136,7 @@ const CASE_ITEMS = [
   },
   {
     category: "ユニットバス交換",
+    type:     "水回り",
     before: "lp_image_assets_png/cases/web/bath_unit_before.jpg",
     after:  "lp_image_assets_png/cases/web/bath_unit_after.jpg",
     spec:   { location: "浴室", period: "4日間", cost: "約125万円〜（目安）", building: "戸建て" },
@@ -137,6 +150,7 @@ const CASE_ITEMS = [
   },
   {
     category: "浴室改修（バランス釜→ポリバス）",
+    type:     "水回り",
     before: "lp_image_assets_png/cases/web/bath_polybath_before.jpg",
     after:  "lp_image_assets_png/cases/web/bath_polybath_after.jpg",
     spec:   { location: "浴室", period: "3日間", cost: "約42万円〜（目安）", building: "戸建て" },
@@ -150,6 +164,7 @@ const CASE_ITEMS = [
   },
   {
     category: "外壁塗装",
+    type:     "外壁塗装",
     before: "lp_image_assets_png/cases/web/exterior_paint_before.jpg",
     after:  "lp_image_assets_png/cases/web/exterior_paint_after.jpg",
     spec:   { location: "外壁", period: "12日間", cost: "約185万円〜（目安）", building: "戸建て" },
@@ -163,6 +178,7 @@ const CASE_ITEMS = [
   },
   {
     category: "内装リフォーム（畳→フローリング）",
+    type:     "内装・建具",
     before: "lp_image_assets_png/cases/web/floor_before.jpg",
     after:  "lp_image_assets_png/cases/web/floor_after.jpg",
     spec:   { location: "居室", period: "2日間", cost: "約22万円〜（目安）", building: "戸建て" },
@@ -176,6 +192,7 @@ const CASE_ITEMS = [
   },
   {
     category: "外構・庭工事",
+    type:     "外構・その他",
     before: "lp_image_assets_png/cases/web/garden_before.jpg",
     after:  "lp_image_assets_png/cases/web/garden_after.jpg",
     spec:   { location: "庭・外構", period: "8日間", cost: "約120万円〜（目安）", building: "戸建て" },
