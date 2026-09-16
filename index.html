@@ -50,9 +50,9 @@
 <meta property="og:locale"       content="ja_JP">
 <meta name="twitter:card"        content="summary_large_image">
 <!-- 最初の画面で使う書体を先に取りにいく（900は見出し、400は本文） -->
-<link rel="preload" as="font" type="font/woff2" crossorigin href="fonts/noto-sans-jp-900.woff2?v=20260916d">
-<link rel="preload" as="font" type="font/woff2" crossorigin href="fonts/noto-sans-jp-400.woff2?v=20260916d">
-<link rel="stylesheet" href="style.css?v=20260916d">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="fonts/noto-sans-jp-900.woff2?v=20260916e">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="fonts/noto-sans-jp-400.woff2?v=20260916e">
+<link rel="stylesheet" href="style.css?v=20260916e">
 <!-- ===== 構造化データ：事業所情報 =====
      検索エンジンに会社の基本情報を伝える。
      ここに書いてよいのは「画面に表示されている事実」だけ。
@@ -285,7 +285,14 @@
 <section class="cases" id="cases">
   <div class="container">
     <h2 class="sec-title">いわき市の<em>施工事例</em></h2>
+    <p class="cases-lead">
+      丸翔が実際に手がけた工事です。工事前の状態、行った工事、工期、費用の目安まで、できるだけそのまま載せています。<br>
+      ご自宅と近い状況の事例があれば、ご相談の際にお知らせください。より具体的にご説明できます。
+    </p>
     <div class="case-grid" id="caseGrid"></div>
+    <div class="cases-more">
+      <a href="/works/" class="btn btn-outline">施工事例をすべて見る<span id="casesCount"></span> <span class="arw">→</span></a>
+    </div>
   </div>
 </section>
 
@@ -371,6 +378,67 @@
       </div>
     </div>
     <p class="worries-lead">そのお悩み、丸翔リフォームが<em>丁寧に解決</em>します。</p>
+  </div>
+</section>
+
+<!-- ===== 対応できる工事 =====
+     工事別ページ（/gaiheki-tosou/ ・ /yane/ ・ /amamori/ ・ /mizumawari/ ・
+     /naisou/ ・ /shoushuuzen-barrierfree/）への入口として作ったセクションです。
+
+     【リンク先について】
+     工事別ページはまだ作っていません（提案書 第17章の32項目の回答待ち）。
+     そのため、いまは次のようにつないであります。
+
+       事例があるもの（外壁塗装・水回り・内装）… 施工事例一覧の絞り込みへ
+       事例がないもの（屋根・雨漏り・小修繕）  … お問い合わせフォームへ
+
+     工事別ページを公開したら、各カードの href を下記に差し替え、
+     リンクの文言も提案書 8-7 のもの（例「いわき市の外壁塗装について詳しく見る」）に
+     戻してください。無いページへリンクすると404になるため、順番を逆にしないこと。
+
+       外壁塗装 → /gaiheki-tosou/   屋根 → /yane/   雨漏り → /amamori/
+       水回り   → /mizumawari/      内装 → /naisou/
+       小修繕・バリアフリー → /shoushuuzen-barrierfree/
+     -->
+<section class="services" id="services">
+  <div class="container">
+    <h2 class="sec-title">対応できる<em>工事</em></h2>
+    <p class="services-lead">
+      外壁も屋根も、キッチンも手すり1本も。住まいのことなら丸ごとご相談いただけます。<br>
+      気になる工事があれば、施工事例をご覧いただくか、そのままご相談ください。
+    </p>
+    <div class="service-grid">
+      <article class="service-card">
+        <h3>外壁塗装</h3>
+        <p>色あせ、チョーキング、ひび割れ、シーリングの切れ。外壁からのサインを現地で確かめ、下地の状態に合わせて必要な工事だけをご提案します。</p>
+        <a class="service-link" href="/works/?type=外壁塗装">いわき市の外壁塗装の施工事例を見る<span class="arw">→</span></a>
+      </article>
+      <article class="service-card">
+        <h3>屋根塗装・屋根工事</h3>
+        <p>塗るか、重ねるか（カバー工法）、葺き替えるか。屋根の状態とこの先何年住むかをうかがって、判断の材料をすべてお出しします。</p>
+        <a class="service-link" href="#contact">屋根の工事について相談する<span class="arw">→</span></a>
+      </article>
+      <article class="service-card">
+        <h3>雨漏り修理</h3>
+        <p>天井のシミ、壁の水跡。雨漏りは屋根だけが原因とは限りません。どこから入っているのかを調べるところから承ります。</p>
+        <a class="service-link" href="#contact">雨漏りについて相談する<span class="arw">→</span></a>
+      </article>
+      <article class="service-card">
+        <h3>水回りリフォーム</h3>
+        <p>キッチン、お風呂、トイレ、洗面。「工事中、何日使えなくなるのか」を最初にはっきりお伝えします。</p>
+        <a class="service-link" href="/works/?type=水回り">いわき市の水回りリフォームの施工事例を見る<span class="arw">→</span></a>
+      </article>
+      <article class="service-card">
+        <h3>内装リフォーム</h3>
+        <p>壁紙の張り替え、畳からフローリングへ、間取りの見直しまで。暮らし方に合わせて整えます。</p>
+        <a class="service-link" href="/works/?type=内装・建具">いわき市の内装リフォームの施工事例を見る<span class="arw">→</span></a>
+      </article>
+      <article class="service-card">
+        <h3>小修繕・バリアフリー</h3>
+        <p>手すりの取り付け、段差の解消、網戸や蛇口の交換。小さな工事だからと遠慮なさらないでください。</p>
+        <a class="service-link" href="#contact">小修繕・バリアフリー工事について相談する<span class="arw">→</span></a>
+      </article>
+    </div>
   </div>
 </section>
 
@@ -667,7 +735,13 @@
       通常<strong>1～2営業日以内</strong>にご連絡いたします。しつこい営業はいたしません。
     </p>
 
-    <form class="contact-form" id="contactForm" novalidate>
+    <!-- action と method は「JavaScriptが動かないときでも送信できる」ための保険です。
+         JavaScript が動くときは、下のスクリプトが送信を横取りして、この画面のまま送ります。
+         送信先を変えるときは、ここと下の FORM_ENDPOINT の両方を直してください。
+         novalidate はスクリプト側で付けています（独自のエラー表示を使うため）。
+         JavaScriptが無効な端末では、ブラウザ標準の未入力チェックが働きます。 -->
+    <form class="contact-form" id="contactForm"
+          action="https://ssgform.com/s/2qEq3hthPZK0" method="post">
       <div class="form-row">
         <label class="form-label">ご相談内容 <span class="req">必須</span></label>
         <div class="form-field radio-group">
@@ -827,6 +901,10 @@
         </label>
       </div>
 
+      <noscript>
+        <p class="form-noscript">※お使いのブラウザはJavaScriptが無効になっています。このまま送信いただけますが、送信後は送信サービス（SSGform）の完了画面に移ります。うまくいかない場合は、お電話（代表 0246-84-5557／携帯 090-2025-3104）へご連絡ください。</p>
+      </noscript>
+
       <p class="form-error" id="formError" hidden>未入力の必須項目があります。ご確認ください。</p>
       <p class="form-success" id="formSuccess" hidden>お問い合わせを受け付けました。担当者より1～2営業日以内にご連絡いたします。</p>
 
@@ -837,7 +915,9 @@
 
       <div class="form-submit">
         <button type="submit" class="btn btn-orange btn-lg">この内容で送信する <span class="arw">→</span></button>
-        <p class="form-note" id="formNote">※送信ボタンを押すとメールソフトが起動し、入力内容が本文に入ります。<br>うまく起動しない場合は、お電話（代表 0246-84-5557／携帯 090-2025-3104）またはメール（yamauchi310lyd@gmail.com）へ直接ご連絡ください。</p>
+        <!-- JavaScriptが無効でも正しい案内が出るよう、既定はサーバー送信の文言にしてある。
+             mailto方式（FORM_ENDPOINT が空）のときだけ、スクリプトが文言を差し替える。 -->
+        <p class="form-note" id="formNote">※送信後、担当者より折り返しご連絡いたします。<br>お急ぎの場合は、お電話（代表 0246-84-5557／携帯 090-2025-3104）へご連絡ください。</p>
       </div>
     </form>
   </div>
@@ -1104,6 +1184,10 @@
         </div>
       </article>`;
     }).join('');
+
+    // 「施工事例をすべて見る（○件）」の件数は、ここで数えて入れる（書き忘れ防止）
+    const cc = document.getElementById('casesCount');
+    if (cc) cc.textContent = `（${items.length}件）`;
   })();
 
   // ===== WebPが読めなかったときは、JPEGで出し直す =====
@@ -1135,11 +1219,16 @@
   const formNote = document.getElementById('formNote');
 
   // 送信方式に合わせて、ボタン下の注意書きを切り替える
-  if (formNote && FORM_ENDPOINT) {
-    formNote.innerHTML = '※送信後、担当者より折り返しご連絡いたします。<br>お急ぎの場合は、お電話（代表 0246-84-5557／携帯 090-2025-3104）へご連絡ください。';
+  // （HTMLに書いてあるのはサーバー送信のときの文言。mailto方式のときだけ差し替える）
+  if (formNote && !FORM_ENDPOINT) {
+    formNote.innerHTML = '※送信ボタンを押すとメールソフトが起動し、入力内容が本文に入ります。<br>うまく起動しない場合は、お電話（代表 0246-84-5557／携帯 090-2025-3104）またはメール（yamauchi310lyd@gmail.com）へ直接ご連絡ください。';
   }
 
   if (form) {
+    // ブラウザ標準の未入力チェックを止めて、独自のエラー表示を使う。
+    // HTMLに novalidate と書かないのは、JavaScriptが動かない端末では
+    // 標準のチェックに働いてもらうため。
+    form.noValidate = true;
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
       formSuccess.hidden = true;
