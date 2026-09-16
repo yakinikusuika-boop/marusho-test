@@ -23,3 +23,11 @@ Thumbs.db
 ehthumbs.db
 desktop.ini
 .DS_Store
+
+# 書体を作り直すときの元ファイル（1本30MB前後）。
+# 公開には使わないので上げません。tools/フォント作成.py が毎回取り直します。
+tools/_元ファイル/
+
+# Python が自動で作る中間ファイル
+__pycache__/
+*.pyc

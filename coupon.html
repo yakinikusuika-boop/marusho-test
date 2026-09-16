@@ -31,10 +31,10 @@
   }
 </script>
 <script src="analytics.js?v=20260916" defer></script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=20260916c">
+<!-- 最初の画面で使う書体を先に取りにいく（900は見出し、400は本文） -->
+<link rel="preload" as="font" type="font/woff2" crossorigin href="fonts/noto-sans-jp-900.woff2?v=20260916d">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="fonts/noto-sans-jp-400.woff2?v=20260916d">
+<link rel="stylesheet" href="style.css?v=20260916d">
 </head>
 <body>
 

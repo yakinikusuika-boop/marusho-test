@@ -1,3 +1,43 @@
+/* ============================================================
+   書体（Webフォント）
+   ------------------------------------------------------------
+   Google のサーバーから借りるのをやめ、このサイトの fonts フォルダから
+   配信しています。サイトに出てくる文字だけに削ってあるため、
+   借りていたときより軽く済みます（最後まで読んだ場合で 約2,457KB → 約446KB）。
+
+   ■ 新しい漢字を書き足したときは
+     削ったファイルに無い字は、端末にもともと入っている書体で表示されます
+     （読めなくなるわけではありませんが、そこだけ字の形が変わります）。
+     気になったら tools/フォント作成.py を実行して作り直してください。
+
+   ■ ライセンス
+     Noto Sans JP / Yuji Mai / Yuji Syuku は SIL Open Font License 1.1 です。
+     条件としてライセンス文の同梱が必要です。fonts/OFL.txt を消さないでください。
+
+   font-display:swap … 書体の読み込みが終わるまで、端末の書体で先に表示します。
+                       文字が見えない時間を作らないための指定です。
+   ============================================================ */
+@font-face{
+  font-family:"Noto Sans JP"; font-style:normal; font-weight:400;
+  font-display:swap; src:url("fonts/noto-sans-jp-400.woff2?v=20260916d") format("woff2");
+}
+@font-face{
+  font-family:"Noto Sans JP"; font-style:normal; font-weight:700;
+  font-display:swap; src:url("fonts/noto-sans-jp-700.woff2?v=20260916d") format("woff2");
+}
+@font-face{
+  font-family:"Noto Sans JP"; font-style:normal; font-weight:900;
+  font-display:swap; src:url("fonts/noto-sans-jp-900.woff2?v=20260916d") format("woff2");
+}
+@font-face{
+  font-family:"Yuji Mai"; font-style:normal; font-weight:400;
+  font-display:swap; src:url("fonts/yuji-mai.woff2?v=20260916d") format("woff2");
+}
+@font-face{
+  font-family:"Yuji Syuku"; font-style:normal; font-weight:400;
+  font-display:swap; src:url("fonts/yuji-syuku.woff2?v=20260916d") format("woff2");
+}
+
 /* ===== Reset & Base ===== */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 :root{
@@ -15,7 +55,7 @@
 }
 html{ scroll-behavior:smooth; scroll-padding-top:104px; }
 body{
-  font-family:"Noto Sans JP",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  font-family:"Noto Sans JP","Hiragino Sans","Hiragino Kaku Gothic ProN","Yu Gothic UI","Yu Gothic","Noto Sans CJK JP","Meiryo",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
   color:var(--text);
   line-height:1.8;
   background:#fff;
@@ -218,7 +258,7 @@ a.news-title:hover{ color:var(--orange); }
 .greeting-name{ margin-top:16px; }
 .greeting-role{ display:block; font-size:13px; color:var(--muted); }
 .greeting-person{
-  display:inline-block; font-family:"Yuji Mai", "Yuji Syuku", serif;
+  display:inline-block; font-family:"Yuji Mai","Yuji Syuku","Hiragino Mincho ProN","Yu Mincho",serif;
   font-size:40px; font-weight:400; color:#1f1a17; letter-spacing:.12em;
   margin-top:8px; transform:rotate(-3deg); line-height:1;
 }
@@ -226,7 +266,7 @@ a.news-title:hover{ color:var(--orange); }
    1300文字を装飾書体で出すと、その文字ぶんの書体データを余分に読み込むことになるため。 */
 .greeting-body{ padding-top:4px; }
 .greeting-catch{
-  font-family:"Yuji Syuku", "Noto Sans JP", serif;
+  font-family:"Yuji Syuku","Hiragino Mincho ProN","Yu Mincho",serif;
   font-size:27px; font-weight:400; color:var(--teal); line-height:1.75;
   margin-bottom:24px; padding-bottom:18px; border-bottom:2px solid var(--line);
 }
