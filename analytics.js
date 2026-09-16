@@ -2,6 +2,7 @@
    訪問数だけでなく「実際に問い合わせようとした動き」を記録します。
    記録するイベント：
      tel_tap        … 電話番号のタップ／クリック（ページ内のどの位置から掛けたかも記録）
+     form_start     … お問い合わせフォームに最初の1文字を入れた時点（入力を始めた人の数）
      contact_submit … お問い合わせフォームの送信成功（index.html の送信処理から呼び出し）
      contact_mailto … メールソフト起動方式での送信（フォーム送信サービスが使えない場合の予備動線）
      coupon_view    … 割引券ページの表示
@@ -46,6 +47,21 @@
     }
     return 'その他';
   }
+
+  // ----- フォームの入力開始 -----
+  // 「フォームまで来て入力を始めたが、送信まで至らなかった人」の数を知るために記録する。
+  // form_start と contact_submit の差が、そのまま離脱の大きさになる。
+  // 1回の表示につき1度だけ送る（項目を移動するたびに数えない）。
+  (function formStart() {
+    var form = document.getElementById('contactForm');
+    if (!form) return;
+    var sent = false;
+    form.addEventListener('input', function () {
+      if (sent) return;
+      sent = true;
+      track('form_start');
+    }, { once: false });
+  })();
 
   // ----- 割引券ページの表示 -----
   // 割引券まで見た人は検討度が高いため、通常のページ表示とは別に数える
