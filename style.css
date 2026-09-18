@@ -215,7 +215,12 @@ a.news-title:hover{ color:var(--orange); }
 .case-card{ background:#fff; border-radius:var(--radius); overflow:hidden; box-shadow:var(--shadow); display:flex; flex-direction:column; }
 .case-ba{ display:grid; grid-template-columns:1fr 1fr; gap:2px; background:#fff; }
 .case-ba figure{ position:relative; aspect-ratio:4/3; overflow:hidden; }
-.case-ba figure img:first-child{ width:100%; height:100%; object-fit:cover; }
+/* 写真は <picture><source><img> の形で入れているので、img は picture の :first-child にならない。
+   figure 直下に置いた写真と picture の中の写真、どちらも拾えるようにしておく（Before/After ラベルは除く）。
+   img に width/height 属性が付いていても、この指定で figure の 4:3 枠いっぱいに収まる。 */
+.case-ba figure > picture{ display:block; width:100%; height:100%; }
+.case-ba figure > picture > img,
+.case-ba figure > img:not(.ba-label){ width:100%; height:100%; object-fit:cover; }
 .ba-label{ position:absolute; top:8px; width:auto !important; height:22px; }
 .ba-label--l{ left:8px; }
 .ba-label--r{ right:8px; }
