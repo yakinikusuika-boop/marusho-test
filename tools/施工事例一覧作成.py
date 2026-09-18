@@ -54,6 +54,11 @@ PAGE = os.path.join(SITE, "works", "index.html")
 TYPE_ORDER = ["外壁塗装", "屋根・雨漏り", "水回り", "内装・建具", "外構・その他"]
 TYPE_FALLBACK = "外構・その他"
 
+# 写真の版数。写真を差し替えたら、この日付を新しくしてから実行する。
+# URL の末尾が変わるので、前に見たことがある人のブラウザも新しい写真を取り直す。
+# index.html の中の PHOTO_VER と同じ値にしておくこと。
+PHOTO_VER = "20260918"
+
 
 # ============================================================
 # 1. cases.js を読む
@@ -101,10 +106,11 @@ def photo(src, alt):
        cases.js に書くのは今までどおり .jpg のパスだけでよい。"""
     jpg = "/" + esc(src).lstrip("/")
     webp = re.sub(r"\.(jpe?g|png)$", ".webp", jpg, flags=re.I)
+    v = "?v=" + PHOTO_VER
     w, h = img_size(src)
-    return ('<picture><source srcset="%s" type="image/webp">'
-            '<img src="%s" alt="%s" loading="lazy" decoding="async" width="%d" height="%d"></picture>'
-            % (webp, jpg, esc(alt), w, h))
+    return ('<picture><source srcset="%s%s" type="image/webp">'
+            '<img src="%s%s" alt="%s" loading="lazy" decoding="async" width="%d" height="%d"></picture>'
+            % (webp, v, jpg, v, esc(alt), w, h))
 
 
 def card_html(c):

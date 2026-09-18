@@ -1152,11 +1152,16 @@
     // cases.js に書くのは今までどおり .jpg のパスだけでよい。
     // 同じ場所に同じ名前の .webp を置けば、自動でそちらが使われる。
     // .webp が無い場合は、下の「読み込みに失敗したら JPEG に戻す」仕組みが働く。
+    // 写真を差し替えたら、この日付を新しくする。
+    // URL の末尾が変わるので、前に見たことがある人のブラウザも新しい写真を取り直す。
+    // tools/施工事例一覧作成.py の PHOTO_VER と同じ値にしておくこと。
+    const PHOTO_VER = '20260918';
     const photo = (src, alt) => {
       const jpg = esc(src);
       const webp = esc(String(src || '').replace(/\.(jpe?g|png)$/i, '.webp'));
-      return `<picture><source srcset="${webp}" type="image/webp">`
-           + `<img src="${jpg}" alt="${alt}" loading="lazy"></picture>`;
+      const v = '?v=' + PHOTO_VER;
+      return `<picture><source srcset="${webp}${v}" type="image/webp">`
+           + `<img src="${jpg}${v}" alt="${alt}" loading="lazy"></picture>`;
     };
 
     const items = CASE_ITEMS.filter(c => c && c.category);
