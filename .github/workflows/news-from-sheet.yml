@@ -1,0 +1,86 @@
+# ============================================================
+#  お知らせ台帳（Googleスプレッドシート）→ news.js の自動反映
+#
+#  ■ 動くきっかけ
+#     ・10分おきに自動（事務ご担当者様は何も押さなくてよい）
+#     ・GitHub の画面から手で実行（Actions → このワークフロー → Run workflow）
+#
+#  ■ 事前に1回だけ必要な設定
+#     リポジトリの Settings → Secrets and variables → Actions に
+#       名前: NEWS_SHEET_CSV_URL
+#       値  : 台帳を「ウェブに公開」したときのCSVのURL
+#     を登録してください。（手順は 01_引継ぎ・運用/台帳/ の手順書に記載）
+#
+#  ■ 安全の決めごと
+#     台帳が取得できない／列が足りない／公開行が0件 のときは news.js を
+#     書き換えません。サイトのお知らせが真っ白になることはありません。
+#     行ごとの不備があったときは、正しい行だけ公開したうえで、
+#     このワークフローを「失敗」にしてメールで知らせます。
+# ============================================================
+
+name: お知らせ台帳の反映
+
+on:
+  schedule:
+    # 10分おき。GitHub側の混み具合で数分〜十数分ずれることがあります。
+    - cron: "*/10 * * * *"
+  workflow_dispatch:
+
+# 同時に何本も走らせない（連続で保存されたときの衝突を防ぐ）
+concurrency:
+  group: news-from-sheet
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: リポジトリを取り出す
+        uses: actions/checkout@v4
+
+      - name: Python を用意する
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: 台帳から news.js を作り直す
+        id: build
+        env:
+          NEWS_SHEET_CSV_URL: ${{ secrets.NEWS_SHEET_CSV_URL }}
+        run: |
+          if [ -z "$NEWS_SHEET_CSV_URL" ]; then
+            echo "::error::NEWS_SHEET_CSV_URL が未設定です。リポジトリの Secrets に台帳のCSV URLを登録してください。"
+            exit 1
+          fi
+          set +e
+          python "tools/お知らせ台帳_生成.py" --csv "$NEWS_SHEET_CSV_URL" --out news.js
+          code=$?
+          set -e
+          echo "exit_code=$code" >> "$GITHUB_OUTPUT"
+          # 0 = 問題なし / 2 = 公開はするが注意あり / それ以外 = 中止（news.js はそのまま）
+          if [ "$code" -ne 0 ] && [ "$code" -ne 2 ]; then
+            echo "::error::台帳を読み取れませんでした。news.js は書き換えていません。"
+            exit "$code"
+          fi
+
+      - name: 変わっていれば公開する
+        run: |
+          if git diff --quiet -- news.js; then
+            echo "台帳に変更はありませんでした。公開はそのままです。"
+            exit 0
+          fi
+          git config user.name "marusho-news-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add news.js
+          git commit -m "お知らせ台帳の内容を反映（$(TZ=Asia/Tokyo date '+%Y-%m-%d %H:%M') 時点）"
+          git push
+          echo "公開しました。GitHub Pages への反映まで、さらに1〜2分かかります。"
+
+      - name: 台帳に不備があったことを知らせる
+        if: steps.build.outputs.exit_code == '2'
+        run: |
+          echo "::error::台帳に書き方の不備がありました。正しい行だけを公開しています。上の『台帳から news.js を作り直す』の記録を確認し、台帳を直してください。"
+          exit 1
