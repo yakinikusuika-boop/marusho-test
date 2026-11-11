@@ -456,7 +456,15 @@ def main():
     if os.path.exists(workflow):
         with open(workflow, encoding="utf-8") as handle:
             text = handle.read()
-        text = text.replace("name: お知らせ台帳の反映", "name: お知らせ台帳の反映（練習用）")
+        # 名前の先頭は「お知らせ台帳の反映」のまま変えないこと
+        # （01_引継ぎ・運用/台帳/定期実行の間隔を調べる.py が、この書き出しで実行記録を探す）
+        if "name: お知らせ台帳の反映（施工事例も）" in text:
+            text = text.replace(
+                "name: お知らせ台帳の反映（施工事例も）",
+                "name: お知らせ台帳の反映（施工事例も・練習用）",
+            )
+        else:
+            text = text.replace("name: お知らせ台帳の反映", "name: お知らせ台帳の反映（練習用）")
         with open(workflow, "w", encoding="utf-8", newline="\n") as handle:
             handle.write(text)
         note("ワークフローの名前に「（練習用）」を付けました")

@@ -91,21 +91,28 @@ def fetch(url):
 
 def main():
     parser = argparse.ArgumentParser(
-        description="お知らせ台帳の公開CSVを取り寄せてファイルに保存する"
+        description="台帳の公開CSVを取り寄せてファイルに保存する"
     )
     parser.add_argument("--out", required=True, help="保存先（例: work/ledger_raw.csv）")
+    parser.add_argument(
+        "--env-name",
+        default=ENV_NAME,
+        help="台帳のURLが入っている環境変数の名前（既定: %s。"
+        "施工事例台帳は CASES_SHEET_CSV_URL を指定）" % ENV_NAME,
+    )
     args = parser.parse_args()
 
-    url = clean_url(os.environ.get(ENV_NAME))
+    env_name = args.env_name
+    url = clean_url(os.environ.get(env_name))
     if not url:
         die(
             "%s が未設定です。リポジトリの Secrets に台帳のCSV URLを登録してください。"
-            % ENV_NAME
+            % env_name
         )
     if not re.match(r"^https://", url, re.I):
         die(
             "%s が https:// で始まっていません。台帳のCSV URLを登録し直してください。"
-            % ENV_NAME
+            % env_name
         )
 
     print("URLの形: %s" % url_kind(url), flush=True)

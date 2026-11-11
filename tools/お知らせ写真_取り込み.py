@@ -244,8 +244,8 @@ def open_image(raw, kind):
     return image, False
 
 
-def make_thumbnail(image, is_document):
-    """800×500（16:10）の見出し画像をつくる。
+def make_thumbnail(image, is_document, width=THUMB_WIDTH, height=THUMB_HEIGHT):
+    """見出し画像をつくる（既定は 800×500。施工事例の取り込みが 800×600 で共用する）。
 
     ・横長の写真        → 中央で切り抜いて、枠いっぱいに敷く
     ・縦長の写真／文書  → 全体が入るように収め、後ろに自分をぼかして敷く
@@ -257,7 +257,7 @@ def make_thumbnail(image, is_document):
     crop_allowed = (not is_document) and source_ratio >= 1.0
 
     if crop_allowed:
-        target_ratio = THUMB_WIDTH / float(THUMB_HEIGHT)
+        target_ratio = width / float(height)
         if source_ratio > target_ratio:
             new_width = int(round(image.height * target_ratio))
             left = (image.width - new_width) // 2
@@ -267,30 +267,30 @@ def make_thumbnail(image, is_document):
             top = (image.height - new_height) // 2
             box = (0, top, image.width, top + new_height)
         return image.resize(
-            (THUMB_WIDTH, THUMB_HEIGHT), Image.LANCZOS, box=box
+            (width, height), Image.LANCZOS, box=box
         )
 
     # 後ろ：枠いっぱいに敷いてから、強くぼかす
-    scale = max(THUMB_WIDTH / float(image.width), THUMB_HEIGHT / float(image.height))
+    scale = max(width / float(image.width), height / float(image.height))
     backdrop = image.resize(
         (max(1, int(image.width * scale)), max(1, int(image.height * scale))),
         Image.LANCZOS,
     )
-    left = (backdrop.width - THUMB_WIDTH) // 2
-    top = (backdrop.height - THUMB_HEIGHT) // 2
-    backdrop = backdrop.crop((left, top, left + THUMB_WIDTH, top + THUMB_HEIGHT))
+    left = (backdrop.width - width) // 2
+    top = (backdrop.height - height) // 2
+    backdrop = backdrop.crop((left, top, left + width, top + height))
     backdrop = backdrop.filter(ImageFilter.GaussianBlur(radius=24))
-    overlay = Image.new("RGB", (THUMB_WIDTH, THUMB_HEIGHT), (255, 255, 255))
+    overlay = Image.new("RGB", (width, height), (255, 255, 255))
     backdrop = Image.blend(backdrop, overlay, 0.25)
 
     # 前：全体が入るように収める
-    fit = min(THUMB_WIDTH / float(image.width), THUMB_HEIGHT / float(image.height))
+    fit = min(width / float(image.width), height / float(image.height))
     front = image.resize(
         (max(1, int(image.width * fit)), max(1, int(image.height * fit))), Image.LANCZOS
     )
     backdrop.paste(
         front,
-        ((THUMB_WIDTH - front.width) // 2, (THUMB_HEIGHT - front.height) // 2),
+        ((width - front.width) // 2, (height - front.height) // 2),
     )
     return backdrop
 

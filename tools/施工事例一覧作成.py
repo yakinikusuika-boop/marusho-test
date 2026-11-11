@@ -67,7 +67,9 @@ def load_cases():
     s = io.open(CASES_JS, encoding="utf-8").read()
     i = s.index("const CASE_ITEMS")
     body = s[s.index("[", i): s.rindex("]") + 1]
-    body = re.sub(r"//[^\n]*", "", body)              # 行コメントを外す
+    # 行まるごとのコメントだけを外す。行の途中の // は触らない
+    # （link: "https://…" の中の // をコメントと取り違えて、文字列を壊さないため）
+    body = re.sub(r"^\s*//[^\n]*$", "", body, flags=re.M)
     body = re.sub(r"([{,]\s*)([A-Za-z_]\w*)\s*:", r'\1"\2":', body)   # 鍵をJSON形式に
     body = re.sub(r",(\s*[}\]])", r"\1", body)        # 末尾のカンマを外す
     try:

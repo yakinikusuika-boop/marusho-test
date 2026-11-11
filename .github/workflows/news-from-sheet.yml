@@ -1,5 +1,7 @@
 # ============================================================
-#  お知らせ台帳（Googleスプレッドシート）→ news.js の自動反映
+#  台帳（Googleスプレッドシート）→ サイトの自動反映
+#    ・お知らせ台帳   → news.js
+#    ・施工事例台帳   → cases.js と works/index.html
 #
 #  ■ 動くきっかけ
 #     ・10分おきに自動（事務ご担当者様は何も押さなくてよい）
@@ -8,26 +10,34 @@
 #
 #  ■ 事前に1回だけ必要な設定
 #     リポジトリの Settings → Secrets and variables → Actions に
-#       名前: NEWS_SHEET_CSV_URL
-#       値  : 台帳のCSVのURL
+#       名前: NEWS_SHEET_CSV_URL   値: お知らせ台帳のCSVのURL
+#       名前: CASES_SHEET_CSV_URL  値: 施工事例台帳のCSVのURL
 #     を登録してください。（手順は 01_引継ぎ・運用/台帳/ の手順書に記載）
+#     CASES_SHEET_CSV_URL が未設定のあいだは、施工事例の工程は飛ばして
+#     お知らせだけで動きます（施工事例は前の内容のまま）。
 #
-#  ■ やっていること（3段）
-#     1. 台帳のCSVを取り寄せる
-#     2. 「写真／リンク／リンク2」に貼られたGoogleドライブのリンクを、
-#        サイトの中のファイルに取り込む（写真は800×500に作り直す）
-#     3. news.js を作り直して、変わっていれば公開する
+#  ■ やっていること（お知らせ3段 → 施工事例3段）
+#     1. お知らせ台帳のCSVを取り寄せる
+#     2. 「写真／リンク／リンク2」のドライブのリンクを取り込む（800×500）
+#     3. news.js を作り直す
+#     4. 施工事例台帳のCSVを取り寄せる
+#     5. 「ビフォー写真／アフター写真」のドライブのリンクを取り込む（400×300・webpも）
+#     6. cases.js を作り直し、/works/ のカードも作り直す
+#     ・変わっていればまとめて自動コミット
 #
 #  ■ 安全の決めごと
-#     ・台帳が取得できない／列が足りない／公開行が0件 のときは news.js を
-#       書き換えません。サイトのお知らせが真っ白になることはありません。
+#     ・台帳が取得できない／列が足りない／公開行が0件 のときは、その台帳の
+#       生成物を書き換えません。サイトが真っ白になることはありません。
 #     ・写真の取り込みに失敗しても、お知らせの文章は必ず公開します。
-#       （その行は標準の写真で出ます）
+#       施工事例は写真が無いと出せないため、その事例だけ掲載を見合わせます。
+#     ・施工事例側の失敗は、お知らせの公開を止めません（逆も同じ）。
 #     ・不備があったときは、出せる分を公開したうえで、
 #       このワークフローを「失敗」にしてメールで知らせます。
 # ============================================================
 
-name: お知らせ台帳の反映
+# 名前は「お知らせ台帳の反映」で始めること。
+# 01_引継ぎ・運用/台帳/定期実行の間隔を調べる.py が、この書き出しで実行記録を探します。
+name: お知らせ台帳の反映（施工事例も）
 
 on:
   schedule:
@@ -60,16 +70,16 @@ jobs:
           python -m pip install --quiet --disable-pip-version-check \
             "Pillow==12.3.0" "pypdfium2==5.12.1"
 
-      # --- 1段目 -------------------------------------------------
-      # Secret を使うのはこの1か所だけにする（あとの段は手元のファイルを見る）
-      - name: 台帳を取り寄せる
+      # --- お知らせ 1段目 ----------------------------------------
+      # Secret を使うのは取り寄せの段だけにする（あとの段は手元のファイルを見る）
+      - name: お知らせ台帳を取り寄せる
         env:
           NEWS_SHEET_CSV_URL: ${{ secrets.NEWS_SHEET_CSV_URL }}
         run: |
           python "tools/お知らせ台帳_取り寄せ.py" --out work/ledger_raw.csv
 
-      # --- 2段目 -------------------------------------------------
-      - name: 写真・チラシを取り込む
+      # --- お知らせ 2段目 ----------------------------------------
+      - name: お知らせの写真・チラシを取り込む
         id: photos
         run: |
           set +e
@@ -86,7 +96,7 @@ jobs:
             echo "exit_code=2" >> "$GITHUB_OUTPUT"
           fi
 
-      # --- 3段目 -------------------------------------------------
+      # --- お知らせ 3段目 ----------------------------------------
       - name: 台帳から news.js を作り直す
         id: build
         run: |
@@ -101,22 +111,100 @@ jobs:
             exit "$code"
           fi
 
+      # --- 施工事例 1段目 ----------------------------------------
+      # CASES_SHEET_CSV_URL が未設定のうちは、施工事例の工程をぜんぶ飛ばす
+      - name: 施工事例台帳を取り寄せる
+        id: cases_fetch
+        env:
+          CASES_SHEET_CSV_URL: ${{ secrets.CASES_SHEET_CSV_URL }}
+        run: |
+          if [ -z "$CASES_SHEET_CSV_URL" ]; then
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+            echo "CASES_SHEET_CSV_URL が未設定のため、施工事例の反映は行いません（お知らせのみ）。"
+            exit 0
+          fi
+          set +e
+          python "tools/お知らせ台帳_取り寄せ.py" \
+            --env-name CASES_SHEET_CSV_URL --out work/cases_raw.csv
+          code=$?
+          set -e
+          if [ "$code" -ne 0 ]; then
+            # 取り寄せの失敗で、お知らせの公開まで止めない
+            echo "::warning::施工事例台帳を取り寄せられませんでした。施工事例は前の内容のまま、お知らせだけ反映します。"
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+            echo "failed=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          echo "skip=false" >> "$GITHUB_OUTPUT"
+
+      # --- 施工事例 2段目 ----------------------------------------
+      - name: 施工事例の写真を取り込む
+        id: cases_photos
+        if: steps.cases_fetch.outputs.skip == 'false'
+        run: |
+          set +e
+          python "tools/施工事例写真_取り込み.py" \
+            --csv work/cases_raw.csv \
+            --out-csv work/cases.csv
+          code=$?
+          set -e
+          echo "exit_code=$code" >> "$GITHUB_OUTPUT"
+          # 取り込みが丸ごとこけても、写真がそろっている事例だけで作り直す
+          if [ ! -s work/cases.csv ]; then
+            echo "::warning::施工事例の写真の取り込みができませんでした。写真がそろっている事例だけ公開します。"
+            cp work/cases_raw.csv work/cases.csv
+            echo "exit_code=2" >> "$GITHUB_OUTPUT"
+          fi
+
+      # --- 施工事例 3段目 ----------------------------------------
+      # ここで失敗しても exit しない（お知らせの公開を止めないため）。
+      # 失敗は最後の「知らせる」の段でまとめて赤くする。
+      - name: 台帳から cases.js と /works/ を作り直す
+        id: cases_build
+        if: steps.cases_fetch.outputs.skip == 'false'
+        run: |
+          set +e
+          python "tools/施工事例台帳_生成.py" --csv work/cases.csv --out cases.js
+          code=$?
+          set -e
+          if [ "$code" -eq 0 ] || [ "$code" -eq 2 ]; then
+            # トップページは cases.js をその場で読むが、/works/ はHTMLに書き出す必要がある
+            set +e
+            python "tools/施工事例一覧作成.py"
+            list_code=$?
+            set -e
+            if [ "$list_code" -ne 0 ]; then
+              echo "::error::/works/ のカードを作り直せませんでした。"
+              code=1
+            fi
+          else
+            echo "::warning::施工事例台帳を読み取れませんでした。施工事例は前の内容のまま、お知らせだけ反映します。"
+          fi
+          echo "exit_code=$code" >> "$GITHUB_OUTPUT"
+
       - name: 変わっていれば公開する
         run: |
           rm -rf work
-          if [ -z "$(git status --porcelain -- news.js lp_image_assets_png/news)" ]; then
+          TARGETS="news.js cases.js works/index.html lp_image_assets_png/news lp_image_assets_png/cases/web"
+          if [ -z "$(git status --porcelain -- $TARGETS)" ]; then
             echo "台帳に変更はありませんでした。公開はそのままです。"
             exit 0
           fi
           git config user.name "marusho-news-bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add news.js lp_image_assets_png/news
-          git commit -m "お知らせ台帳の内容を反映（$(TZ=Asia/Tokyo date '+%Y-%m-%d %H:%M') 時点）"
+          git add $TARGETS
+          git commit -m "台帳の内容を反映（$(TZ=Asia/Tokyo date '+%Y-%m-%d %H:%M') 時点）"
           git push
           echo "公開しました。GitHub Pages への反映まで、さらに1〜2分かかります。"
 
       - name: 台帳に不備があったことを知らせる
-        if: steps.build.outputs.exit_code == '2' || steps.photos.outputs.exit_code == '2'
+        if: >-
+          steps.build.outputs.exit_code == '2' ||
+          steps.photos.outputs.exit_code == '2' ||
+          steps.cases_photos.outputs.exit_code == '2' ||
+          steps.cases_fetch.outputs.failed == 'true' ||
+          (steps.cases_build.outputs.exit_code != '' &&
+           steps.cases_build.outputs.exit_code != '0')
         run: |
-          echo "::error::台帳に不備がありました。出せる分だけを公開しています。上の『写真・チラシを取り込む』『台帳から news.js を作り直す』の記録を確認し、台帳を直してください。"
+          echo "::error::台帳に不備がありました。出せる分だけを公開しています。上の各段の記録を確認し、台帳を直してください。"
           exit 1
