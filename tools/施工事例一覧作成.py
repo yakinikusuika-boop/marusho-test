@@ -103,10 +103,27 @@ def img_size(src, default=(800, 600)):
         return default
 
 
+# サイトの置き場所（ルート始まりのパスの頭に付ける）。
+# 本番は "/"、練習用（github.io/marusho-renshu/）は "/marusho-renshu/"。
+# works/index.html の style.css の読み込み先から自動で読み取る（main() で設定）。
+# 決め打ちにすると、練習用リポジトリで自動反映がカードを作り直したときに
+# 写真のパスから /marusho-renshu/ が消え、練習用の /works/ の写真が全部出なくなる。
+BASE = "/"
+
+
+def detect_base(page_html):
+    m = re.search(r'<link[^>]+href="(/(?:[^"/]+/)*)style\.css', page_html)
+    return m.group(1) if m else "/"
+
+
+def site_path(path):
+    return BASE + str(path).lstrip("/")
+
+
 def photo(src, alt):
     """WebPがあればWebPで、無ければJPEGで出す。
        cases.js に書くのは今までどおり .jpg のパスだけでよい。"""
-    jpg = "/" + esc(src).lstrip("/")
+    jpg = site_path(esc(src))
     webp = re.sub(r"\.(jpe?g|png)$", ".webp", jpg, flags=re.I)
     v = "?v=" + PHOTO_VER
     w, h = img_size(src)
@@ -122,8 +139,8 @@ def card_html(c):
     if t not in TYPE_ORDER:
         t = TYPE_FALLBACK
     cat = esc(c.get("category"))
-    L = "/lp_ui_assets_png/decorations/label_before_green.png"
-    R = "/lp_ui_assets_png/decorations/label_after_green.png"
+    L = site_path("lp_ui_assets_png/decorations/label_before_green.png")
+    R = site_path("lp_ui_assets_png/decorations/label_after_green.png")
 
     rows_spec = [("施工箇所", sp.get("location")), ("工期", sp.get("period")),
                  ("費用目安", sp.get("cost")), ("建物種別", sp.get("building"))]
@@ -190,6 +207,8 @@ def main():
     if not items:
         raise SystemExit("cases.js に事例が1件もありません。")
     s = io.open(PAGE, encoding="utf-8", newline="").read()
+    global BASE
+    BASE = detect_base(s)
     s = replace_block(s, "CASES", "\n".join(card_html(c) for c in items))
     s = replace_block(s, "FILTER", filter_html(items))
     io.open(PAGE, "w", encoding="utf-8", newline="").write(s)

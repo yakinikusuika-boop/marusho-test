@@ -290,7 +290,9 @@ def transform_html(html, filename, base):
     #   href="/works/" → href="/marusho-renshu/works/"
     #   「//」で始まるもの（//example.com）は書き換えない
     prefix = "/" + base.strip("/") + "/"
-    html, n_path = re.subn(r"(href|src)=\"/(?!/)", r'\1="%s' % prefix, html)
+    # srcset も対象（/works/ の <source srcset="/…webp">。漏れると webp が404になり、
+    # ブラウザが jpg へ切り替えるまで1枚ずつむだな通信が出る）
+    html, n_path = re.subn(r"(href|src|srcset)=\"/(?!/)", r'\1="%s' % prefix, html)
     if n_path:
         note("  %s : ルート始まりのパスを %d か所 %s に直しました" % (filename, n_path, prefix))
 
