@@ -3,19 +3,28 @@
 #
 #  ■ 動くきっかけ
 #     ・10分おきに自動（事務ご担当者様は何も押さなくてよい）
+#     ・台帳のメニュー【サイトに反映】から（事務ご担当者様はこちら）
 #     ・GitHub の画面から手で実行（Actions → このワークフロー → Run workflow）
 #
 #  ■ 事前に1回だけ必要な設定
 #     リポジトリの Settings → Secrets and variables → Actions に
 #       名前: NEWS_SHEET_CSV_URL
-#       値  : 台帳を「ウェブに公開」したときのCSVのURL
+#       値  : 台帳のCSVのURL
 #     を登録してください。（手順は 01_引継ぎ・運用/台帳/ の手順書に記載）
 #
+#  ■ やっていること（3段）
+#     1. 台帳のCSVを取り寄せる
+#     2. 「写真／リンク／リンク2」に貼られたGoogleドライブのリンクを、
+#        サイトの中のファイルに取り込む（写真は800×500に作り直す）
+#     3. news.js を作り直して、変わっていれば公開する
+#
 #  ■ 安全の決めごと
-#     台帳が取得できない／列が足りない／公開行が0件 のときは news.js を
-#     書き換えません。サイトのお知らせが真っ白になることはありません。
-#     行ごとの不備があったときは、正しい行だけ公開したうえで、
-#     このワークフローを「失敗」にしてメールで知らせます。
+#     ・台帳が取得できない／列が足りない／公開行が0件 のときは news.js を
+#       書き換えません。サイトのお知らせが真っ白になることはありません。
+#     ・写真の取り込みに失敗しても、お知らせの文章は必ず公開します。
+#       （その行は標準の写真で出ます）
+#     ・不備があったときは、出せる分を公開したうえで、
+#       このワークフローを「失敗」にしてメールで知らせます。
 # ============================================================
 
 name: お知らせ台帳の反映
@@ -39,24 +48,50 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: リポジトリを取り出す
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Python を用意する
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v7
         with:
           python-version: "3.12"
 
-      - name: 台帳から news.js を作り直す
-        id: build
+      - name: 写真を扱う道具を入れる
+        run: |
+          python -m pip install --quiet --disable-pip-version-check \
+            "Pillow==12.3.0" "pypdfium2==5.12.1"
+
+      # --- 1段目 -------------------------------------------------
+      # Secret を使うのはこの1か所だけにする（あとの段は手元のファイルを見る）
+      - name: 台帳を取り寄せる
         env:
           NEWS_SHEET_CSV_URL: ${{ secrets.NEWS_SHEET_CSV_URL }}
         run: |
-          if [ -z "$NEWS_SHEET_CSV_URL" ]; then
-            echo "::error::NEWS_SHEET_CSV_URL が未設定です。リポジトリの Secrets に台帳のCSV URLを登録してください。"
-            exit 1
-          fi
+          python "tools/お知らせ台帳_取り寄せ.py" --out work/ledger_raw.csv
+
+      # --- 2段目 -------------------------------------------------
+      - name: 写真・チラシを取り込む
+        id: photos
+        run: |
           set +e
-          python "tools/お知らせ台帳_生成.py" --csv "$NEWS_SHEET_CSV_URL" --out news.js
+          python "tools/お知らせ写真_取り込み.py" \
+            --csv work/ledger_raw.csv \
+            --out-csv work/ledger.csv
+          code=$?
+          set -e
+          echo "exit_code=$code" >> "$GITHUB_OUTPUT"
+          # 取り込みが丸ごとこけても、お知らせの文章だけは必ず出す
+          if [ ! -s work/ledger.csv ]; then
+            echo "::warning::写真の取り込みができませんでした。お知らせの文章だけ公開します。"
+            cp work/ledger_raw.csv work/ledger.csv
+            echo "exit_code=2" >> "$GITHUB_OUTPUT"
+          fi
+
+      # --- 3段目 -------------------------------------------------
+      - name: 台帳から news.js を作り直す
+        id: build
+        run: |
+          set +e
+          python "tools/お知らせ台帳_生成.py" --csv work/ledger.csv --out news.js
           code=$?
           set -e
           echo "exit_code=$code" >> "$GITHUB_OUTPUT"
@@ -68,19 +103,20 @@ jobs:
 
       - name: 変わっていれば公開する
         run: |
-          if git diff --quiet -- news.js; then
+          rm -rf work
+          if [ -z "$(git status --porcelain -- news.js lp_image_assets_png/news)" ]; then
             echo "台帳に変更はありませんでした。公開はそのままです。"
             exit 0
           fi
           git config user.name "marusho-news-bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add news.js
+          git add news.js lp_image_assets_png/news
           git commit -m "お知らせ台帳の内容を反映（$(TZ=Asia/Tokyo date '+%Y-%m-%d %H:%M') 時点）"
           git push
           echo "公開しました。GitHub Pages への反映まで、さらに1〜2分かかります。"
 
       - name: 台帳に不備があったことを知らせる
-        if: steps.build.outputs.exit_code == '2'
+        if: steps.build.outputs.exit_code == '2' || steps.photos.outputs.exit_code == '2'
         run: |
-          echo "::error::台帳に書き方の不備がありました。正しい行だけを公開しています。上の『台帳から news.js を作り直す』の記録を確認し、台帳を直してください。"
+          echo "::error::台帳に不備がありました。出せる分だけを公開しています。上の『写真・チラシを取り込む』『台帳から news.js を作り直す』の記録を確認し、台帳を直してください。"
           exit 1

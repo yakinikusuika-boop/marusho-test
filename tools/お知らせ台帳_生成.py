@@ -121,6 +121,73 @@ def normalize_date(value, row_number, column_name):
     return "%04d-%02d-%02d" % (year, month, day)
 
 
+def check_link(url, row_number, column_name):
+    """リンクの書き方をざっと見て、危ういものには注意を出す。
+
+    サイト側（index.html）は、http(s) なら別タブ＋「↗」、.pdf なら「PDF」の印、
+    それ以外（coupon.html など）は同じタブ、と自動で出し分ける。
+    ここでは「出せないリンク」を見つけて知らせるだけにする。
+    """
+    if not url:
+        return ""
+
+    if " " in url:
+        warn("%d行目：%sに空白が入っています。貼り直してください。" % (row_number, column_name))
+
+    if re.match(r"^http://", url, re.I):
+        warn(
+            "%d行目：%sが http:// で始まっています。https:// のリンクを貼り直してください。"
+            % (row_number, column_name)
+        )
+        return url
+
+    if re.match(r"^https://", url, re.I):
+        host = re.sub(r"^https://", "", url, flags=re.I).split("/")[0].lower()
+        if "drive.google.com" in host or "docs.google.com" in host:
+            warn(
+                "%d行目：%sがGoogleドライブのリンクのままです。"
+                "共有フォルダに入っているか、フォルダが共有されているか確認してください。"
+                % (row_number, column_name)
+            )
+        return url
+
+    # サイトの中のファイル（lp_image_assets_png/news/... や coupon.html）
+    if re.match(r"^[\w./-]+\.(pdf|html|jpg|jpeg|png|webp)(\?|$)", url, re.I):
+        return url
+
+    warn(
+        "%d行目：%s「%s」は、リンクとして使える形ではありません。この欄は出しません。"
+        % (row_number, column_name, url)
+    )
+    return ""
+
+
+def check_image(url, row_number):
+    """写真の欄は「サイトの中のファイル」だけを通す。
+
+    ドライブのリンクのまま（＝取り込みに失敗した）だと、サイト側で画像が出ずに
+    枠が割れてしまう。空にしておけば、サイトが標準の写真で出してくれる。
+    """
+    if not url:
+        return ""
+    if re.match(r"^[\w./-]+\.(jpg|jpeg|png|webp|gif)(\?|$)", url, re.I):
+        return url
+    warn(
+        "%d行目：写真「%s」はサイトの中のファイルではありません。"
+        "この行は標準の写真で出します。" % (row_number, url)
+    )
+    return ""
+
+
+def default_label(url):
+    """リンク文字が空のときに、せめて読める文字を当てる（URLをそのまま出さない）。"""
+    if re.search(r"\.pdf(\?|$)", url, re.I):
+        return "PDFを開く"
+    if re.match(r"^https?://", url, re.I):
+        return "詳しくはこちら"
+    return "こちらを開く"
+
+
 def js_string(value):
     """JavaScript の文字列リテラルとして安全な形に直す。"""
     out = value.replace("\\", "\\\\").replace('"', '\\"')
@@ -160,28 +227,30 @@ def read_items(csv_text):
             "category": cell(row, COL_CATEGORY) or "お知らせ",
             "title": title,
             "body": cell(row, COL_BODY),
-            "image": cell(row, COL_IMAGE),
+            "image": check_image(cell(row, COL_IMAGE), row_number),
             "archive": is_true(cell(row, COL_ARCHIVE)),
             "row": row_number,
         }
 
-        link1, label1 = cell(row, COL_LINK1), cell(row, COL_LABEL1)
-        link2, label2 = cell(row, COL_LINK2), cell(row, COL_LABEL2)
+        link1 = check_link(cell(row, COL_LINK1), row_number, COL_LINK1)
+        link2 = check_link(cell(row, COL_LINK2), row_number, COL_LINK2)
+        label1, label2 = cell(row, COL_LABEL1), cell(row, COL_LABEL2)
 
         if link1 and link2:
             # リンクが2本あるときは links（行ごとのリンク）として出す
             item["links"] = [
-                {"url": link1, "label": label1 or link1},
-                {"url": link2, "label": label2 or link2},
+                {"url": link1, "label": label1 or default_label(link1)},
+                {"url": link2, "label": label2 or default_label(link2)},
             ]
         else:
             if link2 and not link1:
                 warn("%d行目：リンク2だけが入っています。リンクの欄から先に埋めてください。" % row_number)
                 link1, label1 = link2, label2
             if label1 and not link1:
-                warn("%d行目：リンク文字だけが入っています（リンク先が空）。文字だけが出ます。" % row_number)
+                warn("%d行目：リンク文字だけが入っています（リンク先が空）。文字は出ません。" % row_number)
+                label1 = ""
             item["link"] = link1
-            item["linkText"] = label1
+            item["linkText"] = label1 or (default_label(link1) if link1 else "")
 
         items.append(item)
 
