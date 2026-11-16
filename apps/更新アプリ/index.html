@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<base target="_top">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>まるしょう サイト更新</title>
+<style>
+  :root{
+    --orange:#e8731a; --orange-dark:#c95e0c; --navy:#1f2f4a; --green:#2f8a4e;
+    --bg:#f5f3ef; --card:#fff; --line:#ddd6cc; --text:#222; --muted:#6b6459; --error:#b3261e;
+  }
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; background:var(--bg); color:var(--text);
+    font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Noto Sans JP","Yu Gothic",sans-serif;
+    font-size:17px; line-height:1.6; -webkit-text-size-adjust:100%; }
+  header{ background:var(--navy); color:#fff; padding:14px 16px 0; position:sticky; top:0; z-index:5; }
+  header h1{ margin:0 0 10px; font-size:18px; font-weight:700; }
+  header .who{ font-size:12px; opacity:.75; margin:-8px 0 10px; }
+  nav{ display:flex; gap:4px; }
+  nav button{ flex:1; border:0; border-radius:10px 10px 0 0; padding:12px 4px; font-size:15px; font-weight:700;
+    background:rgba(255,255,255,.12); color:#fff; cursor:pointer; min-height:48px; }
+  nav button[aria-selected="true"]{ background:var(--bg); color:var(--navy); }
+  main{ padding:16px; max-width:640px; margin:0 auto 120px; }
+  section[hidden]{ display:none; }
+  .card{ background:var(--card); border:1px solid var(--line); border-radius:14px; padding:16px; margin-bottom:16px; }
+  label.field{ display:block; margin-bottom:16px; }
+  .name{ display:block; font-weight:700; margin-bottom:6px; }
+  .req{ color:var(--orange-dark); font-size:13px; margin-left:6px; font-weight:700; }
+  .hint{ display:block; color:var(--muted); font-size:13px; margin-top:4px; }
+  input[type=text],input[type=date],select,textarea{
+    width:100%; font:inherit; padding:12px; border:1.5px solid var(--line); border-radius:10px; background:#fff; color:var(--text); }
+  textarea{ min-height:110px; resize:vertical; }
+  input:focus,select:focus,textarea:focus{ outline:3px solid rgba(232,115,26,.35); border-color:var(--orange); }
+  .row2{ display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+  .photo-pick{ display:block; border:2px dashed var(--line); border-radius:12px; padding:14px; text-align:center;
+    background:#fffaf5; cursor:pointer; min-height:120px; position:relative; }
+  .photo-pick input{ position:absolute; inset:0; opacity:0; width:100%; height:100%; cursor:pointer; }
+  .photo-pick .ph-text{ display:block; color:var(--orange-dark); font-weight:700; padding-top:28px; }
+  .photo-pick img{ display:block; max-width:100%; max-height:220px; margin:0 auto; border-radius:8px; }
+  .photo-pick .ph-file{ display:block; padding-top:28px; font-weight:700; word-break:break-all; }
+  .photo-pick.has-file{ border-style:solid; border-color:var(--green); background:#f3faf5; }
+  .photo-pick.has-file .ph-text{ display:none; }
+  .clear-btn{ margin-top:6px; background:none; border:0; color:var(--muted); text-decoration:underline; font:inherit; font-size:14px; padding:6px 0; cursor:pointer; }
+  .choice{ display:flex; gap:10px; align-items:flex-start; padding:12px; border:1.5px solid var(--line); border-radius:10px; margin-bottom:10px; background:#fff; cursor:pointer; }
+  .choice input{ width:24px; height:24px; margin:2px 0 0; flex:none; accent-color:var(--orange); }
+  .choice b{ display:block; }
+  .choice small{ color:var(--muted); }
+  .actions{ position:fixed; left:0; right:0; bottom:0; background:rgba(255,255,255,.96); border-top:1px solid var(--line);
+    padding:12px 16px calc(12px + env(safe-area-inset-bottom)); z-index:6; }
+  .actions .inner{ max-width:640px; margin:0 auto; }
+  .primary{ width:100%; border:0; border-radius:12px; background:var(--orange); color:#fff; font:inherit; font-weight:700;
+    font-size:18px; padding:15px; min-height:56px; cursor:pointer; }
+  .primary:disabled{ background:#c9bfb3; cursor:wait; }
+  .msg{ border-radius:12px; padding:14px 16px; margin-bottom:16px; font-weight:700; }
+  .msg.ok{ background:#e7f5ec; color:#1d5e34; border:1px solid #b7dfc4; }
+  .msg.err{ background:#fdecea; color:var(--error); border:1px solid #f3c2bd; }
+  .msg a{ color:inherit; }
+  .list-item{ display:flex; gap:12px; align-items:center; padding:12px 0; border-bottom:1px solid var(--line); }
+  .list-item:last-child{ border-bottom:0; }
+  .list-item .t{ flex:1; min-width:0; }
+  .list-item .t b{ display:block; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .list-item .t small{ color:var(--muted); }
+  .toggle{ border:1.5px solid var(--line); border-radius:999px; padding:8px 14px; font:inherit; font-size:14px; font-weight:700;
+    min-height:44px; min-width:84px; background:#fff; color:var(--muted); cursor:pointer; }
+  .toggle.on{ background:var(--green); border-color:var(--green); color:#fff; }
+  .toggle:disabled{ opacity:.5; cursor:wait; }
+  h2{ font-size:16px; margin:0 0 12px; color:var(--navy); }
+  .loading{ text-align:center; color:var(--muted); padding:40px 0; }
+  details summary{ cursor:pointer; font-weight:700; color:var(--navy); padding:6px 0; min-height:44px; display:flex; align-items:center; }
+</style>
+</head>
+<body>
+<header>
+  <h1>サイト更新</h1>
+  <div class="who" id="who"></div>
+  <nav role="tablist">
+    <button role="tab" aria-selected="true" data-tab="news">お知らせ</button>
+    <button role="tab" aria-selected="false" data-tab="cases" id="tabCases">施工事例</button>
+    <button role="tab" aria-selected="false" data-tab="list">登録済み</button>
+  </nav>
+</header>
+
+<main>
+  <div id="message"></div>
+  <div class="loading" id="loading">読み込み中…</div>
+
+  <!-- ===== お知らせ ===== -->
+  <section id="tab-news" hidden>
+    <form id="newsForm" novalidate>
+      <div class="card">
+        <label class="field">
+          <span class="name">見出し<span class="req">必須</span></span>
+          <input type="text" name="title" maxlength="80" placeholder="例）年末セールを開催中です" required>
+        </label>
+        <label class="field">
+          <span class="name">本文</span>
+          <textarea name="body" placeholder="お客様に伝えたいことを書いてください"></textarea>
+        </label>
+        <div class="row2">
+          <label class="field">
+            <span class="name">掲載日<span class="req">必須</span></span>
+            <input type="date" name="date" required>
+          </label>
+          <label class="field">
+            <span class="name">種別</span>
+            <input type="text" name="category" list="newsCategories" value="お知らせ">
+            <datalist id="newsCategories"></datalist>
+          </label>
+        </div>
+        <label class="field">
+          <span class="name">掲載終了日</span>
+          <input type="date" name="until">
+          <span class="hint">この日の翌日から「過去のお知らせ」に移ります。空なら移りません。</span>
+        </label>
+      </div>
+
+      <div class="card">
+        <span class="name">写真</span>
+        <label class="photo-pick" data-pick="photo">
+          <input type="file" accept="image/*" data-kind="image">
+          <span class="ph-text">📷 タップして写真を撮る／選ぶ</span>
+          <span class="ph-preview"></span>
+        </label>
+        <button type="button" class="clear-btn" data-clear="photo" hidden>写真を外す</button>
+        <span class="hint">写真が無いときは、サイトの標準の写真で出ます。</span>
+      </div>
+
+      <div class="card">
+        <details>
+          <summary>チラシ（PDF・画像）を付ける</summary>
+          <label class="photo-pick" data-pick="flyer" style="margin-top:10px">
+            <input type="file" accept="application/pdf,image/*" data-kind="flyer">
+            <span class="ph-text">📄 タップしてチラシを選ぶ</span>
+            <span class="ph-preview"></span>
+          </label>
+          <button type="button" class="clear-btn" data-clear="flyer" hidden>チラシを外す</button>
+          <label class="field" style="margin-top:12px">
+            <span class="name">ボタンの文字</span>
+            <input type="text" name="flyerText" placeholder="例）チラシを開く（A4・印刷できます）">
+          </label>
+        </details>
+      </div>
+
+      <div class="card">
+        <label class="choice"><input type="radio" name="publish" value="yes" checked>
+          <span><b>サイトに公開する</b><small>10分ほどでサイトに出ます</small></span></label>
+        <label class="choice"><input type="radio" name="publish" value="no">
+          <span><b>下書きで保存する</b><small>台帳に入るだけで、サイトには出ません</small></span></label>
+      </div>
+    </form>
+  </section>
+
+  <!-- ===== 施工事例 ===== -->
+  <section id="tab-cases" hidden>
+    <form id="caseForm" novalidate>
+      <div class="card">
+        <div class="row2">
+          <div>
+            <span class="name">ビフォー<span class="req">必須</span></span>
+            <label class="photo-pick" data-pick="before">
+              <input type="file" accept="image/*" data-kind="image">
+              <span class="ph-text">📷 施工前</span>
+              <span class="ph-preview"></span>
+            </label>
+          </div>
+          <div>
+            <span class="name">アフター<span class="req">必須</span></span>
+            <label class="photo-pick" data-pick="after">
+              <input type="file" accept="image/*" data-kind="image">
+              <span class="ph-text">📷 施工後</span>
+              <span class="ph-preview"></span>
+            </label>
+          </div>
+        </div>
+        <span class="hint">同じ向き・同じ場所から撮った写真だと、違いが伝わりやすくなります。</span>
+      </div>
+
+      <div class="card">
+        <label class="field">
+          <span class="name">工事の名前<span class="req">必須</span></span>
+          <input type="text" name="category" placeholder="例）外壁塗装（クリーム色）">
+        </label>
+        <label class="field">
+          <span class="name">分類<span class="req">必須</span></span>
+          <select name="type" id="caseTypes"><option value="">選んでください</option></select>
+          <span class="hint">施工事例一覧の絞り込みに使います。</span>
+        </label>
+        <div class="row2">
+          <label class="field"><span class="name">施工箇所</span><input type="text" name="location" placeholder="例）外壁・付帯部"></label>
+          <label class="field"><span class="name">工期</span><input type="text" name="period" placeholder="例）約14日間"></label>
+        </div>
+        <div class="row2">
+          <label class="field"><span class="name">費用目安</span><input type="text" name="cost" placeholder="例）155万円〜（目安）"></label>
+          <label class="field"><span class="name">建物種別</span><input type="text" name="building" list="caseBuildings" placeholder="例）戸建て"><datalist id="caseBuildings"></datalist></label>
+        </div>
+      </div>
+
+      <div class="card">
+        <details>
+          <summary>くわしい説明を書く（任意）</summary>
+          <label class="field" style="margin-top:10px"><span class="name">工事前の悩み</span><textarea name="problem"></textarea></label>
+          <label class="field"><span class="name">施工内容</span><textarea name="work"></textarea></label>
+          <label class="field"><span class="name">施工後の変化</span><textarea name="change"></textarea></label>
+          <label class="field"><span class="name">担当者コメント</span><textarea name="comment"></textarea></label>
+        </details>
+      </div>
+
+      <div class="card">
+        <label class="choice"><input type="checkbox" name="consent">
+          <span><b>施主様から掲載の承諾をいただいた</b><small>承諾がないと公開できません</small></span></label>
+        <label class="choice"><input type="radio" name="position" value="first" checked>
+          <span><b>いちばん先頭に出す</b></span></label>
+        <label class="choice"><input type="radio" name="position" value="last">
+          <span><b>いちばん最後に出す</b></span></label>
+      </div>
+      <div class="card">
+        <label class="choice"><input type="radio" name="publish" value="yes">
+          <span><b>サイトに公開する</b><small>10分ほどでサイトに出ます</small></span></label>
+        <label class="choice"><input type="radio" name="publish" value="no" checked>
+          <span><b>下書きで保存する</b><small>台帳に入るだけで、サイトには出ません</small></span></label>
+      </div>
+    </form>
+  </section>
+
+  <!-- ===== 登録済み ===== -->
+  <section id="tab-list" hidden>
+    <div class="card"><h2>お知らせ（台帳の上から）</h2><div id="newsList"></div></div>
+    <div class="card" id="casesListCard"><h2>施工事例（表示順）</h2><div id="casesList"></div></div>
+    <p class="hint">公開の切り替えは、10分ほどでサイトに反映されます。文章の手直しは台帳で行ってください。</p>
+  </section>
+</main>
+
+<div class="actions" id="actions" hidden>
+  <div class="inner"><button class="primary" id="saveBtn" type="button">保存する</button></div>
+</div>
+
+<script>
+(function () {
+  'use strict';
+
+  // ---- 写真はスマホ側で縮めてから送る（通信量と待ち時間を減らす） ----
+  var PHOTO_MAX_EDGE = 1600;
+  var PHOTO_QUALITY = 0.85;
+  var FLYER_MAX_BYTES = 10 * 1024 * 1024;
+
+  var state = { tab: 'news', data: null, files: {}, busy: false };
+  var $ = function (sel, root) { return (root || document).querySelector(sel); };
+  var $$ = function (sel, root) { return Array.prototype.slice.call((root || document).querySelectorAll(sel)); };
+
+  function esc(s) {
+    return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+
+  function today() {
+    var d = new Date();
+    return d.getFullYear() + '-' + ('0' + (d.getMonth() + 1)).slice(-2) + '-' + ('0' + d.getDate()).slice(-2);
+  }
+
+  function showMessage(kind, html) {
+    $('#message').innerHTML = html ? '<div class="msg ' + kind + '" role="status">' + html + '</div>' : '';
+    if (html) window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function call(name) {
+    var args = Array.prototype.slice.call(arguments, 1);
+    return new Promise(function (resolve, reject) {
+      var runner = google.script.run.withSuccessHandler(resolve).withFailureHandler(function (err) {
+        reject(new Error(err && err.message ? err.message : String(err)));
+      });
+      runner[name].apply(runner, args);
+    });
+  }
+
+  // ---- タブ ----
+  function selectTab(tab) {
+    state.tab = tab;
+    $$('nav button').forEach(function (b) { b.setAttribute('aria-selected', String(b.dataset.tab === tab)); });
+    ['news', 'cases', 'list'].forEach(function (t) { $('#tab-' + t).hidden = t !== tab; });
+    $('#actions').hidden = tab === 'list';
+    showMessage('', '');
+  }
+  $$('nav button').forEach(function (b) {
+    b.addEventListener('click', function () { if (!b.disabled) selectTab(b.dataset.tab); });
+  });
+
+  // ---- 写真・チラシを選んだとき ----
+  function readAsDataUrl(file) {
+    return new Promise(function (resolve, reject) {
+      var r = new FileReader();
+      r.onload = function () { resolve(r.result); };
+      r.onerror = function () { reject(new Error('ファイルを読めませんでした。')); };
+      r.readAsDataURL(file);
+    });
+  }
+
+  function shrinkPhoto(file) {
+    return readAsDataUrl(file).then(function (url) {
+      return new Promise(function (resolve, reject) {
+        var img = new Image();
+        img.onload = function () {
+          var scale = Math.min(1, PHOTO_MAX_EDGE / Math.max(img.naturalWidth, img.naturalHeight));
+          var canvas = document.createElement('canvas');
+          canvas.width = Math.round(img.naturalWidth * scale);
+          canvas.height = Math.round(img.naturalHeight * scale);
+          var ctx = canvas.getContext('2d');
+          ctx.fillStyle = '#fff';
+          ctx.fillRect(0, 0, canvas.width, canvas.height);
+          ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+          resolve(canvas.toDataURL('image/jpeg', PHOTO_QUALITY));
+        };
+        img.onerror = function () { reject(new Error('この写真は読み込めませんでした。別の写真を選んでください。')); };
+        img.src = url;
+      });
+    });
+  }
+
+  function setPicked(key, file, previewHtml) {
+    var box = $('[data-pick="' + key + '"]');
+    state.files[key] = file;
+    box.classList.toggle('has-file', !!file);
+    $('.ph-preview', box).innerHTML = previewHtml || '';
+    var clear = $('[data-clear="' + key + '"]');
+    if (clear) clear.hidden = !file;
+    if (!file) $('input', box).value = '';
+  }
+
+  $$('.photo-pick').forEach(function (box) {
+    var key = box.dataset.pick;
+    var input = $('input', box);
+    input.addEventListener('change', function () {
+      var file = input.files && input.files[0];
+      if (!file) return;
+      showMessage('', '');
+      var isPdf = file.type === 'application/pdf' || /\.pdf$/i.test(file.name);
+      if (input.dataset.kind === 'flyer' && isPdf) {
+        if (file.size > FLYER_MAX_BYTES) {
+          setPicked(key, null);
+          showMessage('err', 'PDFが大きすぎます（10MBまで）。');
+          return;
+        }
+        readAsDataUrl(file).then(function (url) {
+          setPicked(key, { name: file.name, type: 'application/pdf', data: url.split(',')[1] },
+            '<span class="ph-file">📄 ' + esc(file.name) + '</span>');
+        }).catch(function (e) { setPicked(key, null); showMessage('err', esc(e.message)); });
+        return;
+      }
+      $('.ph-preview', box).innerHTML = '<span class="ph-file">写真を整えています…</span>';
+      shrinkPhoto(file).then(function (dataUrl) {
+        setPicked(key, { name: file.name, type: 'image/jpeg', data: dataUrl.split(',')[1] },
+          '<img alt="選んだ写真" src="' + dataUrl + '">');
+      }).catch(function (e) { setPicked(key, null); showMessage('err', esc(e.message)); });
+    });
+  });
+  $$('[data-clear]').forEach(function (btn) {
+    btn.addEventListener('click', function () { setPicked(btn.dataset.clear, null); });
+  });
+
+  // ---- 保存 ----
+  function formValue(form, name) {
+    var el = form.elements[name];
+    if (!el) return '';
+    if (el.length && el[0] && el[0].type === 'radio') {
+      var checked = $$('input[name="' + name + '"]', form).filter(function (r) { return r.checked; })[0];
+      return checked ? checked.value : '';
+    }
+    if (el.type === 'checkbox') return el.checked;
+    return el.value;
+  }
+
+  function collectNews() {
+    var f = $('#newsForm');
+    var p = {
+      title: formValue(f, 'title').trim(),
+      body: formValue(f, 'body'),
+      date: formValue(f, 'date'),
+      until: formValue(f, 'until'),
+      category: formValue(f, 'category').trim(),
+      flyerText: formValue(f, 'flyerText'),
+      publish: formValue(f, 'publish') === 'yes',
+      photo: state.files.photo || null,
+      flyer: state.files.flyer || null
+    };
+    if (!p.title) throw new Error('見出しを入れてください。');
+    if (!p.date) throw new Error('掲載日を入れてください。');
+    if (p.until && p.until < p.date) throw new Error('掲載終了日が掲載日より前になっています。');
+    return p;
+  }
+
+  function collectCase() {
+    var f = $('#caseForm');
+    var p = {
+      category: formValue(f, 'category').trim(),
+      type: formValue(f, 'type'),
+      location: formValue(f, 'location'),
+      period: formValue(f, 'period'),
+      cost: formValue(f, 'cost'),
+      building: formValue(f, 'building'),
+      problem: formValue(f, 'problem'),
+      work: formValue(f, 'work'),
+      change: formValue(f, 'change'),
+      comment: formValue(f, 'comment'),
+      consent: formValue(f, 'consent'),
+      position: formValue(f, 'position'),
+      publish: formValue(f, 'publish') === 'yes',
+      before: state.files.before || null,
+      after: state.files.after || null
+    };
+    if (!p.before) throw new Error('ビフォー写真を選んでください。');
+    if (!p.after) throw new Error('アフター写真を選んでください。');
+    if (!p.category) throw new Error('工事の名前を入れてください。');
+    if (!p.type) throw new Error('分類を選んでください。');
+    if (p.publish && !p.consent) throw new Error('施主様の承諾がないと公開できません。承諾がまだなら「下書きで保存する」を選んでください。');
+    return p;
+  }
+
+  function resetForm(kind) {
+    if (kind === 'news') {
+      $('#newsForm').reset();
+      $('#newsForm').elements.date.value = today();
+      setPicked('photo', null); setPicked('flyer', null);
+    } else {
+      $('#caseForm').reset();
+      setPicked('before', null); setPicked('after', null);
+    }
+  }
+
+  $('#saveBtn').addEventListener('click', function () {
+    if (state.busy) return;
+    showMessage('', '');
+    var kind = state.tab;
+    var payload;
+    try {
+      payload = kind === 'news' ? collectNews() : collectCase();
+    } catch (e) {
+      showMessage('err', esc(e.message));
+      return;
+    }
+    state.busy = true;
+    var btn = $('#saveBtn');
+    btn.disabled = true;
+    btn.textContent = '保存しています…';
+    call(kind === 'news' ? 'saveNews' : 'saveCase', payload).then(function (res) {
+      resetForm(kind);
+      showMessage('ok', esc(res.message) + '<br><a href="' + esc(state.data.siteUrl) + '" target="_blank" rel="noopener">サイトを開く</a>');
+      return refresh();
+    }).catch(function (e) {
+      showMessage('err', '保存できませんでした：' + esc(e.message));
+    }).then(function () {
+      state.busy = false;
+      btn.disabled = false;
+      btn.textContent = '保存する';
+    });
+  });
+
+  // ---- 登録済み ----
+  function renderList() {
+    var d = state.data;
+    var item = function (kind, it, sub) {
+      return '<div class="list-item"><div class="t"><b>' + esc(it.title) + '</b><small>' + sub + '</small></div>' +
+        '<button type="button" class="toggle' + (it.publish ? ' on' : '') + '" data-kind="' + kind + '" data-row="' + it.row +
+        '" data-title="' + esc(it.title) + '" data-publish="' + (it.publish ? '1' : '0') + '" aria-pressed="' + it.publish + '">' +
+        (it.publish ? '公開中' : '非公開') + '</button></div>';
+    };
+    $('#newsList').innerHTML = d.news.recent.length ? d.news.recent.map(function (it) {
+      return item('news', it, esc(it.date) + '・' + esc(it.category || 'お知らせ') + (it.until ? '・〜' + esc(it.until) : ''));
+    }).join('') : '<p class="hint">まだありません。</p>';
+    if (d.cases) {
+      $('#casesList').innerHTML = d.cases.recent.length ? d.cases.recent.map(function (it) {
+        return item('cases', it, '表示順 ' + esc(it.order) + '・' + esc(it.type) + (it.consent ? '' : '・<b>承諾なし</b>'));
+      }).join('') : '<p class="hint">まだありません。</p>';
+    }
+  }
+
+  document.addEventListener('click', function (ev) {
+    var btn = ev.target.closest && ev.target.closest('.toggle');
+    if (!btn || btn.disabled) return;
+    var next = btn.dataset.publish !== '1';
+    btn.disabled = true;
+    call('setPublish', btn.dataset.kind, Number(btn.dataset.row), btn.dataset.title, next).then(function () {
+      showMessage('ok', next ? '公開にしました。10分ほどでサイトに出ます。' : '非公開にしました。10分ほどでサイトから消えます。');
+      return refresh();
+    }).catch(function (e) {
+      btn.disabled = false;
+      showMessage('err', esc(e.message));
+    });
+  });
+
+  // ---- 最初の読み込み ----
+  function fillOptions(data) {
+    $('#newsCategories').innerHTML = data.news.categories.map(function (c) { return '<option value="' + esc(c) + '">'; }).join('');
+    if (data.cases) {
+      $('#caseTypes').innerHTML = '<option value="">選んでください</option>' +
+        data.cases.types.map(function (t) { return '<option>' + esc(t) + '</option>'; }).join('');
+      $('#caseBuildings').innerHTML = data.cases.buildings.map(function (c) { return '<option value="' + esc(c) + '">'; }).join('');
+    } else {
+      $('#tabCases').disabled = true;
+      $('#tabCases').title = '施工事例台帳がまだ設定されていません';
+      $('#casesListCard').hidden = true;
+    }
+    $('#who').textContent = data.user ? data.user + ' でログイン中' : '';
+  }
+
+  function refresh() {
+    return call('getInitialData').then(function (data) {
+      state.data = data;
+      renderList();
+    });
+  }
+
+  $('#newsForm').elements.date.value = today();
+  call('getInitialData').then(function (data) {
+    state.data = data;
+    fillOptions(data);
+    renderList();
+    $('#loading').hidden = true;
+    selectTab('news');
+  }).catch(function (e) {
+    $('#loading').hidden = true;
+    showMessage('err', '読み込めませんでした：' + esc(e.message));
+  });
+})();
+</script>
+</body>
+</html>
